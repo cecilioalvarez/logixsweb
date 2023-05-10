@@ -9,6 +9,7 @@ public interface CompaniesRepository {
 
     Companies insert(Companies company);
     void update(Companies company);
+    void update(Companies company, Companies oldCompany);
     void delete(Companies company);
     List<Companies> findAll();
 
