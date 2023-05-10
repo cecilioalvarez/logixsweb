@@ -2,7 +2,10 @@ package es.logixs.web.repositories.mysql;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import es.logixs.web.domain.Companies;
@@ -37,7 +40,8 @@ public class CompaniesRepositoryMySQL implements CompaniesRepository {
     
     @Override
     public Companies findOne(String objectid) {    
-       return  plantilla.queryForObject(sqlFindOne, Companies.class, objectid);
+       
+       return  plantilla.queryForObject(sqlFindOne, new CompaniesMapper(),objectid);
     }
 
 }
