@@ -8,7 +8,7 @@ import es.logixs.web.domain.Companies;
 public interface CompaniesRepository {
 
     Companies insert(Companies company);
-
+    void update(Companies company);
     void delete(Companies company);
     List<Companies> findAll();
 

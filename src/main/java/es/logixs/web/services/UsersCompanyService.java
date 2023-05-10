@@ -12,6 +12,17 @@ public class UsersCompanyService {
  
    // private UserRepository repositorioUserMySQL;
 
+   // un servicio tenga varios metodos que invocan a los repos
+    public void updateCompanies(Companies company,String objectId) {
+      //objeto viejo
+       Companies companiesOld= repositorioCompaniesMySQL.findOne(objectId);
+       companiesOld.setName(company.getName());
+       companiesOld.setLicenseId(company.getLicenseId());
+       companiesOld.setTaxId(company.getTaxId());
+       companiesOld.setCode(company.getCode());
+       companiesOld.setObjectId(company.getObjectId());
+       repositorioCompaniesMySQL.update(companiesOld);
+    }
     private CompaniesRepository repositorioCompaniesMySQL;
 
 
