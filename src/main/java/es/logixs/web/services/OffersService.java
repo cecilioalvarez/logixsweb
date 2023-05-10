@@ -1,7 +1,6 @@
 package es.logixs.web.services;
 
 import es.logixs.web.domain.CounterOffers;
-import es.logixs.web.domain.Requests;
 import es.logixs.web.repositories.CounterOffersRepository;
 import es.logixs.web.domain.Offer;
 import es.logixs.web.repositories.OfferRepository;
@@ -46,7 +45,7 @@ public class OffersService {
         return counterOffersRepository.insert(counterOffers);
     }
 
-    public CounterOffers updateCounterOffer(CounterOffers counterOffers,String objectId){
+    public void updateCounterOffer(CounterOffers counterOffers, String objectId){
         CounterOffers oldCounterOffers= counterOffersRepository.findOne(objectId);
         counterOffersRepository.update(counterOffers,oldCounterOffers);
     }

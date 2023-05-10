@@ -14,9 +14,9 @@ import java.util.List;
 public class CounterOffersRepositoryMySQL implements CounterOffersRepository {
     private final static String sqlInsert = "insert into counter_offers (objectId,name,vom,originalPrice,counterOfferPrice,quantity) values(?,?,?,?,?,?)";
     private final static String sqlUpdate = "update counter_offers set name=? ,vom=? ,originalPrice=? ,counterOfferPrice=? ,quantity=? where objectId=?";
-    private final static String sqlDelete = "delete from products where objectId=?";
-    private final static String sqlFindAll = "select * from products;";
-    private final static String sqlFindOne = "select * from products  where objectId=?;";
+    private final static String sqlDelete = "delete from counter_offers where objectId=?";
+    private final static String sqlFindAll = "select * from counter_offers;";
+    private final static String sqlFindOne = "select * from counter_offers  where objectId=?;";
     @Autowired
     private JdbcTemplate plantilla;
 
