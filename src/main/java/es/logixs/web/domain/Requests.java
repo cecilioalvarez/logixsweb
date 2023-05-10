@@ -7,6 +7,13 @@ public class Requests {
     private String ownerId;
     private String companyId;
 
+    public Requests(String id, String code, String offerId, String ownerId, String companyId) {
+        this.id = id;
+        this.code = code;
+        this.offerId = offerId;
+        this.ownerId = ownerId;
+        this.companyId = companyId;
+    }
 
     public Requests(String code, String offerId, String ownerId, String companyId) {
         this.code = code;
@@ -14,6 +21,7 @@ public class Requests {
         this.ownerId = ownerId;
         this.companyId = companyId;
     }
+
 
     public Requests(String id) {
         this.id = id;
