@@ -48,5 +48,10 @@ public class CompaniesRepositoryMySQL implements CompaniesRepository {
         plantilla.update(sqlUpdate,company.getObjectId(), company.getCode(), company.getLicenseId(),company.getName(), company.getTaxId(),company.getObjectId());
 
     }
+    @Override
+    public void update(Companies company, Companies oldCompany) {
+        
+        plantilla.update(sqlUpdate,company.getObjectId(), company.getCode(), company.getLicenseId(),company.getName(), company.getTaxId(),oldCompany.getObjectId());
+    }
 
 }

@@ -16,12 +16,7 @@ public class UsersCompanyService {
     public void updateCompanies(Companies company,String objectId) {
       //objeto viejo
        Companies companiesOld= repositorioCompaniesMySQL.findOne(objectId);
-       companiesOld.setName(company.getName());
-       companiesOld.setLicenseId(company.getLicenseId());
-       companiesOld.setTaxId(company.getTaxId());
-       companiesOld.setCode(company.getCode());
-       companiesOld.setObjectId(company.getObjectId());
-       repositorioCompaniesMySQL.update(companiesOld);
+       repositorioCompaniesMySQL.update(company,companiesOld);
     }
     private CompaniesRepository repositorioCompaniesMySQL;
 

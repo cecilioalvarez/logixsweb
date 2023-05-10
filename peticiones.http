@@ -17,14 +17,14 @@ content-type: application/json
     "taxId":"2C"
 }
 ######
-PUT http://localhost:8080/webapi/companies/3F HTTP/1.1
+PUT http://localhost:8080/webapi/companies/2A HTTP/1.1
 content-type: application/json
 
 {
-    "objectId": "3F",
-    "code":"123B",
-    "licenseId": "AABBB",
-    "name":"mycompany3",
-    "taxId":"2C"
+    "objectId": "10A",
+    "code":"1",
+    "licenseId": "2",
+    "name":"my",
+    "taxId":"A"
 }
 
