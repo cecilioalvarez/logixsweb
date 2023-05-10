@@ -1,8 +1,7 @@
 package es.logixs.web.controllers;
 
-import es.logixs.web.domain.Products;
-import es.logixs.web.domain.Requests;
-import es.logixs.web.services.SalesProductsRequestsService;
+import es.logixs.web.domain.Product;
+import es.logixs.web.services.SaleProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,29 +12,29 @@ import java.util.List;
 public class ProductsController {
     
     @Autowired
-    private SalesProductsRequestsService salesProductsRequestsService;
+    private SaleProductRequestService saleProductRequestService;
 
     @GetMapping
-    public List<Products> findAllProducts() {
-        return salesProductsRequestsService.findAllProducts();
+    public List<Product> findAllProducts() {
+        return saleProductRequestService.findAllProducts();
     }
 
     @GetMapping("/{objectId}")
-    public Products findOneProduct(@PathVariable String objectId) {
-        return salesProductsRequestsService.findOneProducts(objectId);
+    public Product findOneProduct(@PathVariable String objectId) {
+        return saleProductRequestService.findOneProducts(objectId);
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteProducts(@PathVariable String objectId) {
-        salesProductsRequestsService.deleteProducts(objectId);
+        saleProductRequestService.deleteProducts(objectId);
     }
     @PostMapping
-    public Products insertProducts(@RequestBody Products product) {
-        return salesProductsRequestsService.insertProducts(product);
+    public Product insertProducts(@RequestBody Product product) {
+        return saleProductRequestService.insertProducts(product);
     }
     @PutMapping("/{objectId}")
-    public void updateProducts(@RequestBody Products product,@PathVariable String objectId) {
-        salesProductsRequestsService.updateProducts(product,objectId);
+    public void updateProducts(@RequestBody Product product, @PathVariable String objectId) {
+        saleProductRequestService.updateProducts(product,objectId);
     }
 
   

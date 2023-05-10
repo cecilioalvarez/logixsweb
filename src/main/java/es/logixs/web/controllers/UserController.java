@@ -1,7 +1,7 @@
 package es.logixs.web.controllers;
 
 import es.logixs.web.domain.User;
-import es.logixs.web.services.UsersCompanyService;
+import es.logixs.web.services.UserCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UsersCompanyService servicioUserCompany;
+    private UserCompanyService servicioUserCompany;
 
     @GetMapping
     public List<User> findAllUsers() {

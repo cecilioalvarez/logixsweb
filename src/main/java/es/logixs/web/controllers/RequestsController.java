@@ -1,9 +1,7 @@
 package es.logixs.web.controllers;
 
-import es.logixs.web.domain.Companies;
-import es.logixs.web.domain.Requests;
-import es.logixs.web.services.SalesProductsRequestsService;
-import es.logixs.web.services.UsersCompanyService;
+import es.logixs.web.domain.Request;
+import es.logixs.web.services.SaleProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,29 +12,29 @@ import java.util.List;
 public class RequestsController {
     
     @Autowired
-    private SalesProductsRequestsService salesProductsRequestsService;
+    private SaleProductRequestService saleProductRequestService;
 
     @GetMapping
-    public List<Requests> findAllRequests() {
-        return salesProductsRequestsService.findAllRequests();
+    public List<Request> findAllRequests() {
+        return saleProductRequestService.findAllRequests();
     }
 
     @GetMapping("/{objectId}")
-    public Requests findOneCompanies(@PathVariable String objectId) {
-        return salesProductsRequestsService.findOneRequests(objectId);
+    public Request findOneCompanies(@PathVariable String objectId) {
+        return saleProductRequestService.findOneRequests(objectId);
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteRequests(@PathVariable String objectId) {
-        salesProductsRequestsService.deleteRequests(new Requests(objectId));
+        saleProductRequestService.deleteRequests(new Request(objectId));
     }
     @PostMapping
-    public Requests insertRequests(@RequestBody Requests request) {
-        return salesProductsRequestsService.insertRequests(request);
+    public Request insertRequests(@RequestBody Request request) {
+        return saleProductRequestService.insertRequests(request);
     }
     @PutMapping("/{objectId}")
-    public void updateCompanies(@RequestBody Requests request,@PathVariable String objectId) {
-        salesProductsRequestsService.updateRequests(request,objectId);
+    public void updateCompanies(@RequestBody Request request, @PathVariable String objectId) {
+        saleProductRequestService.updateRequests(request,objectId);
     }
 
   

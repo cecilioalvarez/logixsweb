@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Offer {
 
-    private int objectId;
+    private String objectId;
     private String code;
     private String name;
     private String description;
     private String category;
 
-    public Offer(int objectId, String code, String name, String description, String category) {
+    public Offer(String objectId, String code, String name, String description, String category) {
         this.objectId = objectId;
         this.code = code;
         this.name = name;
@@ -18,7 +18,7 @@ public class Offer {
         this.category = category;
     }
 
-    public Offer(int objectId) {
+    public Offer(String objectId) {
         this.objectId = objectId;
     }
 
@@ -29,7 +29,7 @@ public class Offer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Offer offers)) return false;
-        return objectId == offers.objectId && Objects.equals(code, offers.code);
+        return Objects.equals(objectId, offers.objectId) && Objects.equals(code, offers.code);
     }
 
     @Override
@@ -37,11 +37,11 @@ public class Offer {
         return Objects.hash(objectId, code);
     }
 
-    public int getObjectId() {
+    public String getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(int objectId) {
+    public void setObjectId(String objectId) {
         this.objectId = objectId;
     }
 

@@ -12,11 +12,11 @@ import java.util.List;
 @Repository
 public class OfferRepositoryMySQL implements OfferRepository {
 
-    private final static String sqlInsert = "insert into offer (id,code,name,description,category) values (?,?,?,?,?)";
-    private final static String sqlDelete = "delete from offer where id=?";
+    private final static String sqlInsert = "insert into offer (objectId,code,name,description,category) values (?,?,?,?,?)";
+    private final static String sqlDelete = "delete from offer where objectId=?";
     private final static String sqlFindAll = "select * from offer";
-    private final static String sqlFindOne = "select * from offer where id=?";
-    private final static String sqlUpdate = "update offer set code=?,name=?,description=?,category=? where id=?";
+    private final static String sqlFindOne = "select * from offer where objectId=?";
+    private final static String sqlUpdate = "update offer set code=?,name=?,description=?,category=? where objectId=?";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -45,7 +45,7 @@ public class OfferRepositoryMySQL implements OfferRepository {
     }
 
     @Override
-    public Offer findOne(int id) {
+    public Offer findOne(String objectId) {
         return jdbcTemplate.queryForObject(sqlFindOne, new OfferMapper(), new OfferMapper());
     }
 

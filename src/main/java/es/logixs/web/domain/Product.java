@@ -1,6 +1,6 @@
 package es.logixs.web.domain;
 
-public class Products {
+public class Product {
     private String id;
     private String userId;
     private String code;
@@ -12,11 +12,11 @@ public class Products {
     private String quality;
     private String descAndSpecs;
 
-    public Products() {
+    public Product() {
 
     }
 
-    public Products(String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
+    public Product(String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
         this.userId = userId;
         this.code = code;
         this.companyId = companyId;
@@ -28,11 +28,11 @@ public class Products {
         this.descAndSpecs = descAndSpecs;
     }
 
-    public Products(String id) {
+    public Product(String id) {
         this.id = id;
     }
 
-    public Products(String id, String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
+    public Product(String id, String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
         this.id = id;
         this.userId = userId;
         this.code = code;

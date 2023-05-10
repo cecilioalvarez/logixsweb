@@ -1,13 +1,13 @@
 package es.logixs.web.domain;
 
-public class Requests {
+public class Request {
     private String id;
     private String code;
     private String offerId;
     private String ownerId;
     private String companyId;
 
-    public Requests(String id, String code, String offerId, String ownerId, String companyId) {
+    public Request(String id, String code, String offerId, String ownerId, String companyId) {
         this.id = id;
         this.code = code;
         this.offerId = offerId;
@@ -15,7 +15,7 @@ public class Requests {
         this.companyId = companyId;
     }
 
-    public Requests(String code, String offerId, String ownerId, String companyId) {
+    public Request(String code, String offerId, String ownerId, String companyId) {
         this.code = code;
         this.offerId = offerId;
         this.ownerId = ownerId;
@@ -23,11 +23,11 @@ public class Requests {
     }
 
 
-    public Requests(String id) {
+    public Request(String id) {
         this.id = id;
     }
 
-    public Requests() {
+    public Request() {
     }
 
     public String getId() {

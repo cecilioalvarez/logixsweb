@@ -1,42 +1,39 @@
 package es.logixs.web.repositories.mysql;
 
-import es.logixs.web.domain.Products;
-import es.logixs.web.repositories.ProductsRepository;
-import es.logixs.web.repositories.mysql.mappers.ProductsMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import es.logixs.web.domain.Product;
+import es.logixs.web.repositories.ProductRepository;
+import es.logixs.web.repositories.mysql.mappers.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class ProductsRepositoryMySQL implements ProductsRepository {
+public class ProductRepositoryMySQL implements ProductRepository {
     @Autowired
-    private final static String sqlInsert = "insert into products (id, userId, code, companyId, scientificName, name, category, originCountryIso, quality, descAndSpecs) values (?,?,?,?,?,?,?,?,?,?);";
-    private final static String sqlDelete = "delete from products where id=?";
-    private final static String sqlFindAll = "select * from products;";
-    private final static String sqlFindOne = "select * from products  where id=?;";
-    private final static String sqlUpdate = "update products set userId=?, code=?, companyId=?, scientificName=?, name=?, category=?, originCountryIso=?, quality=?, descAndSpecs=? where id=?;";
+    private final static String sqlInsert = "insert into product (objectId, userId, code, companyId, scientificName, name, category, originCountryIso, quality, descAndSpecs) values (?,?,?,?,?,?,?,?,?,?);";
+    private final static String sqlDelete = "delete from product where objectId=?";
+    private final static String sqlFindAll = "select * from product;";
+    private final static String sqlFindOne = "select * from product  where objectId=?;";
+    private final static String sqlUpdate = "update product set userId=?, code=?, companyId=?, scientificName=?, name=?, category=?, originCountryIso=?, quality=?, descAndSpecs=? where objectId=?;";
     @Autowired
     private JdbcTemplate plantilla;
     
     @Override
-    public Products insert(Products product) {
+    public Product insert(Product product) {
         plantilla.update(sqlInsert, product.getId(), product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs());
         return product;
     }
 
     @Override
-    public Products findOne(String id) {
-        return plantilla.queryForObject(sqlFindOne, Products.class, id);
+    public Product findOne(String id) {
+        return plantilla.queryForObject(sqlFindOne, Product.class, id);
     }
 
     @Override
-    public List<Products> findAll() {
-        return plantilla.query(sqlFindAll, new ProductsMapper());
+    public List<Product> findAll() {
+        return plantilla.query(sqlFindAll, new ProductMapper());
     }
 
     @Override
@@ -45,13 +42,13 @@ public class ProductsRepositoryMySQL implements ProductsRepository {
     }
 
     @Override
-    public Products update(Products product) {
+    public Product update(Product product) {
         plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), product.getId());
         return product;
     }
 
     @Override
-    public Products update(Products product, Products oldProduct) {
+    public Product update(Product product, Product oldProduct) {
         plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), oldProduct.getId());
         return product;
     }

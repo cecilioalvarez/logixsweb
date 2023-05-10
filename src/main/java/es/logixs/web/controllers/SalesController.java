@@ -1,8 +1,7 @@
 package es.logixs.web.controllers;
 
-import es.logixs.web.domain.Requests;
-import es.logixs.web.domain.Sales;
-import es.logixs.web.services.SalesProductsRequestsService;
+import es.logixs.web.domain.Sale;
+import es.logixs.web.services.SaleProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,29 +12,29 @@ import java.util.List;
 public class SalesController {
     
     @Autowired
-    private SalesProductsRequestsService salesProductsRequestsService;
+    private SaleProductRequestService saleProductRequestService;
 
     @GetMapping
-    public List<Sales> findAllRequests() {
-        return salesProductsRequestsService.findAllSales();
+    public List<Sale> findAllRequests() {
+        return saleProductRequestService.findAllSales();
     }
 
     @GetMapping("/{objectId}")
-    public Sales findOneSales(@PathVariable String objectId) {
-        return salesProductsRequestsService.findOneSales(objectId);
+    public Sale findOneSales(@PathVariable String objectId) {
+        return saleProductRequestService.findOneSales(objectId);
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteSales(@PathVariable String objectId) {
-        salesProductsRequestsService.deleteSales(new Sales(objectId));
+        saleProductRequestService.deleteSales(new Sale(objectId));
     }
     @PostMapping
-    public Sales insertSales(@RequestBody Sales sale) {
-        return salesProductsRequestsService.insertSales(sale);
+    public Sale insertSales(@RequestBody Sale sale) {
+        return saleProductRequestService.insertSales(sale);
     }
     @PutMapping("/{objectId}")
-    public void updateSales(@RequestBody Sales sale,@PathVariable String objectId) {
-        salesProductsRequestsService.updateSales(sale,objectId);
+    public void updateSales(@RequestBody Sale sale, @PathVariable String objectId) {
+        saleProductRequestService.updateSales(sale,objectId);
     }
 
   

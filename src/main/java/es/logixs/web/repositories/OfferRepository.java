@@ -10,6 +10,6 @@ public interface OfferRepository {
     Offer update(Offer offer);
     Offer update(Offer offer, Offer oldOffer);
     void delete(Offer offer);
-    Offer findOne(int id);
+    Offer findOne(String objectId);
     List<Offer> findAll();
 }

@@ -11,7 +11,7 @@ public class OfferMapper implements RowMapper<Offer> {
     @Override
     public Offer mapRow(ResultSet rs, final int rowNum) throws SQLException {
         return  new Offer(
-                rs.getInt("objectid"),
+                rs.getString("objectid"),
                 rs.getString("code"),
                 rs.getString("name"),
                 rs.getString("description"),

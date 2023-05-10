@@ -12,37 +12,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import es.logixs.web.domain.Companies;
-import es.logixs.web.services.UsersCompanyService;
+import es.logixs.web.domain.Company;
+import es.logixs.web.services.UserCompanyService;
 
 @RestController
 @RequestMapping("webapi/companies")
 public class CompaniesController {
     
     @Autowired
-    private UsersCompanyService servicioUserCompany;
+    private UserCompanyService servicioUserCompany;
 
     @GetMapping
-    public List<Companies> findAllCompanies() {
+    public List<Company> findAllCompanies() {
         return servicioUserCompany.findAllCompanies();
     }
 
     @GetMapping("/{objectId}")
-    public Companies findOneCompanies(@PathVariable String objectId) {
+    public Company findOneCompanies(@PathVariable String objectId) {
         return servicioUserCompany.findOneCompanies(objectId);
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteCompanies(@PathVariable String objectId) {
 
-        servicioUserCompany.deleteCompanies(new Companies(objectId));
+        servicioUserCompany.deleteCompanies(new Company(objectId));
     }
     @PostMapping
-    public Companies insertCompanies(@RequestBody Companies company) {
+    public Company insertCompanies(@RequestBody Company company) {
         return servicioUserCompany.insertCompanies(company);
     }
     @PutMapping("/{objectId}")
-    public void updateCompanies(@RequestBody Companies company,@PathVariable String objectId) {
+    public void updateCompanies(@RequestBody Company company, @PathVariable String objectId) {
         servicioUserCompany.updateCompanies(company,objectId);
     }
 

@@ -1,8 +1,8 @@
 package es.logixs.web.repositories.mysql;
 
-import es.logixs.web.domain.CounterOffers;
-import es.logixs.web.repositories.CounterOffersRepository;
-import es.logixs.web.repositories.mysql.mappers.CounterOffersMapper;
+import es.logixs.web.domain.CounterOffer;
+import es.logixs.web.repositories.CounterOfferRepository;
+import es.logixs.web.repositories.mysql.mappers.CounterOfferMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -11,17 +11,17 @@ import java.util.List;
 
 
 @Component
-public class CounterOffersRepositoryMySQL implements CounterOffersRepository {
-    private final static String sqlInsert = "insert into counter_offers (objectId,name,vom,originalPrice,counterOfferPrice,quantity) values(?,?,?,?,?,?)";
-    private final static String sqlUpdate = "update counter_offers set name=? ,vom=? ,originalPrice=? ,counterOfferPrice=? ,quantity=? where objectId=?";
-    private final static String sqlDelete = "delete from counter_offers where objectId=?";
-    private final static String sqlFindAll = "select * from counter_offers;";
-    private final static String sqlFindOne = "select * from counter_offers  where objectId=?;";
+public class CounterOfferRepositoryMySQL implements CounterOfferRepository {
+    private final static String sqlInsert = "insert into counteroffer (objectId,name,vom,originalPrice,counterOfferPrice,quantity) values(?,?,?,?,?,?)";
+    private final static String sqlUpdate = "update counteroffer set name=? ,vom=? ,originalPrice=? ,counterOfferPrice=? ,quantity=? where objectId=?";
+    private final static String sqlDelete = "delete from counteroffer where objectId=?";
+    private final static String sqlFindAll = "select * from counteroffer;";
+    private final static String sqlFindOne = "select * from counteroffer  where objectId=?;";
     @Autowired
     private JdbcTemplate plantilla;
 
     @Override
-    public CounterOffers insert(CounterOffers counterOffer) {
+    public CounterOffer insert(CounterOffer counterOffer) {
         plantilla.update(
                 sqlInsert,
                 counterOffer.getObjectId(),
@@ -35,7 +35,7 @@ public class CounterOffersRepositoryMySQL implements CounterOffersRepository {
     }
 
     @Override
-    public void update(CounterOffers counterOffer) {
+    public void update(CounterOffer counterOffer) {
         plantilla.update(
                 sqlUpdate,
                 counterOffer.getName(),
@@ -48,7 +48,7 @@ public class CounterOffersRepositoryMySQL implements CounterOffersRepository {
     }
 
     @Override
-    public void update(CounterOffers counterOffer,CounterOffers oldCounterOffer) {
+    public void update(CounterOffer counterOffer, CounterOffer oldCounterOffer) {
         plantilla.update(
                 sqlUpdate,
                 counterOffer.getName(),
@@ -61,17 +61,17 @@ public class CounterOffersRepositoryMySQL implements CounterOffersRepository {
     }
 
     @Override
-    public void delete(CounterOffers counterOffer) {
+    public void delete(CounterOffer counterOffer) {
         plantilla.update(sqlDelete, counterOffer.getObjectId());
     }
 
     @Override
-    public CounterOffers findOne(String objectId) {
-        return plantilla.queryForObject(sqlFindOne, new CounterOffersMapper(), objectId);
+    public CounterOffer findOne(String objectId) {
+        return plantilla.queryForObject(sqlFindOne, new CounterOfferMapper(), objectId);
     }
 
     @Override
-    public List<CounterOffers> findAll() {
-        return plantilla.query(sqlFindAll, new CounterOffersMapper());
+    public List<CounterOffer> findAll() {
+        return plantilla.query(sqlFindAll, new CounterOfferMapper());
     }
 }

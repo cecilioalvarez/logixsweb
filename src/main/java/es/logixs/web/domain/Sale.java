@@ -1,6 +1,6 @@
 package es.logixs.web.domain;
 
-public class Sales {
+public class Sale {
 
     private String id;
     private String ownerId;
@@ -11,15 +11,15 @@ public class Sales {
     private boolean isCounterOffer;
 
 
-    public Sales() {
+    public Sale() {
     }
 
-    public Sales(String id) {
+    public Sale(String id) {
         this.id = id;
     }
 
-    public Sales(String id, String ownerId, String clientId, String code, String offerId, String counterOfferId,
-                 boolean isCounterOffer) {
+    public Sale(String id, String ownerId, String clientId, String code, String offerId, String counterOfferId,
+                boolean isCounterOffer) {
         this.id = id;
         this.ownerId = ownerId;
         this.clientId = clientId;

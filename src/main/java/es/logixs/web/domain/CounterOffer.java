@@ -1,6 +1,6 @@
 package es.logixs.web.domain;
 
-public class CounterOffers {
+public class CounterOffer {
     private String objectId;
     private String name;
     private String vom;
@@ -8,15 +8,15 @@ public class CounterOffers {
     private double counterOfferPrice;
     private double quantity;
 
-    public CounterOffers() {
+    public CounterOffer() {
 
     }
 
-    public CounterOffers(String objectId) {
+    public CounterOffer(String objectId) {
         this.objectId = objectId;
     }
 
-    public CounterOffers(String objectId, String name, String vom, double originalPrice, double counterOfferPrice, double quantity) {
+    public CounterOffer(String objectId, String name, String vom, double originalPrice, double counterOfferPrice, double quantity) {
         this.objectId = objectId;
         this.name = name;
         this.vom = vom;
