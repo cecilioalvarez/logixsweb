@@ -11,4 +11,6 @@ public interface ProductsRepository {
     Products findOne(String id);
     List<Products> findAll();
     void delete(String id);
+    Products update(Products product);
+    Products update(Products product, Products oldProduct);
 }

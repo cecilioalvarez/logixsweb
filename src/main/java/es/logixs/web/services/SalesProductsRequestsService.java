@@ -1,8 +1,10 @@
 package es.logixs.web.services;
 
 import es.logixs.web.domain.Companies;
+import es.logixs.web.domain.Products;
 import es.logixs.web.domain.Requests;
 import es.logixs.web.repositories.CompaniesRepository;
+import es.logixs.web.repositories.ProductsRepository;
 import es.logixs.web.repositories.RequestsRepository;
 import org.springframework.stereotype.Component;
 

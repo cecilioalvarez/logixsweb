@@ -18,6 +18,7 @@ public class ProductsRepositoryMySQL implements ProductsRepository {
     private final static String sqlDelete = "delete from products where id=?";
     private final static String sqlFindAll = "select * from products;";
     private final static String sqlFindOne = "select * from products  where id=?;";
+    private final static String sqlUpdate = "update products set userId=?, code=?, companyId=?, scientificName=?, name=?, category=?, originCountryIso=?, quality=?, descAndSpecs=? where id=?;";
     @Autowired
     private JdbcTemplate plantilla;
     
@@ -40,5 +41,17 @@ public class ProductsRepositoryMySQL implements ProductsRepository {
     @Override
     public void delete(String id) {
        plantilla.update(sqlDelete, id);
+    }
+
+    @Override
+    public Products update(Products product) {
+        plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), product.getId());
+        return product;
+    }
+
+    @Override
+    public Products update(Products product, Products oldProduct) {
+        plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), oldProduct.getId());
+        return product;
     }
 }
