@@ -12,6 +12,10 @@ public class CounterOffers {
 
     }
 
+    public CounterOffers(String objectId) {
+        this.objectId = objectId;
+    }
+
     public CounterOffers(String objectId, String name, String vom, double originalPrice, double counterOfferPrice, double quantity) {
         this.objectId = objectId;
         this.name = name;
