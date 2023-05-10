@@ -1,3 +1,19 @@
 http://localhost:8080/webapi/companies
 #####
 http://localhost:8080/webapi/companies/1A
+
+#####
+DELETE  http://localhost:8080/webapi/companies/3F
+
+######
+POST http://localhost:8080/webapi/companies HTTP/1.1
+content-type: application/json
+
+{
+    "objectId": "3F",
+    "code":"123B",
+    "licenseId": "AABBB",
+    "name":"mycompany3",
+    "taxId":"2C"
+}
+

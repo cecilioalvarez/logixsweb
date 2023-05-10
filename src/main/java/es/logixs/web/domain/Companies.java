@@ -1,14 +1,14 @@
 package es.logixs.web.domain;
 
 public class Companies {
-    private String objectid;
+    private String objectId;
     private String code;
     private String licenseId;
     private String name;
     private String taxId;
 
     public Companies(String objectid, String code, String licenseId, String name, String taxId) {
-        this.objectid = objectid;
+        this.objectId = objectid;
         this.code = code;
         this.licenseId = licenseId;
         this.name = name;
@@ -16,7 +16,7 @@ public class Companies {
     }
 
     public Companies(String objectid) {
-        this.objectid = objectid;
+        this.objectId = objectid;
     }
 
     public Companies() {
@@ -29,12 +29,12 @@ public class Companies {
         this.taxId = taxId;
     }
 
-    public String getObjectid() {
-        return objectid;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setObjectid(String objectid) {
-        this.objectid = objectid;
+    public void setObjectId(String objectid) {
+        this.objectId = objectid;
     }
 
     public String getCode() {

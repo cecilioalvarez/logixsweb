@@ -25,12 +25,12 @@ public class CompaniesRepositoryMySQL implements CompaniesRepository {
 
     @Override
     public Companies insert(Companies company) {   
-        plantilla.update(sqlInsert, company.getObjectid(),company.getCode(), company.getLicenseId(),company.getName(), company.getTaxId());
+        plantilla.update(sqlInsert, company.getObjectId(),company.getCode(), company.getLicenseId(),company.getName(), company.getTaxId());
         return company;
     }
     @Override
     public void delete(Companies company) {
-        plantilla.update(sqlDelete, company.getObjectid());
+        plantilla.update(sqlDelete, company.getObjectId());
     }
 
     @Override
