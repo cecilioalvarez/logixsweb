@@ -29,6 +29,11 @@ public class OffersService {
         offerRepository.delete(offer);
     }
 
+    public void updateOffer(Offer offer, int objectId){
+        Offer offer1 = offerRepository.findOne(objectId);
+        offerRepository.update(offer, offer1);
+    }
+
     public Offer findOneOffer(int objectId){
         return offerRepository.findOne(objectId);
     }

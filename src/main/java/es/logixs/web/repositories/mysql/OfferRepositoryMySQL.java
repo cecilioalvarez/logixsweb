@@ -23,18 +23,25 @@ public class OfferRepositoryMySQL implements OfferRepository {
 
     @Override
     public Offer insert(Offer offer) {
-        jdbcTemplate.update(sqlInsert, offer.getId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory());
+        jdbcTemplate.update(sqlInsert, offer.getObjectId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory());
         return offer;
     }
 
     @Override
-    public void update(Offer offer) {
-        jdbcTemplate.update(sqlUpdate, offer.getId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory());
+    public Offer update(Offer offer) {
+        jdbcTemplate.update(sqlUpdate, offer.getObjectId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory());
+        return offer;
+    }
+
+    @Override
+    public Offer update(Offer offer, Offer offerOld) {
+        jdbcTemplate.update(sqlUpdate, offer.getObjectId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory(), offerOld.getObjectId());
+        return offer;
     }
 
     @Override
     public void delete(Offer offer) {
-        jdbcTemplate.update(sqlDelete, offer.getId());
+        jdbcTemplate.update(sqlDelete, offer.getObjectId());
     }
 
     @Override

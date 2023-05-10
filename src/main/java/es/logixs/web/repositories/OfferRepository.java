@@ -7,7 +7,8 @@ import java.util.List;
 public interface OfferRepository {
 
     Offer insert(Offer offer);
-    void update(Offer offer);
+    Offer update(Offer offer);
+    Offer update(Offer offer, Offer oldOffer);
     void delete(Offer offer);
     Offer findOne(int id);
     List<Offer> findAll();

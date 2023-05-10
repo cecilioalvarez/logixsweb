@@ -4,22 +4,22 @@ import java.util.Objects;
 
 public class Offer {
 
-    private int id;
+    private int objectId;
     private String code;
     private String name;
     private String description;
     private String category;
 
-    public Offer(int id, String code, String name, String description, String category) {
-        this.id = id;
+    public Offer(int objectId, String code, String name, String description, String category) {
+        this.objectId = objectId;
         this.code = code;
         this.name = name;
         this.description = description;
         this.category = category;
     }
 
-    public Offer(int id) {
-        this.id = id;
+    public Offer(int objectId) {
+        this.objectId = objectId;
     }
 
     public Offer() {
@@ -29,20 +29,20 @@ public class Offer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Offer offers)) return false;
-        return id == offers.id && Objects.equals(code, offers.code);
+        return objectId == offers.objectId && Objects.equals(code, offers.code);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, code);
+        return Objects.hash(objectId, code);
     }
 
-    public int getId() {
-        return id;
+    public int getObjectId() {
+        return objectId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setObjectId(int objectId) {
+        this.objectId = objectId;
     }
 
     public String getCode() {
