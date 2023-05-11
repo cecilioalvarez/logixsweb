@@ -15,8 +15,8 @@ public class CounterOfferRepositoryMySQL implements CounterOfferRepository {
     private final static String sqlInsert = "insert into counteroffer (objectId,name,vom,originalPrice,counterOfferPrice,quantity) values(?,?,?,?,?,?)";
     private final static String sqlUpdate = "update counteroffer set name=? ,vom=? ,originalPrice=? ,counterOfferPrice=? ,quantity=? where objectId=?";
     private final static String sqlDelete = "delete from counteroffer where objectId=?";
-    private final static String sqlFindAll = "select * from counteroffer;";
-    private final static String sqlFindOne = "select * from counteroffer  where objectId=?;";
+    private final static String sqlFindAll = "select * from counteroffer";
+    private final static String sqlFindOne = "select * from counteroffer  where objectId=?";
     @Autowired
     private JdbcTemplate plantilla;
 
