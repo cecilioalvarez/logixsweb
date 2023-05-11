@@ -8,7 +8,7 @@ insert into
         quantity
     )
 values
-    ("1A", "name1", 'vom1', 2.0, 4.0, 10.0);
+    ("1A", "name1", "vom1", 2.0, 4.0, 10.0);
 
 insert into
     counteroffer (
@@ -20,7 +20,7 @@ insert into
         quantity
     )
 values
-    ("2A", "name2", 'vom2', 2.0, 4.0, 10.0);
+    ("2A", "name2", "vom2", 2.0, 4.0, 10.0);
 
 insert into
     counteroffer (
@@ -32,7 +32,7 @@ insert into
         quantity
     )
 values
-    ("3A", "name3", 'vom3', 2.0, 4.0, 10.0);
+    ("3A", "name3", "vom3", 2.0, 4.0, 10.0);
 
 insert into
     counteroffer (
@@ -44,4 +44,4 @@ insert into
         quantity
     )
 values
-    ("4A", "name4", 'vom4', 2.0, 4.0, 10.0);
+    ("4A", "name4", "vom4", 2.0, 4.0, 10.0);
