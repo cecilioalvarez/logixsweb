@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public class ProductRepositoryMySQL implements ProductRepository {
     @Autowired
-    private final static String sqlInsert = "insert into product (objectId, userId, code, companyId, scientificName, name, category, originCountryIso, quality, descAndSpecs) values (?,?,?,?,?,?,?,?,?,?);";
-    private final static String sqlDelete = "delete from product where objectId=?";
+    private final static String sqlInsert = "insert into product (id, userId, code, companyId, scientificName, name, category, originCountryIso, quality, descAndSpecs) values (?,?,?,?,?,?,?,?,?,?);";
+    private final static String sqlDelete = "delete from product where id=?;";
     private final static String sqlFindAll = "select * from product;";
-    private final static String sqlFindOne = "select * from product  where objectId=?;";
+    private final static String sqlFindOne = "select * from product where id=?;";
     private final static String sqlUpdate = "update product set userId=?, code=?, companyId=?, scientificName=?, name=?, category=?, originCountryIso=?, quality=?, descAndSpecs=? where objectId=?;";
     @Autowired
     private JdbcTemplate plantilla;
@@ -28,7 +28,7 @@ public class ProductRepositoryMySQL implements ProductRepository {
 
     @Override
     public Product findOne(String id) {
-        return plantilla.queryForObject(sqlFindOne, Product.class, id);
+        return plantilla.queryForObject(sqlFindOne, new ProductMapper(), id);
     }
 
     @Override
