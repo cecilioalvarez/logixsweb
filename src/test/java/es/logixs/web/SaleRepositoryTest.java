@@ -28,5 +28,12 @@ class SaleRepositoryTest {
 
     }
 
+    @Test
+    void findOne() {
+        Sale saleFinal= saleRepository.findOne("4A");
+
+        assertEquals("4A", saleFinal.getCode());
+    }
+
 
 }
