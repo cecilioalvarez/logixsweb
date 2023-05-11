@@ -34,7 +34,7 @@ public class OfferCounterofferServiceTest {
 
         when(counterOfferRepositoryMock.findAll()).thenReturn(listCounterOffer);
 
-        List<CounterOffer> listCounterOfferResult = offersService.findAllCounterOffer();
+        List<CounterOffer> listCounterOfferResult = offersService.findAllCounterOffers();
         verify(counterOfferRepositoryMock, times(1)).findAll();
         assertEquals(listCounterOffer, listCounterOfferResult);
     }
