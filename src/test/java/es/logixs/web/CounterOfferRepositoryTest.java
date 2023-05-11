@@ -35,6 +35,12 @@ class CounterOfferRepositoryTest {
         assertEquals("name1", counterOfferFinal.getName());
     }
 
+    @Test
+    void findAll() {
+        List<CounterOffer> counterOfferList = counterOfferRepository.findAll();
+
+        assertTrue(counterOfferList.size()>=4);
+    }
 
 
 }
