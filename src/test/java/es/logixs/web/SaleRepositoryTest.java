@@ -63,5 +63,8 @@ class SaleRepositoryTest {
 
     }
 
-
+    @Test
+    void update() {
+        /* TODO */
+    }
 }
