@@ -1,7 +1,5 @@
-package es.logixs.web;
+package es.logixs.web.repositories;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,7 +8,6 @@ import org.springframework.test.context.jdbc.Sql;
 import es.logixs.web.domain.User;
 import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,11 +18,6 @@ class UserRepositoryTest {
 
     @Autowired
     private UserRepositoryMySQL repository;
-
-    @BeforeEach
-    public void inicializar() throws IOException {
-
-    }
 
     @Test
     void insert() {

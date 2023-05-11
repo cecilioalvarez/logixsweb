@@ -1,24 +1,19 @@
-package es.logixs.web;
+package es.logixs.web.repositories;
 
 
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.IOException;
 import java.util.List;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import es.logixs.web.domain.Company;
-import es.logixs.web.repositories.CompanyRepository;
 
 @SpringBootTest
 @Sql({ "classpath:schemacompanies.sql", "classpath:datacompanies.sql" })
@@ -29,11 +24,6 @@ class CompanyRepositoryTest {
 
     
 
-    @BeforeEach
-    public void inicializar() throws IOException {
-
-    
-    }
     @Test
     void findOne() {
         Company companyFinal;

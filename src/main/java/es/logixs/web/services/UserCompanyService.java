@@ -15,15 +15,15 @@ public class UserCompanyService {
    private final UserRepository userRepository;
    private final CompanyRepository companyRepository;
 
-    public void updateCompanies(Company company, String objectId) {
-       Company companiesOld= companyRepository.findOne(objectId);
-       companyRepository.update(company,companiesOld);
+    public void updateCompany(Company company, String objectId) {
+       Company companyOld= companyRepository.findOne(objectId);
+       companyRepository.update(company,companyOld);
     }
 
 
-    public UserCompanyService(CompanyRepository repoCompanies, UserRepository repoUsers) {
-        this.userRepository = repoUsers;
-        this.companyRepository = repoCompanies;
+    public UserCompanyService(CompanyRepository companyRepository, UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
     }
     public void updateUser(User user,String objectId) {
         User userOld= userRepository.findOne(objectId);
@@ -33,12 +33,12 @@ public class UserCompanyService {
         userRepository.delete(user);
     }
 
-    public void deleteCompanies(Company company) {
+    public void deleteCompany(Company company) {
         companyRepository.delete(company);
     }
 
 
-    public Company insertCompanies(Company company) {
+    public Company insertCompany(Company company) {
         return companyRepository.insert(company);
     }
 
@@ -54,7 +54,7 @@ public class UserCompanyService {
         return userRepository.findAll();
     }
 
-    public Company findOneCompanies(String objectid) {
+    public Company findOneCompany(String objectid) {
         return companyRepository.findOne(objectid);
     }
 

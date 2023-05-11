@@ -16,7 +16,7 @@ public class RequestRepositoryMySQL implements RequestRepository {
     private final static String sqlDelete = "delete from request where objectId=?";
     private final static String sqlFindAll = "select * from request;";
     private final static String sqlFindOne = "select * from request where objectId=?;";
-    private final static String sqlUpdate = "update companies set objectId=?, code=?, offerId=?, ownerId=?, companyId=? where objectId=?";
+    private final static String sqlUpdate = "update request set objectId=?, code=?, offerId=?, ownerId=?, companyId=? where objectId=?";
 
     @Autowired
     private JdbcTemplate plantilla;

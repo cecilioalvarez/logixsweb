@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("webapi/requests")
-public class RequestsController {
+@RequestMapping("webapi/request")
+public class RequestController {
     
     @Autowired
     private SaleProductRequestService saleProductRequestService;
@@ -20,21 +20,21 @@ public class RequestsController {
     }
 
     @GetMapping("/{objectId}")
-    public Request findOneCompanies(@PathVariable String objectId) {
-        return saleProductRequestService.findOneRequests(objectId);
+    public Request findOneRequest(@PathVariable String objectId) {
+        return saleProductRequestService.findOneRequest(objectId);
     }
 
     @DeleteMapping("/{objectId}")
-    public void deleteRequests(@PathVariable String objectId) {
-        saleProductRequestService.deleteRequests(new Request(objectId));
+    public void deleteRequest(@PathVariable String objectId) {
+        saleProductRequestService.deleteRequest(new Request(objectId));
     }
     @PostMapping
-    public Request insertRequests(@RequestBody Request request) {
-        return saleProductRequestService.insertRequests(request);
+    public Request insertRequest(@RequestBody Request request) {
+        return saleProductRequestService.insertRequest(request);
     }
     @PutMapping("/{objectId}")
-    public void updateCompanies(@RequestBody Request request, @PathVariable String objectId) {
-        saleProductRequestService.updateRequests(request,objectId);
+    public void updateRequest(@RequestBody Request request, @PathVariable String objectId) {
+        saleProductRequestService.updateRequest(request,objectId);
     }
 
   

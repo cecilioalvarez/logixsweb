@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("webapi/products")
-public class ProductsController {
+@RequestMapping("webapi/product")
+public class ProductController {
     
     @Autowired
     private SaleProductRequestService saleProductRequestService;
@@ -25,16 +25,16 @@ public class ProductsController {
     }
 
     @DeleteMapping("/{objectId}")
-    public void deleteProducts(@PathVariable String objectId) {
-        saleProductRequestService.deleteProducts(objectId);
+    public void deleteProduct(@PathVariable String objectId) {
+        saleProductRequestService.deleteProduct(objectId);
     }
     @PostMapping
-    public Product insertProducts(@RequestBody Product product) {
-        return saleProductRequestService.insertProducts(product);
+    public Product insertProduct(@RequestBody Product product) {
+        return saleProductRequestService.insertProduct(product);
     }
     @PutMapping("/{objectId}")
-    public void updateProducts(@RequestBody Product product, @PathVariable String objectId) {
-        saleProductRequestService.updateProducts(product,objectId);
+    public void updateProduct(@RequestBody Product product, @PathVariable String objectId) {
+        saleProductRequestService.updateProduct(product,objectId);
     }
 
   

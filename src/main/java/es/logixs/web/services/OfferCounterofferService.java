@@ -58,7 +58,7 @@ public class OfferCounterofferService {
         return counterOfferRepository.findOne(objectId);
     }
 
-    public List<CounterOffer> findAllCounterOffer(){
+    public List<CounterOffer> findAllCounterOffers(){
         return counterOfferRepository.findAll();
     }
 }
