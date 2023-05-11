@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class OfferService {
+public class OfferCounterofferService {
 
     private final OfferRepository offerRepository;
     private final CounterOfferRepository counterOfferRepository;
 
 
-    public OfferService(OfferRepository offerRepository, CounterOfferRepository counterOfferRepository) {
+    public OfferCounterofferService(OfferRepository offerRepository, CounterOfferRepository counterOfferRepository) {
         this.offerRepository = offerRepository;
         this.counterOfferRepository = counterOfferRepository;
     }
