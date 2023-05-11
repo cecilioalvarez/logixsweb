@@ -32,7 +32,7 @@ public class Sale {
     public String getObjectId() {
         return objectId;
     }
-    public void setObjectIdId(String objectId) {
+    public void setObjectId(String objectId) {
         this.objectId = objectId;
     }
     public String getOwnerId() {
