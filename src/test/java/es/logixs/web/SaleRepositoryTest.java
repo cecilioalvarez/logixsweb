@@ -51,5 +51,17 @@ class SaleRepositoryTest {
         assertEquals(sale, saleFinal);
     }
 
+    @Test
+    void delete() {
+        Sale sale = new Sale("5A", "0005", "0005", "5A", "5", "5", true);
+
+        saleRepository.insert(sale);
+        saleRepository.delete(sale);
+        List<Sale> sales = saleRepository.findAll();
+
+        assertFalse(sales.contains(sale));
+
+    }
+
 
 }
