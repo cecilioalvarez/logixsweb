@@ -32,10 +32,10 @@ public class SaleProductRequestServiceTest {
   @InjectMocks
   private SaleProductRequestService saleProductRequestService;
   @Test
-  public void deleteSalesTest() {
+  public void deleteSaleTest() {
     Sale sale = new Sale("0001","0001","0001","1A","1","1",true);
 
-    saleProductRequestService.deleteSales(sale);
+    saleProductRequestService.deleteSale(sale);
 
     verify(saleRepositoryMock, times(1)).delete(sale);
 
@@ -43,15 +43,15 @@ public class SaleProductRequestServiceTest {
 
 
   @Test
-  public void insertSalesTest() {
+  public void insertSaleTest() {
     Sale sales = mock(Sale.class);
 
     List<Sale> salesList = List.of(sales, sales, sales);
-    List<Sale> insertedSalesList = saleProductRequestService.insertSalesList(salesList);
+    List<Sale> insertedSaleList = saleProductRequestService.insertSalesList(salesList);
 
     verify(saleRepositoryMock, times(3)).insert(any(Sale.class));
 
-    assertIterableEquals(salesList, insertedSalesList);
+    assertIterableEquals(salesList, insertedSaleList);
   }
 
 
@@ -88,29 +88,29 @@ public class SaleProductRequestServiceTest {
   public void deleteProductTest() {
     Product product = new Product("7", "23", "123456789", "company1", "scientificName1", "product1", "category1", "ES", "quality1", "description1");
 
-    saleProductRequestService.deleteProducts(product.getId());
+    saleProductRequestService.deleteProduct(product.getId());
 
     verify(productRepositoryMock, times(1)).delete(product.getId());
   }
 
-  // Requests
+  // Request
   @Test
-  public void insertRequestsTest() {
+  public void insertRequestTest() {
     Request request = mock(Request.class);
 
     List<Request> requestsList = List.of(request, request, request);
-    List<Request> insertedRequestsList = saleProductRequestService.insertRequestsList(requestsList);
+    List<Request> insertedRequestList = saleProductRequestService.insertRequestsList(requestsList);
 
     verify(requestRepositoryMock, times(3)).insert(any(Request.class));
 
-    assertIterableEquals(requestsList, insertedRequestsList);
+    assertIterableEquals(requestsList, insertedRequestList);
   }
 
   @Test
-  public void deleteRequestsTest() {
+  public void deleteRequestTest() {
     Request request = new Request("123456789", "offer6", "owner6", "company6");
 
-    saleProductRequestService.deleteRequests(request);
+    saleProductRequestService.deleteRequest(request);
 
     verify(requestRepositoryMock, times(1)).delete(request);
   }

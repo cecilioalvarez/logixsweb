@@ -22,13 +22,13 @@ import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 import es.logixs.web.services.UserCompanyService;
 
 @ExtendWith(MockitoExtension.class)
-public class UsersCompaniesServiceTest {
+public class UserCompanyServiceTest {
     @Mock
     public UserRepositoryMySQL userRepositoryMock;
     @Mock
-    public CompanyRepositoryMySQL companiesRepositoryMock;
+    public CompanyRepositoryMySQL companyRepositoryMock;
     @InjectMocks
-    public UserCompanyService userCompaniesService;
+    public UserCompanyService userCompanyService;
 
     @Test
     public void findOneUserTest() {
@@ -50,7 +50,7 @@ public class UsersCompaniesServiceTest {
 
         List<User> usersListMock = Arrays.asList(user1, user2);
         when(userRepositoryMock.findAll()).thenReturn(usersListMock);
-        List<User> userListFinal = userCompaniesService.findAllUsers();
+        List<User> userListFinal = userCompanyService.findAllUsers();
 
         verify(userRepositoryMock, times(1)).findAll();
         assertEquals(usersListMock, userListFinal);
@@ -61,7 +61,7 @@ public class UsersCompaniesServiceTest {
 
         User user = new User("1A");
 
-        userCompaniesService.deleteUser(user);
+        userCompanyService.deleteUser(user);
 
         verify(userRepositoryMock, times(1)).delete(user);
     }
@@ -79,13 +79,13 @@ public class UsersCompaniesServiceTest {
     }
 
     @Test
-    public void insertCompaniesTest() {
+    public void insertCompanyTest() {
 
         Company company1 = new Company("1A","ds12fsdf","asdafs23","PWC","324234d");
 
-        when(companiesRepositoryMock.insert(company1)).thenReturn(company1);
+        when(companyRepositoryMock.insert(company1)).thenReturn(company1);
 
-        Company insertedCompany = companiesRepositoryMock.insert(company1);
+        Company insertedCompany = companyRepositoryMock.insert(company1);
 
         assertEquals(company1, insertedCompany);
     }
@@ -96,9 +96,9 @@ public class UsersCompaniesServiceTest {
         Company company1 = new Company("1A","ds12fsdf","asdafs23","PWC","324234d");
 
 
-        when(companiesRepositoryMock.findOne("1A")).thenReturn(company1);
+        when(companyRepositoryMock.findOne("1A")).thenReturn(company1);
 
-        Company foundCompany = companiesRepositoryMock.findOne("1A");
+        Company foundCompany = companyRepositoryMock.findOne("1A");
 
         assertEquals(company1, foundCompany);
     }
@@ -109,22 +109,22 @@ public class UsersCompaniesServiceTest {
         Company company1 = new Company("1A","HFGAD2","ASDFAF2","PWC","asdfasdf2");
         Company company2 = new Company("2A","HFGDAD2","ASDFAAF2","PWC 2","asd2fasdf2");
 
-        List<Company> companiesListMock = Arrays.asList(company1, company2);
-        when(companiesRepositoryMock.findAll()).thenReturn(companiesListMock);
-        List<Company> companiesListFinal = userCompaniesService.findAllCompanies();
+        List<Company> companyListMock = Arrays.asList(company1, company2);
+        when(companyRepositoryMock.findAll()).thenReturn(companyListMock);
+        List<Company> companyListFinal = userCompanyService.findAllCompanies();
 
-        verify(companiesRepositoryMock, times(1)).findAll();
-        assertEquals(companiesListMock, companiesListFinal);
+        verify(companyRepositoryMock, times(1)).findAll();
+        assertEquals(companyListMock, companyListFinal);
     }
 
     @Test
-    public void deleteCompaniesTest() {
+    public void deleteCompanyTest() {
 
         Company company = new Company("1A");
 
-        userCompaniesService.deleteCompanies(company);
+        userCompanyService.deleteCompany(company);
 
-        verify(companiesRepositoryMock, times(1)).delete(company);
+        verify(companyRepositoryMock, times(1)).delete(company);
     }
 
 

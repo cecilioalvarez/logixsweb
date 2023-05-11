@@ -8,34 +8,34 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("webapi/counteroffers")
-public class CounterOffersController {
+@RequestMapping("webapi/counteroffer")
+public class CounterOfferController {
     @Autowired
     private OfferCounterofferService offerCounterofferService;
 
     @GetMapping
     public List<CounterOffer> findAllCounterOffers() {
-        return offerCounterofferService.findAllCounterOffer();
+        return offerCounterofferService.findAllCounterOffers();
     }
 
     @GetMapping("/{objectId}")
-    public CounterOffer findOneCounterOffers(@PathVariable String objectId) {
+    public CounterOffer findOneCounterOffer(@PathVariable String objectId) {
         return offerCounterofferService.findOneCounterOffer(objectId);
     }
 
     @DeleteMapping("/{objectId}")
-    public void deleteCounterOffers(@PathVariable String objectId) {
+    public void deleteCounterOffer(@PathVariable String objectId) {
 
         offerCounterofferService.deleteCounterOffer(new CounterOffer(objectId));
     }
 
     @PostMapping
-    public CounterOffer insertCounterOffers(@RequestBody CounterOffer company) {
+    public CounterOffer insertCounterOffer(@RequestBody CounterOffer company) {
         return offerCounterofferService.insertCounterOffer(company);
     }
 
     @PutMapping("/{objectId}")
-    public void updateCounterOffers(@RequestBody CounterOffer company, @PathVariable String objectId) {
+    public void updateCounterOffer(@RequestBody CounterOffer company, @PathVariable String objectId) {
         offerCounterofferService.updateCounterOffer(company, objectId);
     }
 
