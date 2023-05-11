@@ -4,6 +4,7 @@ package es.logixs.web;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,7 +21,7 @@ import es.logixs.web.domain.Company;
 import es.logixs.web.repositories.CompanyRepository;
 
 @SpringBootTest
-@Sql({ "classpath:schemausers.sql", "classpath:datausers.sql" })
+@Sql({ "classpath:schemacompanies.sql", "classpath:datacompanies.sql" })
 class CompanyRepositoryTest {
 
     @Autowired
@@ -57,8 +58,8 @@ class CompanyRepositoryTest {
         Company company = new Company("6A", "32234", "ADF2323SD", "PWC DTS", "adsf23");
         companiesRepository.insert(company);
         companiesRepository.delete(company);
-        Company companyDeleted = companiesRepository.findOne("6A");
-        assertNull(companyDeleted);
+       List<Company> companies = companiesRepository.findAll();
+       assertFalse(companies.contains(company));
 
     }
 
