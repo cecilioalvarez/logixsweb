@@ -1,4 +1,4 @@
-package es.logixs.web;
+package es.logixs.web.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
@@ -19,8 +19,6 @@ import es.logixs.web.domain.Company;
 import es.logixs.web.domain.User;
 import es.logixs.web.repositories.mysql.CompanyRepositoryMySQL;
 import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
-import es.logixs.web.services.UserCompanyService;
-
 @ExtendWith(MockitoExtension.class)
 public class UserCompanyServiceTest {
     @Mock

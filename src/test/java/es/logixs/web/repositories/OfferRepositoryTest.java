@@ -1,7 +1,6 @@
-package es.logixs.web;
+package es.logixs.web.repositories;
 
 import es.logixs.web.domain.Offer;
-import es.logixs.web.repositories.OfferRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

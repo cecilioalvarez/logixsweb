@@ -1,4 +1,4 @@
-package es.logixs.web;
+package es.logixs.web.services;
 
 import es.logixs.web.domain.Product;
 import es.logixs.web.domain.Request;
@@ -6,7 +6,6 @@ import es.logixs.web.domain.Sale;
 import es.logixs.web.repositories.mysql.ProductRepositoryMySQL;
 import es.logixs.web.repositories.mysql.RequestRepositoryMySQL;
 import es.logixs.web.repositories.mysql.SaleRepositoryMySQL;
-import es.logixs.web.services.SaleProductRequestService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

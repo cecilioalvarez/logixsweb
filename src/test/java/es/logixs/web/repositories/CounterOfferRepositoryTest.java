@@ -1,14 +1,11 @@
-package es.logixs.web;
+package es.logixs.web.repositories;
 
 import es.logixs.web.domain.CounterOffer;
-import es.logixs.web.repositories.CounterOfferRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,12 +18,6 @@ class CounterOfferRepositoryTest {
     private CounterOfferRepository counterOfferRepository;
 
 
-
-    @BeforeEach
-    public void inicializar() throws IOException {
-
-
-    }
 
     @Test
     void findOne() {

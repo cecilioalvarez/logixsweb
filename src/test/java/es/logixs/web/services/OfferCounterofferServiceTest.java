@@ -1,10 +1,9 @@
-package es.logixs.web;
+package es.logixs.web.services;
 
 import es.logixs.web.domain.CounterOffer;
 import es.logixs.web.domain.Offer;
 import es.logixs.web.repositories.mysql.CounterOfferRepositoryMySQL;
 import es.logixs.web.repositories.mysql.OfferRepositoryMySQL;
-import es.logixs.web.services.OfferCounterofferService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
