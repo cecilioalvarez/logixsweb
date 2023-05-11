@@ -35,5 +35,12 @@ class SaleRepositoryTest {
         assertEquals("4A", saleFinal.getCode());
     }
 
+    @Test
+    void findAll() {
+        List<Sale> saleList = saleRepository.findAll();
+
+        assertTrue(saleList.size()>=4);
+    }
+
 
 }
