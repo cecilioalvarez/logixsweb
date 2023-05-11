@@ -63,5 +63,8 @@ class CounterOfferRepositoryTest {
 
     }
 
-
+    @Test
+    void update() {
+        /* TODO */
+    }
 }
