@@ -51,6 +51,17 @@ class CounterOfferRepositoryTest {
         assertEquals(counterOffer, counterOfferFinal);
     }
 
-    
+    @Test
+    void delete() {
+        CounterOffer counterOffer = new CounterOffer("6A", "name6", "vom6", 2.0, 4.0, 10.0);
+
+        counterOfferRepository.insert(counterOffer);
+        counterOfferRepository.delete(counterOffer);
+        List<CounterOffer> counterOffers = counterOfferRepository.findAll();
+
+        assertFalse(counterOffers.contains(counterOffer));
+
+    }
+
 
 }
