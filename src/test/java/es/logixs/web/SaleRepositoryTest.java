@@ -42,5 +42,14 @@ class SaleRepositoryTest {
         assertTrue(saleList.size()>=4);
     }
 
+    @Test
+    void insert() {
+        Sale sale = new Sale("5A", "0005", "0005", "5A", "5", "5", true);
+
+        Sale saleFinal = saleRepository.insert(sale);
+
+        assertEquals(sale, saleFinal);
+    }
+
 
 }
