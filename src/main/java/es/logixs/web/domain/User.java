@@ -52,4 +52,31 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((objectid == null) ? 0 : objectid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (objectid == null) {
+            if (other.objectid != null)
+                return false;
+        } else if (!objectid.equals(other.objectid))
+            return false;
+        return true;
+    }
+
+    
 }
