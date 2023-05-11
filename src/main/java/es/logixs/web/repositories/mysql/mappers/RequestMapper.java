@@ -6,12 +6,16 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RequestMapper implements RowMapper<Request>{
+public class RequestMapper implements RowMapper<Request> {
 
     @Override
     public Request mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-        return new Request(rs.getString("objectId"), rs.getString("code"), rs.getString("offerId"), rs.getString("ownerId"), rs.getString("companyId"));
+        return new Request(
+                rs.getString("objectId"),
+                rs.getString("code"),
+                rs.getString("offerId"),
+                rs.getString("ownerId"),
+                rs.getString("companyId")
+        );
     }
-
 }

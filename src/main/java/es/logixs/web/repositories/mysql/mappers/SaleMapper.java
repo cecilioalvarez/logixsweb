@@ -10,7 +10,14 @@ public class SaleMapper implements RowMapper<Sale> {
 
     @Override
     public Sale mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-        return new Sale(rs.getString("id"), rs.getString("ownerId"), rs.getString("clientId"), rs.getString("code"), rs.getString("offerId"), rs.getString("counterOfferId"), rs.getBoolean("isCounterOffer"));
+        return new Sale(
+                rs.getString("objectId"),
+                rs.getString("ownerId"),
+                rs.getString("clientId"),
+                rs.getString("code"),
+                rs.getString("offerId"),
+                rs.getString("counterOfferId"),
+                rs.getBoolean("isCounterOffer")
+        );
     }
 }
