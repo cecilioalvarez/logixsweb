@@ -1,14 +1,14 @@
 package es.logixs.web.domain;
 
 public class Request {
-    private String id;
+    private String objectId;
     private String code;
     private String offerId;
     private String ownerId;
     private String companyId;
 
-    public Request(String id, String code, String offerId, String ownerId, String companyId) {
-        this.id = id;
+    public Request(String objectId, String code, String offerId, String ownerId, String companyId) {
+        this.objectId = objectId;
         this.code = code;
         this.offerId = offerId;
         this.ownerId = ownerId;
@@ -23,19 +23,19 @@ public class Request {
     }
 
 
-    public Request(String id) {
-        this.id = id;
+    public Request(String objectId) {
+        this.objectId = objectId;
     }
 
     public Request() {
     }
 
-    public String getId() {
-        return id;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getCode() {
@@ -73,7 +73,7 @@ public class Request {
     @Override
     public String toString() {
         return "Requests{" +
-                "id='" + id + '\'' +
+                "id='" + objectId + '\'' +
                 ", code='" + code + '\'' +
                 ", offerId='" + offerId + '\'' +
                 ", ownerId='" + ownerId + '\'' +

@@ -11,7 +11,7 @@ public class RequestMapper implements RowMapper<Request>{
     @Override
     public Request mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-        return new Request(rs.getString("id"), rs.getString("code"), rs.getString("offerId"), rs.getString("ownerId"), rs.getString("companyId"));
+        return new Request(rs.getString("objectId"), rs.getString("code"), rs.getString("offerId"), rs.getString("ownerId"), rs.getString("companyId"));
     }
 
 }
