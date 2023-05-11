@@ -37,8 +37,8 @@ public class RequestRepositoryMySQL implements RequestRepository {
     }
     
     @Override
-    public Request findOne(String objectid) {
-       return  plantilla.queryForObject(sqlFindOne, new RequestMapper(),objectid);
+    public Request findOne(String objectId) {
+       return  plantilla.queryForObject(sqlFindOne, new RequestMapper(),objectId);
     }
 
     @Override

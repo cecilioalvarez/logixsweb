@@ -54,12 +54,12 @@ public class UserCompanyService {
         return userRepository.findAll();
     }
 
-    public Company findOneCompany(String objectid) {
-        return companyRepository.findOne(objectid);
+    public Company findOneCompany(String objectId) {
+        return companyRepository.findOne(objectId);
     }
 
-    public User findOneUser(String objectid) {
-        return userRepository.findOne(objectid);
+    public User findOneUser(String objectId) {
+        return userRepository.findOne(objectId);
     }
 
 

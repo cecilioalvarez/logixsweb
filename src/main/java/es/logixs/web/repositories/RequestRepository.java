@@ -8,7 +8,7 @@ import java.util.List;
 public interface RequestRepository {
 
     Request insert(Request request);
-    Request findOne(String id);
+    Request findOne(String objectId);
 
     void delete(Request request);
 

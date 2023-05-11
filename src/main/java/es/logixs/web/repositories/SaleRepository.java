@@ -9,7 +9,7 @@ public interface SaleRepository {
 
     Sale insert(Sale sale);
     void update(Sale sale);
-    Sale findOne(String id);
+    Sale findOne(String objectId);
     List<Sale> findAll();
     void delete(Sale sale);
 

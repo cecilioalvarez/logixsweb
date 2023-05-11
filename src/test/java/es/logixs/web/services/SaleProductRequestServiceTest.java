@@ -87,9 +87,9 @@ public class SaleProductRequestServiceTest {
   public void deleteProductTest() {
     Product product = new Product("7", "23", "123456789", "company1", "scientificName1", "product1", "category1", "ES", "quality1", "description1");
 
-    saleProductRequestService.deleteProduct(product.getId());
+    saleProductRequestService.deleteProduct(product.getObjectId());
 
-    verify(productRepositoryMock, times(1)).delete(product.getId());
+    verify(productRepositoryMock, times(1)).delete(product.getObjectId());
   }
 
   // Request

@@ -39,8 +39,8 @@ public class SaleProductRequestService {
         saleRepository.update(sale);
     }
 
-    public Sale findOneSale(String id) {
-        return saleRepository.findOne(id);
+    public Sale findOneSale(String objectId) {
+        return saleRepository.findOne(objectId);
     }
 
     public List<Sale> findAllSales() {
@@ -63,16 +63,16 @@ public class SaleProductRequestService {
         return productList;
     }
 
-    public Product findOneProducts(String id) {
-        return productRepository.findOne(id);
+    public Product findOneProducts(String objectId) {
+        return productRepository.findOne(objectId);
     }
 
     public List<Product> findAllProducts() {
         return productRepository.findAll();
     }
 
-    public void deleteProduct(String id) {
-        productRepository.delete(id);
+    public void deleteProduct(String objectId) {
+        productRepository.delete(objectId);
     }
 
     // Requests
@@ -87,8 +87,8 @@ public class SaleProductRequestService {
         return requestList;
     }
 
-    public Request findOneRequest(String id) {
-        return requestRepository.findOne(id);
+    public Request findOneRequest(String objectId) {
+        return requestRepository.findOne(objectId);
     }
 
     public List<Request> findAllRequests() {

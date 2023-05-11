@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS product;
 CREATE TABLE product (
-    id varchar(25),
+    objectId varchar(25),
     userId varchar(25),
     code varchar(25),
     companyId varchar(25),

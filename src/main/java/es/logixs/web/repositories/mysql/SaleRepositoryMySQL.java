@@ -41,8 +41,8 @@ public class SaleRepositoryMySQL implements SaleRepository {
     }
 
     @Override
-    public Sale findOne(String objectid) {
-       return  plantilla.queryForObject(sqlFindOne, new SaleMapper(),objectid);
+    public Sale findOne(String objectId) {
+       return  plantilla.queryForObject(sqlFindOne, new SaleMapper(),objectId);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package es.logixs.web.domain;
 
 public class Product {
-    private String id;
+    private String objectId;
     private String userId;
     private String code;
     private String companyId;
@@ -28,12 +28,12 @@ public class Product {
         this.descAndSpecs = descAndSpecs;
     }
 
-    public Product(String id) {
-        this.id = id;
+    public Product(String objectId) {
+        this.objectId = objectId;
     }
 
-    public Product(String id, String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
-        this.id = id;
+    public Product(String objectId, String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
+        this.objectId = objectId;
         this.userId = userId;
         this.code = code;
         this.companyId = companyId;
@@ -45,12 +45,12 @@ public class Product {
         this.descAndSpecs = descAndSpecs;
     }
 
-    public String getId() {
-        return id;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getUserId() {
@@ -128,7 +128,7 @@ public class Product {
     @Override
     public String toString() {
         return "Products{" +
-            "id='" + id + '\'' +
+            "objectId='" + objectId + '\'' +
             ", userId='" + userId + '\'' +
             ", code='" + code + '\'' +
             ", companyId='" + companyId + '\'' +

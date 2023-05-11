@@ -38,7 +38,7 @@ class UserRepositoryTest {
     @Test
     void findOne() {
         User user = repository.findOne("2A");
-        assertEquals("2A", user.getObjectid());
+        assertEquals("2A", user.getObjectId());
         assertEquals("Pedro", user.getName());
         assertEquals("Sanchez", user.getLastName());
         assertEquals("pedro@mail.com", user.getEmail());

@@ -7,16 +7,16 @@ public class Company {
     private String name;
     private String taxId;
 
-    public Company(String objectid, String code, String licenseId, String name, String taxId) {
-        this.objectId = objectid;
+    public Company(String objectId, String code, String licenseId, String name, String taxId) {
+        this.objectId = objectId;
         this.code = code;
         this.licenseId = licenseId;
         this.name = name;
         this.taxId = taxId;
     }
 
-    public Company(String objectid) {
-        this.objectId = objectid;
+    public Company(String objectId) {
+        this.objectId = objectId;
     }
 
     public Company() {
@@ -33,8 +33,8 @@ public class Company {
         return objectId;
     }
 
-    public void setObjectId(String objectid) {
-        this.objectId = objectid;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
 
     public String getCode() {
