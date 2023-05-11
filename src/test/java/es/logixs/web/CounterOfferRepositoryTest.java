@@ -42,5 +42,15 @@ class CounterOfferRepositoryTest {
         assertTrue(counterOfferList.size()>=4);
     }
 
+    @Test
+    void insert() {
+        CounterOffer counterOffer = new CounterOffer("5A", "name5", "vom5", 2.0, 4.0, 10.0 );
+
+        CounterOffer counterOfferFinal = counterOfferRepository.insert(counterOffer);
+
+        assertEquals(counterOffer, counterOfferFinal);
+    }
+
+    
 
 }
