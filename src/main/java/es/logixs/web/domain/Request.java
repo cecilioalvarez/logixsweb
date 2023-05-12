@@ -1,5 +1,7 @@
 package es.logixs.web.domain;
 
+import java.util.Objects;
+
 public class Request {
     private String objectId;
     private String code;
@@ -22,6 +24,18 @@ public class Request {
         this.companyId = companyId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Request request = (Request) o;
+        return Objects.equals(objectId, request.objectId) && Objects.equals(code, request.code) && Objects.equals(offerId, request.offerId) && Objects.equals(ownerId, request.ownerId) && Objects.equals(companyId, request.companyId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectId, code, offerId, ownerId, companyId);
+    }
 
     public Request(String objectId) {
         this.objectId = objectId;

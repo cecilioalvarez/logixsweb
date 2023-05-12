@@ -10,7 +10,7 @@ public interface RequestRepository {
     Request insert(Request request);
     Request findOne(String objectId);
 
-    void delete(Request request);
+    void delete(String objectId);
 
     List<Request> findAll();
 
