@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -74,14 +75,9 @@ class UserControllerTest {
     void deleteUserTest() throws Exception {
 
         User userToDelete = new User("1A", "Pedro", "Perez", "pedro@gmail.com");
-
-        when(servicio.findOneUser("1A")).thenReturn(userToDelete);
-
-        mvc.perform(delete("/webapi/user/1A"))
-                .andExpect(status().isOk());
-
-        verify(servicio, times(1)).deleteUser(userToDelete);
-
+        // test de risa
+        mvc.perform(delete("/webapi/user/1A")).andExpect(status().isOk());
+        verify(servicio,times(1)).deleteUser(userToDelete);
     }
 
     @Test
