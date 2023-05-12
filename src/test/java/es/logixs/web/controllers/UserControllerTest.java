@@ -75,22 +75,9 @@ class UserControllerTest {
     void deleteUserTest() throws Exception {
 
         User userToDelete = new User("1A", "Pedro", "Perez", "pedro@gmail.com");
-
-
-      
         // test de risa
         mvc.perform(delete("/webapi/user/1A")).andExpect(status().isOk());
-        verify(servicio,times(1)).deleteUser(user1);
-
-        when(servicio.findOneUser("1A")).thenReturn(userToDelete);
-
-        mvc.perform(delete("/webapi/user/1A"))
-                .andExpect(status().isOk());
-
-      
-        // test de risa
-        mvc.perform(delete("/webapi/user/1A")).andExpect(status().isOk());
-        verify(servicio,times(1)).deleteUser(user1);
+        verify(servicio,times(1)).deleteUser(userToDelete);
     }
 
     @Test
