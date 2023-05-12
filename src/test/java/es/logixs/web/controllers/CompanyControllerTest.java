@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.logixs.web.domain.Company;
 import es.logixs.web.services.UserCompanyService;
+import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -73,28 +74,34 @@ class CompanyControllerTest {
     @Test
     void deleteCompanyTest() throws Exception {
 
-        Company company1 = new Company("1A");
+        Company companyToDelete = new Company("1A");
 
-        // verify(servicio,times(1)).deleteCompany(company1);
-        // test de risa
-        mvc.perform(delete("/webapi/company/1A")).andExpect(status().isOk());
+        when(servicio.findOneCompany("1A")).thenReturn(companyToDelete);
+
+        mvc.perform(delete("/webapi/company/1A"))
+                .andExpect(status().isOk());
+
+        verify(servicio, times(1)).deleteCompany(companyToDelete);
 
     }
 
     @Test
     void insertCompanyTest() throws Exception {
 
-        Company company1 = new Company("10A","juan","gomez","juan@gmail.com");
-
-        // verify(servicio,times(1)).deleteCompany(company1);
-        // test de risa
+        Company company1 = new Company("1A", "1AC", "4321A", "PWC","1234A");
 
         when(servicio.insertCompany(company1)).thenReturn(company1);
-        mvc.perform(post("/webapi/company")
+        MvcResult result = mvc.perform(post("/webapi/company")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content( objectMapper.writeValueAsString(company1))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk()).andReturn();
+
+        String responseJson = result.getResponse().getContentAsString();
+        Company createdCompany = objectMapper.readValue(responseJson, Company.class);
+        assertEquals(company1, createdCompany);
+
+        verify(servicio, times(1)).insertCompany(company1);
 
     }
 }
