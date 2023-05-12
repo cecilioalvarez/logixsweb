@@ -17,6 +17,7 @@ public class Product {
     }
 
     public Product(String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
+        this.objectId=objectId;
         this.userId = userId;
         this.code = code;
         this.companyId = companyId;
@@ -140,4 +141,31 @@ public class Product {
             ", descAndSpecs='" + descAndSpecs + '\'' +
             '}';
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Product other = (Product) obj;
+        if (objectId == null) {
+            if (other.objectId != null)
+                return false;
+        } else if (!objectId.equals(other.objectId))
+            return false;
+        return true;
+    }
+
+    
 }

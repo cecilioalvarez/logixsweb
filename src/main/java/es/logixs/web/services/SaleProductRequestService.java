@@ -63,7 +63,7 @@ public class SaleProductRequestService {
         return productList;
     }
 
-    public Product findOneProducts(String objectId) {
+    public Product findOneProduct(String objectId) {
         return productRepository.findOne(objectId);
     }
 

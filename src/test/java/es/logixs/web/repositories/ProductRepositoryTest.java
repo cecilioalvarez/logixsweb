@@ -38,9 +38,9 @@ public class ProductRepositoryTest {
 
     @Test
     void delete(){
-      Product product = new Product("5", "5A", "5", "scientificName5", "name5", "category5", "ES", "quality5", "descAndSpecs5");
+      Product product = new Product("5J","5", "5A", "5", "scientificName5", "name5", "category5", "ES", "quality5", "descAndSpecs5");
       productRepository.insert(product);
-      productRepository.delete("5");
+      productRepository.delete("5J");
       List<Product> products = productRepository.findAll();
       assertFalse(products.contains(product));
     }
