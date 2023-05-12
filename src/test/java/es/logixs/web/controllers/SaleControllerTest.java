@@ -1,6 +1,17 @@
 package es.logixs.web.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+
 import es.logixs.web.domain.Sale;
 import es.logixs.web.services.SaleProductRequestService;
 import org.junit.jupiter.api.Test;
@@ -8,17 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,7 +37,7 @@ public class SaleControllerTest {
   ObjectMapper objectMapper;
 
   @MockBean
-  SaleProductRequestService service;
+  private SaleProductRequestService service;
 
   @Test
   void findAllSalesTest() throws Exception {
@@ -63,7 +70,32 @@ public class SaleControllerTest {
   }
 
   @Test
-  void deleteSaleTest() throws Exception{
+  void deleteSaleTest() throws Exception {
+    Sale saleToDelete = new Sale("1A", "1B", "1B","aaa", "aaa","aaa", false);
 
+    when(service.findOneSale("1A")).thenReturn(saleToDelete);
+
+    mvc.perform(delete("/webapi/sale/1A"))
+            .andExpect(status().isOk());
+
+    verify(service, times(1)).deleteSale("1A");
+  }
+
+  @Test
+  void insertSaleTest() throws Exception {
+    Sale sale = new Sale("1A", "1B", "1B", "aaa", "aaa", "aaa", false);
+
+    when(service.insertSale(sale)).thenReturn(sale);
+    MvcResult result = mvc.perform(post("/webapi/sale")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content( objectMapper.writeValueAsString(sale))
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk()).andReturn();
+
+    String responseJSON = result.getResponse().getContentAsString();
+    Sale createdSale = objectMapper.readValue(responseJSON, Sale.class);
+    assertEquals(sale, createdSale);
+
+  verify(service, times(1)).insertSale(sale);
   }
 }
