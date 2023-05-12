@@ -50,8 +50,7 @@ class UserControllerTest {
 
         String listExpected = objectMapper.writeValueAsString(userList);
         // test de risa
-        String userListResultJSON = mvc.perform(get("/webapi/user")).andExpect(status().isOk())
-                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        String userListResultJSON = mvc.perform(get("/webapi/user")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
         assertEquals(listExpected, userListResultJSON);
     }
