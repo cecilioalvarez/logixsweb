@@ -1,4 +1,4 @@
-package es.logixs.web;
+package es.logixs.web.repositories;
 
 import es.logixs.web.domain.Sale;
 import es.logixs.web.repositories.SaleRepository;

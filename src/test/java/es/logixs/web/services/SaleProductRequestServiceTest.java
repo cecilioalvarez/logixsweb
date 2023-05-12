@@ -11,6 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class SaleProductRequestServiceTest {
 
-  @Mock
+  @MockBean
   private SaleRepositoryMySQL saleRepositoryMock;
-  @Mock
+  @MockBean
   private ProductRepositoryMySQL productRepositoryMock;
-  @Mock
+  @MockBean
   private RequestRepositoryMySQL requestRepositoryMock;
-  @InjectMocks
+  @Autowired
   private SaleProductRequestService saleProductRequestService;
   @Test
   public void deleteSaleTest() {

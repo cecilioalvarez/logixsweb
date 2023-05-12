@@ -9,24 +9,27 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import es.logixs.web.domain.Company;
 import es.logixs.web.domain.User;
 import es.logixs.web.repositories.mysql.CompanyRepositoryMySQL;
 import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
-@ExtendWith(MockitoExtension.class)
+
+
+@SpringBootTest
 public class UserCompanyServiceTest {
-    @Mock
+    @MockBean
     public UserRepositoryMySQL userRepositoryMock;
-    @Mock
+    @MockBean
     public CompanyRepositoryMySQL companyRepositoryMock;
-    @InjectMocks
+    @Autowired
     public UserCompanyService userCompanyService;
+
+
+    
 
     @Test
     public void findOneUserTest() {
