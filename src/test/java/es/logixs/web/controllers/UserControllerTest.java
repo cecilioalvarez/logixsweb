@@ -36,7 +36,7 @@ class UserControllerTest {
     @Autowired
     ObjectMapper objectMapper;
     @MockBean
-    private UserCompanyService servicio;
+    private UserCompanyService service;
 
     @Test
     void findAllUsersTest() throws Exception {
@@ -46,7 +46,7 @@ class UserControllerTest {
         User user3 = new User("3C", "gema", "sanchez", "gema@gmail.com");
 
         List<User> userList = List.of(user1, user2, user3);
-        when(servicio.findAllUsers()).thenReturn(userList);
+        when(service.findAllUsers()).thenReturn(userList);
 
         String listExpected = objectMapper.writeValueAsString(userList);
         // test de risa
@@ -60,7 +60,7 @@ class UserControllerTest {
 
         User user1 = new User("1A", "pedro", "perez", "pedro@gmail.com");
 
-        when(servicio.findOneUser("1A")).thenReturn(user1);
+        when(service.findOneUser("1A")).thenReturn(user1);
         // test de risa
         String userJsonResult = mvc.perform(get("/webapi/user/1A")).andExpect(status().isOk()).andReturn().getResponse()
                 .getContentAsString();
@@ -75,12 +75,12 @@ class UserControllerTest {
 
         User userToDelete = new User("1A", "Pedro", "Perez", "pedro@gmail.com");
 
-        when(servicio.findOneUser("1A")).thenReturn(userToDelete);
+        when(service.findOneUser("1A")).thenReturn(userToDelete);
 
         mvc.perform(delete("/webapi/user/1A"))
                 .andExpect(status().isOk());
 
-        verify(servicio, times(1)).deleteUser(userToDelete);
+        verify(service, times(1)).deleteUser(userToDelete);
 
     }
 
@@ -92,7 +92,7 @@ class UserControllerTest {
         // verify(servicio,times(1)).deleteUser(user1);
         // test de risa
 
-        when(servicio.insertUser(user1)).thenReturn(user1);
+        when(service.insertUser(user1)).thenReturn(user1);
         MvcResult result = mvc.perform(post("/webapi/user")
         .contentType(MediaType.APPLICATION_JSON)
         .content( objectMapper.writeValueAsString(user1))
@@ -104,7 +104,7 @@ class UserControllerTest {
         assertEquals(user1, createdUser);
 
         // Verifica que el servicio haya sido llamado con el usuario correcto
-        verify(servicio, times(1)).insertUser(user1);
+        verify(service, times(1)).insertUser(user1);
 
     }
 
