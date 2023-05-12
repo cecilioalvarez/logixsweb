@@ -46,5 +46,18 @@ class CounterOfferControllerTest {
         assertEquals(listExpected, counterOfferListResultJSON);
     }
 
+    @Test
+    void findOneCounterOffer() throws Exception {
+        CounterOffer counterOffer = new CounterOffer("1A", "name1", "vom1", 2.0, 4.0, 10.0);
 
+        when(offerCounterofferService.findOneCounterOffer("1A")).thenReturn(counterOffer);
+        String counterOfferJsonResult = mvc.perform(get("/webapi/counteroffer/1A"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+        String counterOfferExpected = objectMapper.writeValueAsString(counterOffer);
+
+        assertEquals(counterOfferExpected, counterOfferJsonResult);
+    }
 }
