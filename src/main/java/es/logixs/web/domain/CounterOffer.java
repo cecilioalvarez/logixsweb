@@ -72,4 +72,29 @@ public class CounterOffer {
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        CounterOffer other = (CounterOffer) obj;
+        if (objectId == null) {
+            if (other.objectId != null)
+                return false;
+        } else if (!objectId.equals(other.objectId))
+            return false;
+        return true;
+    }
 }
