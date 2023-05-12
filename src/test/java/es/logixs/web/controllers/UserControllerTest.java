@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import es.logixs.web.domain.User;
 import es.logixs.web.services.UserCompanyService;
+import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -50,8 +51,7 @@ class UserControllerTest {
 
         String listExpected = objectMapper.writeValueAsString(userList);
         // test de risa
-        String userListResultJSON = mvc.perform(get("/webapi/user")).andExpect(status().isOk())
-                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        String userListResultJSON = mvc.perform(get("/webapi/user")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
         assertEquals(listExpected, userListResultJSON);
     }
@@ -74,7 +74,18 @@ class UserControllerTest {
     @Test
     void deleteUserTest() throws Exception {
 
-        User user1 = new User("1A");
+        User userToDelete = new User("1A", "Pedro", "Perez", "pedro@gmail.com");
+
+
+      
+        // test de risa
+        mvc.perform(delete("/webapi/user/1A")).andExpect(status().isOk());
+        verify(servicio,times(1)).deleteUser(user1);
+
+        when(servicio.findOneUser("1A")).thenReturn(userToDelete);
+
+        mvc.perform(delete("/webapi/user/1A"))
+                .andExpect(status().isOk());
 
       
         // test de risa
@@ -91,11 +102,18 @@ class UserControllerTest {
         // test de risa
 
         when(servicio.insertUser(user1)).thenReturn(user1);
-        mvc.perform(post("/webapi/user")
+        MvcResult result = mvc.perform(post("/webapi/user")
         .contentType(MediaType.APPLICATION_JSON)
         .content( objectMapper.writeValueAsString(user1))
         .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk()).andReturn();
+
+        String responseJson = result.getResponse().getContentAsString();
+        User createdUser = objectMapper.readValue(responseJson, User.class);
+        assertEquals(user1, createdUser);
+
+        // Verifica que el servicio haya sido llamado con el usuario correcto
+        verify(servicio, times(1)).insertUser(user1);
 
     }
 

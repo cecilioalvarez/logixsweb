@@ -21,7 +21,7 @@ public class ProductController {
 
     @GetMapping("/{objectId}")
     public Product findOneProduct(@PathVariable String objectId) {
-        return saleProductRequestService.findOneProducts(objectId);
+        return saleProductRequestService.findOneProduct(objectId);
     }
 
     @DeleteMapping("/{objectId}")
