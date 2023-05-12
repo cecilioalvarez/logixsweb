@@ -13,7 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -59,5 +60,15 @@ class CounterOfferControllerTest {
         String counterOfferExpected = objectMapper.writeValueAsString(counterOffer);
 
         assertEquals(counterOfferExpected, counterOfferJsonResult);
+    }
+
+    @Test
+    void deleteCounterOffer() throws Exception {
+        CounterOffer counterOffer = new CounterOffer("1A", "name1", "vom1", 2.0, 4.0, 10.0);
+
+        when(offerCounterofferService.findOneCounterOffer("1A")).thenReturn(counterOffer);
+        mvc.perform(delete("/webapi/counteroffer/1A")).andExpect(status().isOk());
+
+        verify(offerCounterofferService, times(1)).deleteCounterOffer(counterOffer);
     }
 }
