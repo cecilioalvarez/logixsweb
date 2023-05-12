@@ -46,7 +46,7 @@ public class RequestRepositoryTest {
     void delete() {
         Request request = new Request("6A","7a", "7b", "7c", "7c");
         requestRepository.insert(request);
-        requestRepository.delete(request);
+        requestRepository.delete(request.getObjectId());
         List<Request> requestList = requestRepository.findAll();
         assertFalse(requestList.contains(request));
 
