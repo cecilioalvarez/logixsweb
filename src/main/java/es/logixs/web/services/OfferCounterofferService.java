@@ -24,8 +24,8 @@ public class OfferCounterofferService {
         return offerRepository.insert(offer);
     }
 
-    public void deleteOffer(Offer offer){
-        offerRepository.delete(offer);
+    public void deleteOffer(String objectId){
+        offerRepository.delete(objectId);
     }
 
     public void updateOffer(Offer offer, String objectId){

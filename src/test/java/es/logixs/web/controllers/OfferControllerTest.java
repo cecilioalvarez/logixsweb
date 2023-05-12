@@ -91,7 +91,7 @@ class OfferControllerTest {
         mvc.perform(delete("/webapi/offer/A2"))
                 .andExpect(status().isOk());
 
-        verify(service, times(1)).deleteOffer(offerToDelete);
+        verify(service, times(1)).deleteOffer("A2");
 
     }
 }

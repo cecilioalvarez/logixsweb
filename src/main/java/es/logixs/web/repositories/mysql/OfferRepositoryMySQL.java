@@ -40,8 +40,8 @@ public class OfferRepositoryMySQL implements OfferRepository {
     }
 
     @Override
-    public void delete(Offer offer) {
-        jdbcTemplate.update(sqlDelete, offer.getObjectId());
+    public void delete(String objectId) {
+        jdbcTemplate.update(sqlDelete, objectId);
     }
 
     @Override
