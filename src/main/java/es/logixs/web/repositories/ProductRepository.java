@@ -8,9 +8,9 @@ import java.util.List;
 public interface ProductRepository {
 
     Product insert(Product product);
-    Product findOne(String id);
+    Product findOne(String objectId);
     List<Product> findAll();
-    void delete(String id);
+    void delete(String objectId);
     Product update(Product product);
     Product update(Product product, Product oldProduct);
 }

@@ -46,7 +46,7 @@ public class OfferRepositoryMySQL implements OfferRepository {
 
     @Override
     public Offer findOne(String objectId) {
-        return jdbcTemplate.queryForObject(sqlFindOne, new OfferMapper(), new OfferMapper());
+        return jdbcTemplate.queryForObject(sqlFindOne, new OfferMapper(), objectId);
     }
 
     @Override

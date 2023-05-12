@@ -2,7 +2,7 @@ package es.logixs.web.domain;
 
 public class Sale {
 
-    private String id;
+    private String objectId;
     private String ownerId;
     private String clientId;
     private String code;
@@ -14,13 +14,13 @@ public class Sale {
     public Sale() {
     }
 
-    public Sale(String id) {
-        this.id = id;
+    public Sale(String objectId) {
+        this.objectId = objectId;
     }
 
-    public Sale(String id, String ownerId, String clientId, String code, String offerId, String counterOfferId,
+    public Sale(String objectId, String ownerId, String clientId, String code, String offerId, String counterOfferId,
                 boolean isCounterOffer) {
-        this.id = id;
+        this.objectId = objectId;
         this.ownerId = ownerId;
         this.clientId = clientId;
         this.code = code;
@@ -29,11 +29,11 @@ public class Sale {
         this.isCounterOffer = isCounterOffer;
     }
 
-    public String getId() {
-        return id;
+    public String getObjectId() {
+        return objectId;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
     }
     public String getOwnerId() {
         return ownerId;

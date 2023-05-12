@@ -13,6 +13,6 @@ public interface CompanyRepository {
     void delete(Company company);
     List<Company> findAll();
 
-    Company findOne(String objectid);
+    Company findOne(String objectId);
 
 }

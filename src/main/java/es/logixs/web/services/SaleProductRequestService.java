@@ -24,7 +24,7 @@ public class SaleProductRequestService {
     }
 
     // Sales
-    public Sale insertSales(Sale sale) {
+    public Sale insertSale(Sale sale) {
         return saleRepository.insert(sale);
     }
 
@@ -35,24 +35,24 @@ public class SaleProductRequestService {
         return saleList;
     }
 
-    public void updateSales(Sale sale) {
+    public void updateSale(Sale sale) {
         saleRepository.update(sale);
     }
 
-    public Sale findOneSales(String id) {
-        return saleRepository.findOne(id);
+    public Sale findOneSale(String objectId) {
+        return saleRepository.findOne(objectId);
     }
 
     public List<Sale> findAllSales() {
         return saleRepository.findAll();
     }
 
-    public void deleteSales(Sale sale) {
+    public void deleteSale(Sale sale) {
         saleRepository.delete(sale);
     }
 
     // Products
-    public Product insertProducts(Product product) {
+    public Product insertProduct(Product product) {
         return productRepository.insert(product);
     }
 
@@ -63,20 +63,20 @@ public class SaleProductRequestService {
         return productList;
     }
 
-    public Product findOneProducts(String id) {
-        return productRepository.findOne(id);
+    public Product findOneProducts(String objectId) {
+        return productRepository.findOne(objectId);
     }
 
     public List<Product> findAllProducts() {
         return productRepository.findAll();
     }
 
-    public void deleteProducts(String id) {
-        productRepository.delete(id);
+    public void deleteProduct(String objectId) {
+        productRepository.delete(objectId);
     }
 
     // Requests
-    public Request insertRequests(Request request) {
+    public Request insertRequest(Request request) {
         return requestRepository.insert(request);
     }
 
@@ -87,29 +87,29 @@ public class SaleProductRequestService {
         return requestList;
     }
 
-    public Request findOneRequests(String id) {
-        return requestRepository.findOne(id);
+    public Request findOneRequest(String objectId) {
+        return requestRepository.findOne(objectId);
     }
 
     public List<Request> findAllRequests() {
         return requestRepository.findAll();
     }
 
-    public void deleteRequests(Request request) {
+    public void deleteRequest(Request request) {
         requestRepository.delete(request);
     }
 
-    public void updateRequests(Request request, String objectId) {
+    public void updateRequest(Request request, String objectId) {
         Request requestOld= requestRepository.findOne(objectId);
         requestRepository.update(request,requestOld);
     }
 
-    public void updateProducts(Product product, String objectId) {
+    public void updateProduct(Product product, String objectId) {
         Product productOld= productRepository.findOne(objectId);
         productRepository.update(product,productOld);
     }
 
-    public void updateSales(Sale sale, String objectId) {
+    public void updateSale(Sale sale, String objectId) {
         Sale saleOld= saleRepository.findOne(objectId);
         saleRepository.update(sale,saleOld);
     }

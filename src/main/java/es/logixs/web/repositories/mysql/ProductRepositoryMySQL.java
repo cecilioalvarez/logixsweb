@@ -12,23 +12,23 @@ import java.util.List;
 @Repository
 public class ProductRepositoryMySQL implements ProductRepository {
     @Autowired
-    private final static String sqlInsert = "insert into product (id, userId, code, companyId, scientificName, name, category, originCountryIso, quality, descAndSpecs) values (?,?,?,?,?,?,?,?,?,?);";
-    private final static String sqlDelete = "delete from product where id=?;";
+    private final static String sqlInsert = "insert into product (objectId, userId, code, companyId, scientificName, name, category, originCountryIso, quality, descAndSpecs) values (?,?,?,?,?,?,?,?,?,?);";
+    private final static String sqlDelete = "delete from product where objectId=?;";
     private final static String sqlFindAll = "select * from product;";
-    private final static String sqlFindOne = "select * from product where id=?;";
+    private final static String sqlFindOne = "select * from product where objectId=?;";
     private final static String sqlUpdate = "update product set userId=?, code=?, companyId=?, scientificName=?, name=?, category=?, originCountryIso=?, quality=?, descAndSpecs=? where objectId=?;";
     @Autowired
     private JdbcTemplate plantilla;
     
     @Override
     public Product insert(Product product) {
-        plantilla.update(sqlInsert, product.getId(), product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs());
+        plantilla.update(sqlInsert, product.getObjectId(), product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs());
         return product;
     }
 
     @Override
-    public Product findOne(String id) {
-        return plantilla.queryForObject(sqlFindOne, new ProductMapper(), id);
+    public Product findOne(String objectId) {
+        return plantilla.queryForObject(sqlFindOne, new ProductMapper(), objectId);
     }
 
     @Override
@@ -37,19 +37,19 @@ public class ProductRepositoryMySQL implements ProductRepository {
     }
 
     @Override
-    public void delete(String id) {
-       plantilla.update(sqlDelete, id);
+    public void delete(String objectId) {
+       plantilla.update(sqlDelete, objectId);
     }
 
     @Override
     public Product update(Product product) {
-        plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), product.getId());
+        plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), product.getObjectId());
         return product;
     }
 
     @Override
     public Product update(Product product, Product oldProduct) {
-        plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), oldProduct.getId());
+        plantilla.update(sqlUpdate, product.getUserId(), product.getCode(), product.getCompanyId(), product.getScientificName(), product.getName(), product.getCategory(), product.getOriginCountryIso(), product.getQuality(), product.getDescAndSpecs(), oldProduct.getObjectId());
         return product;
     }
 }

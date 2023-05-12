@@ -13,11 +13,11 @@ import es.logixs.web.repositories.mysql.mappers.CompanyMapper;
 @Repository
 public class CompanyRepositoryMySQL implements CompanyRepository {
 
-    private final static String sqlInsert = "insert into company (objectid,code,licenseId,name,taxId) values (?,?,?,?,?)";
+    private final static String sqlInsert = "insert into company (objectId,code,licenseId,name,taxId) values (?,?,?,?,?)";
     private final static String sqlFindAll = "select * from company";
-    private final static String sqlDelete = "delete from company where objectid=?";
-    private final static String sqlFindOne = "select * from company where objectid=?";
-    private final static String sqlUpdate = "update company set objectId=?,code=? , licenseId=? , name=? ,taxId=? where objectid=?";
+    private final static String sqlDelete = "delete from company where objectId=?";
+    private final static String sqlFindOne = "select * from company where objectId=?";
+    private final static String sqlUpdate = "update company set objectId=?,code=? , licenseId=? , name=? ,taxId=? where objectId=?";
   
     @Autowired
     private JdbcTemplate plantilla;
@@ -38,9 +38,9 @@ public class CompanyRepositoryMySQL implements CompanyRepository {
     }
     
     @Override
-    public Company findOne(String objectid) {
+    public Company findOne(String objectId) {
        
-       return  plantilla.queryForObject(sqlFindOne, new CompanyMapper(),objectid);
+       return  plantilla.queryForObject(sqlFindOne, new CompanyMapper(),objectId);
     }
     @Override
     public void update(Company company) {

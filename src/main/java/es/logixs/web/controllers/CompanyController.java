@@ -16,8 +16,8 @@ import es.logixs.web.domain.Company;
 import es.logixs.web.services.UserCompanyService;
 
 @RestController
-@RequestMapping("webapi/companies")
-public class CompaniesController {
+@RequestMapping("webapi/company")
+public class CompanyController {
     
     @Autowired
     private UserCompanyService servicioUserCompany;
@@ -28,22 +28,22 @@ public class CompaniesController {
     }
 
     @GetMapping("/{objectId}")
-    public Company findOneCompanies(@PathVariable String objectId) {
-        return servicioUserCompany.findOneCompanies(objectId);
+    public Company findOneCompany(@PathVariable String objectId) {
+        return servicioUserCompany.findOneCompany(objectId);
     }
 
     @DeleteMapping("/{objectId}")
-    public void deleteCompanies(@PathVariable String objectId) {
+    public void deleteCompany(@PathVariable String objectId) {
 
-        servicioUserCompany.deleteCompanies(new Company(objectId));
+        servicioUserCompany.deleteCompany(new Company(objectId));
     }
     @PostMapping
-    public Company insertCompanies(@RequestBody Company company) {
-        return servicioUserCompany.insertCompanies(company);
+    public Company insertCompany(@RequestBody Company company) {
+        return servicioUserCompany.insertCompany(company);
     }
     @PutMapping("/{objectId}")
-    public void updateCompanies(@RequestBody Company company, @PathVariable String objectId) {
-        servicioUserCompany.updateCompanies(company,objectId);
+    public void updateCompany(@RequestBody Company company, @PathVariable String objectId) {
+        servicioUserCompany.updateCompany(company,objectId);
     }
 
   

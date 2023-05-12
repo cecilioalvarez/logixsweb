@@ -27,12 +27,12 @@ public class SaleRepositoryMySQL implements SaleRepository {
 
     @Override
     public Sale insert(Sale sale) {
-        plantilla.update(sqlInsert, sale.getId(),sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(), sale.getCounterOfferId(), sale.isCounterOffer());
+        plantilla.update(sqlInsert, sale.getObjectId(),sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(), sale.getCounterOfferId(), sale.isCounterOffer());
         return sale;
     }
     @Override
     public void delete(Sale sale) {
-        plantilla.update(sqlDelete, sale.getId());
+        plantilla.update(sqlDelete, sale.getObjectId());
     }
 
     @Override
@@ -41,17 +41,17 @@ public class SaleRepositoryMySQL implements SaleRepository {
     }
 
     @Override
-    public Sale findOne(String objectid) {
-       return  plantilla.queryForObject(sqlFindOne, new SaleMapper(),objectid);
+    public Sale findOne(String objectId) {
+       return  plantilla.queryForObject(sqlFindOne, new SaleMapper(),objectId);
     }
 
     @Override
     public void update(Sale sale) {
-        plantilla.update(sqlUpdate,sale.getId(), sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(),sale.getCounterOfferId(), sale.isCounterOffer(), sale.getId());
+        plantilla.update(sqlUpdate,sale.getObjectId(), sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(),sale.getCounterOfferId(), sale.isCounterOffer(), sale.getObjectId());
     }
     @Override
     public void update(Sale sale, Sale oldSale) {
-        plantilla.update(sqlUpdate,sale.getId(), sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(),sale.getCounterOfferId(), sale.isCounterOffer(), oldSale.getId());
+        plantilla.update(sqlUpdate,sale.getObjectId(), sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(),sale.getCounterOfferId(), sale.isCounterOffer(), oldSale.getObjectId());
     }
 
 }
