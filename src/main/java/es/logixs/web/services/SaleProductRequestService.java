@@ -63,7 +63,7 @@ public class SaleProductRequestService {
         return productList;
     }
 
-    public Product findOneProducts(String objectId) {
+    public Product findOneProduct(String objectId) {
         return productRepository.findOne(objectId);
     }
 
@@ -95,8 +95,8 @@ public class SaleProductRequestService {
         return requestRepository.findAll();
     }
 
-    public void deleteRequest(Request request) {
-        requestRepository.delete(request);
+    public void deleteRequest(String objectId) {
+        requestRepository.delete(objectId);
     }
 
     public void updateRequest(Request request, String objectId) {

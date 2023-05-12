@@ -77,9 +77,8 @@ public class OfferCounterofferServiceTest {
 
     @Test
     public void deleteOfferTest() {
-        Offer offer = mock(Offer.class);
-        offersService.deleteOffer(offer);
-        verify(offerRepositoryMock, times(1)).delete(offer);
+        offersService.deleteOffer("A2");
+        verify(offerRepositoryMock, times(1)).delete("A2");
     }
 
     @Test

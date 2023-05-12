@@ -112,8 +112,8 @@ public class SaleProductRequestServiceTest {
   public void deleteRequestTest() {
     Request request = new Request("123456789", "offer6", "owner6", "company6");
 
-    saleProductRequestService.deleteRequest(request);
+    saleProductRequestService.deleteRequest(request.getObjectId());
 
-    verify(requestRepositoryMock, times(1)).delete(request);
+    verify(requestRepositoryMock, times(1)).delete(request.getObjectId());
   }
 }
