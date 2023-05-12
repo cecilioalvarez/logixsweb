@@ -28,7 +28,7 @@ class OfferRepositoryTest {
     void delete() {
         Offer offer = new Offer("A1", "123456789", "offer1", "description offer 1", "category1");
         offerRepository.insert(offer);
-        offerRepository.delete(offer);
+        offerRepository.delete("A1");
         List<Offer> lista = offerRepository.findAll();
         assertFalse(lista.contains(offer));
     }

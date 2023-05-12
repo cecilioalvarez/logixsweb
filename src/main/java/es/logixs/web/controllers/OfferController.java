@@ -26,7 +26,7 @@ public class OfferController {
 
     @DeleteMapping("/{objectId}")
     public void deleteOffer(@PathVariable String objectId) {
-        offerCounterofferService.deleteOffer(new Offer(objectId));
+        offerCounterofferService.deleteOffer(objectId);
     }
     @PostMapping
     public Offer insertOffer(@RequestBody Offer sale) {

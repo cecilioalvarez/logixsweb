@@ -9,7 +9,7 @@ public interface OfferRepository {
     Offer insert(Offer offer);
     Offer update(Offer offer);
     Offer update(Offer offer, Offer oldOffer);
-    void delete(Offer offer);
+    void delete(String objectId);
     Offer findOne(String objectId);
     List<Offer> findAll();
 }
