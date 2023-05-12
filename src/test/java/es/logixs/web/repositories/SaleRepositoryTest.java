@@ -53,10 +53,10 @@ class SaleRepositoryTest {
 
     @Test
     void delete() {
-        Sale sale = new Sale("5A", "0005", "0005", "5A", "5", "5", true);
+        Sale sale = new Sale("5A", "0005", "0005", "5A", "5", "5", false);
 
         saleRepository.insert(sale);
-        saleRepository.delete(sale);
+        saleRepository.delete("5A");
         List<Sale> sales = saleRepository.findAll();
 
         assertFalse(sales.contains(sale));

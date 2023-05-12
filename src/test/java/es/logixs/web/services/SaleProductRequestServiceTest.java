@@ -37,9 +37,9 @@ public class SaleProductRequestServiceTest {
   public void deleteSaleTest() {
     Sale sale = new Sale("0001","0001","0001","1A","1","1",true);
 
-    saleProductRequestService.deleteSale(sale);
+    saleProductRequestService.deleteSale("1A");
 
-    verify(saleRepositoryMock, times(1)).delete(sale);
+    verify(saleRepositoryMock, times(1)).delete("1A");
 
   }
 

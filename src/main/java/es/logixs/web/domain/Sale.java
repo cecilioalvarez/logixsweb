@@ -1,5 +1,7 @@
 package es.logixs.web.domain;
 
+import java.util.Objects;
+
 public class Sale {
 
     private String objectId;
@@ -27,6 +29,19 @@ public class Sale {
         this.offerId = offerId;
         this.counterOfferId = counterOfferId;
         this.isCounterOffer = isCounterOffer;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sale sale = (Sale) o;
+        return Objects.equals(objectId, sale.objectId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectId);
     }
 
     public String getObjectId() {
