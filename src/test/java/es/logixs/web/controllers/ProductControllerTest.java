@@ -1,19 +1,15 @@
 package es.logixs.web.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import es.logixs.web.domain.Product;
-import es.logixs.web.services.SaleProductRequestService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
-
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +18,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import es.logixs.web.domain.Product;
+import es.logixs.web.services.SaleProductRequestService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -83,15 +75,22 @@ public class ProductControllerTest {
 
   @Test
   void insertProductTest() throws Exception {
+    
     Product productToInsert = new Product("1A", "1", "1A", "1", "scientificName1", "name1", "category1", "originCountryIso1", "quality1", "descAndSpecs1");
+    
     when(service.insertProduct(productToInsert)).thenReturn(productToInsert);
+    
     MvcResult result = mvc.perform(post("/webapi/product")
             .contentType(MediaType.APPLICATION_JSON)
             .content(objectMapper.writeValueAsString(productToInsert))
             .accept(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk()).andReturn();
+
+
     String responseJson = result.getResponse().getContentAsString();
+
     Product productCreated = objectMapper.readValue(responseJson, Product.class);
+
     assertEquals(productToInsert, productCreated);
 
     verify(service, times(1)).insertProduct(productToInsert);
