@@ -1,10 +1,12 @@
 package es.logixs.web.controllers;
 
 import es.logixs.web.domain.Product;
+import es.logixs.web.dto.ProductDTO;
 import es.logixs.web.services.SaleProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,13 +17,18 @@ public class ProductController {
     private SaleProductRequestService saleProductRequestService;
 
     @GetMapping
-    public List<Product> findAllProducts() {
-        return saleProductRequestService.findAllProducts();
+    public List<ProductDTO> findAllProducts() {
+        List<ProductDTO> listProductDto = new ArrayList<ProductDTO>();
+
+        for (Product product: saleProductRequestService.findAllProducts() ) {
+            listProductDto.add(new ProductDTO(product));
+        }
+        return listProductDto;
     }
 
     @GetMapping("/{objectId}")
-    public Product findOneProduct(@PathVariable String objectId) {
-        return saleProductRequestService.findOneProduct(objectId);
+    public ProductDTO findOneProduct(@PathVariable String objectId) {
+        return new ProductDTO(saleProductRequestService.findOneProduct(objectId));
     }
 
     @DeleteMapping("/{objectId}")
@@ -29,12 +36,12 @@ public class ProductController {
         saleProductRequestService.deleteProduct(objectId);
     }
     @PostMapping
-    public Product insertProduct(@RequestBody Product product) {
-        return saleProductRequestService.insertProduct(product);
+    public Product insertProduct(@RequestBody ProductDTO product) {
+        return saleProductRequestService.insertProduct(product.createProduct());
     }
     @PutMapping("/{objectId}")
-    public void updateProduct(@RequestBody Product product, @PathVariable String objectId) {
-        saleProductRequestService.updateProduct(product,objectId);
+    public void updateProduct(@RequestBody ProductDTO product, @PathVariable String objectId) {
+        saleProductRequestService.updateProduct(product.createProduct(), objectId);
     }
 
   

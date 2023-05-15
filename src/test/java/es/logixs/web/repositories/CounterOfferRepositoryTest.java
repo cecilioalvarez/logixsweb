@@ -11,17 +11,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Sql({ "classpath:schemacounteroffer.sql", "classpath:datacounteroffer.sql" })
+@Sql({"classpath:schemacounteroffer.sql", "classpath:datacounteroffer.sql"})
 class CounterOfferRepositoryTest {
-
     @Autowired
     private CounterOfferRepository counterOfferRepository;
 
-
-
     @Test
     void findOne() {
-        CounterOffer counterOfferFinal= counterOfferRepository.findOne("1A");
+        CounterOffer counterOfferFinal = counterOfferRepository.findOne("1A");
 
         assertEquals("name1", counterOfferFinal.getName());
     }
@@ -30,12 +27,12 @@ class CounterOfferRepositoryTest {
     void findAll() {
         List<CounterOffer> counterOfferList = counterOfferRepository.findAll();
 
-        assertTrue(counterOfferList.size()>=4);
+        assertTrue(counterOfferList.size() >= 4);
     }
 
     @Test
     void insert() {
-        CounterOffer counterOffer = new CounterOffer("5A", "name5", "vom5", 2.0, 4.0, 10.0 );
+        CounterOffer counterOffer = new CounterOffer("5A", "name5", "vom5", 2.0, 4.0, 10.0);
 
         CounterOffer counterOfferFinal = counterOfferRepository.insert(counterOffer);
 
@@ -56,6 +53,14 @@ class CounterOfferRepositoryTest {
 
     @Test
     void update() {
-        /* TODO */
+        CounterOffer counterOfferToUpdate = counterOfferRepository.findOne("1A");
+        counterOfferToUpdate.setCounterOfferPrice(10);
+        counterOfferToUpdate.setName("nombre 1 actualizado");
+
+        counterOfferRepository.update(counterOfferToUpdate);
+        CounterOffer counterOfferUpdated = counterOfferRepository.findOne("1A");
+
+        assertEquals(counterOfferToUpdate.getName(), counterOfferUpdated.getName());
+        assertEquals(counterOfferToUpdate.getCounterOfferPrice(), counterOfferUpdated.getCounterOfferPrice());
     }
 }
