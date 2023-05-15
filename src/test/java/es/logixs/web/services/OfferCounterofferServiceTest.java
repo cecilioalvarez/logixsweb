@@ -1,23 +1,23 @@
 package es.logixs.web.services;
 
-import es.logixs.web.domain.CounterOffer;
-import es.logixs.web.domain.Offer;
-import es.logixs.web.repositories.mysql.CounterOfferRepositoryMySQL;
-import es.logixs.web.repositories.mysql.OfferRepositoryMySQL;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import es.logixs.web.domain.CounterOffer;
+import es.logixs.web.domain.Offer;
+import es.logixs.web.repositories.mysql.CounterOfferRepositoryMySQL;
+import es.logixs.web.repositories.mysql.OfferRepositoryMySQL;
 
 @SpringBootTest
 public class OfferCounterofferServiceTest {

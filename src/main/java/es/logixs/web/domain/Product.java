@@ -17,7 +17,7 @@ public class Product {
     }
 
     public Product(String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
-        this.objectId=objectId;
+        //this.objectId=objectId;
         this.userId = userId;
         this.code = code;
         this.companyId = companyId;
