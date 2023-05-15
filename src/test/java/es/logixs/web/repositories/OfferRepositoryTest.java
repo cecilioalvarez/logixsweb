@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Sql({ "classpath:schemaoffers.sql", "classpath:dataoffers.sql" })
+public
 class OfferRepositoryTest {
 
     @Autowired
