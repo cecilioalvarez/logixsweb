@@ -11,7 +11,7 @@ public interface SaleRepository {
     void update(Sale sale);
     Sale findOne(String objectId);
     List<Sale> findAll();
-    void delete(Sale sale);
+    void delete(String objectId);
 
     void update(Sale sale, Sale oldSale);
 }

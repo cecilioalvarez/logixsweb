@@ -26,7 +26,7 @@ public class RequestController {
 
     @DeleteMapping("/{objectId}")
     public void deleteRequest(@PathVariable String objectId) {
-        saleProductRequestService.deleteRequest(new Request(objectId));
+        saleProductRequestService.deleteRequest(objectId);
     }
     @PostMapping
     public Request insertRequest(@RequestBody Request request) {

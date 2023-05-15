@@ -27,8 +27,8 @@ public class RequestRepositoryMySQL implements RequestRepository {
         return request;
     }
     @Override
-    public void delete(Request request) {
-        plantilla.update(sqlDelete, request.getObjectId());
+    public void delete(String objectId) {
+        plantilla.update(sqlDelete, objectId);
     }
 
     @Override

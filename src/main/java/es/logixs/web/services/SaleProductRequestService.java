@@ -47,8 +47,8 @@ public class SaleProductRequestService {
         return saleRepository.findAll();
     }
 
-    public void deleteSale(Sale sale) {
-        saleRepository.delete(sale);
+    public void deleteSale(String objectId) {
+        saleRepository.delete(objectId);
     }
 
     // Products
@@ -95,8 +95,8 @@ public class SaleProductRequestService {
         return requestRepository.findAll();
     }
 
-    public void deleteRequest(Request request) {
-        requestRepository.delete(request);
+    public void deleteRequest(String objectId) {
+        requestRepository.delete(objectId);
     }
 
     public void updateRequest(Request request, String objectId) {

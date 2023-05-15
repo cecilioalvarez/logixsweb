@@ -31,8 +31,8 @@ public class SaleRepositoryMySQL implements SaleRepository {
         return sale;
     }
     @Override
-    public void delete(Sale sale) {
-        plantilla.update(sqlDelete, sale.getObjectId());
+    public void delete(String objectId) {
+        plantilla.update(sqlDelete, objectId);
     }
 
     @Override

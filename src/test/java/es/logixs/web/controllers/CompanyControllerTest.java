@@ -35,7 +35,7 @@ class CompanyControllerTest {
     @Autowired
     ObjectMapper objectMapper;
     @MockBean
-    private UserCompanyService servicio;
+    private UserCompanyService service;
 
     @Test
     void findAllCompaniesTest() throws Exception {
@@ -46,7 +46,7 @@ class CompanyControllerTest {
 
 
         List<Company> companyList = List.of(company1, company2, company3);
-        when(servicio.findAllCompanies()).thenReturn(companyList);
+        when(service.findAllCompanies()).thenReturn(companyList);
 
         String listExpected = objectMapper.writeValueAsString(companyList);
 
@@ -61,7 +61,7 @@ class CompanyControllerTest {
 
         Company company1 = new Company("1A", "1AC", "4321A", "PWC","1234A");
 
-        when(servicio.findOneCompany("1A")).thenReturn(company1);
+        when(service.findOneCompany("1A")).thenReturn(company1);
 
         String companyJsonResult = mvc.perform(get("/webapi/company/1A")).andExpect(status().isOk()).andReturn().getResponse()
                 .getContentAsString();
@@ -76,12 +76,12 @@ class CompanyControllerTest {
 
         Company companyToDelete = new Company("1A");
 
-        when(servicio.findOneCompany("1A")).thenReturn(companyToDelete);
+        when(service.findOneCompany("1A")).thenReturn(companyToDelete);
 
         mvc.perform(delete("/webapi/company/1A"))
                 .andExpect(status().isOk());
 
-        verify(servicio, times(1)).deleteCompany(companyToDelete);
+        verify(service, times(1)).deleteCompany(companyToDelete);
 
     }
 
@@ -90,7 +90,7 @@ class CompanyControllerTest {
 
         Company company1 = new Company("1A", "1AC", "4321A", "PWC","1234A");
 
-        when(servicio.insertCompany(company1)).thenReturn(company1);
+        when(service.insertCompany(company1)).thenReturn(company1);
         MvcResult result = mvc.perform(post("/webapi/company")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content( objectMapper.writeValueAsString(company1))
@@ -101,7 +101,7 @@ class CompanyControllerTest {
         Company createdCompany = objectMapper.readValue(responseJson, Company.class);
         assertEquals(company1, createdCompany);
 
-        verify(servicio, times(1)).insertCompany(company1);
+        verify(service, times(1)).insertCompany(company1);
 
     }
 }
