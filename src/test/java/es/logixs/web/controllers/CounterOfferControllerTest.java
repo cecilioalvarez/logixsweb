@@ -89,4 +89,24 @@ class CounterOfferControllerTest {
         assertEquals(counterOffer, createdCounterOffer);
         verify(offerCounterofferService, times(1)).insertCounterOffer(counterOffer);
     }
+
+    @Test
+    void updateCounterOffer() throws Exception {
+        CounterOffer counterOfferToUpdate = new CounterOffer("1A", "name1", "vom1", 2, 3, 10);
+        counterOfferToUpdate.setCounterOfferPrice(10);
+        counterOfferToUpdate.setName("nombre 1 actualizado");
+
+        when(offerCounterofferService.findOneCounterOffer("1A")).thenReturn(counterOfferToUpdate);
+        offerCounterofferService.updateCounterOffer(counterOfferToUpdate, "1A");
+        mvc.perform(put("/webapi/counteroffer/1A")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(counterOfferToUpdate))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        CounterOffer counterOfferUpdated = offerCounterofferService.findOneCounterOffer("1A");
+
+        assertEquals(counterOfferToUpdate.getName(), counterOfferUpdated.getName());
+        assertEquals(counterOfferToUpdate.getCounterOfferPrice(), counterOfferUpdated.getCounterOfferPrice());
+    }
 }
