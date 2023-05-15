@@ -38,7 +38,7 @@ public class RequestController {
     }
     @PostMapping
     public RequestDTO insertRequest(@RequestBody RequestDTO requestDTO) {
-        return new RequestDTO(saleProductRequestService.insertRequest(requestDTO.createRequest());
+        return new RequestDTO(saleProductRequestService.insertRequest(requestDTO.createRequest()));
     }
     @PutMapping("/{objectId}")
     public void updateRequest(@RequestBody RequestDTO requestDTO, @PathVariable String objectId) {
