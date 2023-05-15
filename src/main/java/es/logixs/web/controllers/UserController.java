@@ -43,11 +43,11 @@ public class UserController {
     }
     @PostMapping
     public User insertUser(@RequestBody UserDTO userDto) {
-        return servicioUserCompany.insertUser(userDto.getUser());
+        return servicioUserCompany.insertUser(userDto.crearUsuario());
     }
     @PutMapping("/{objectId}")
     public void updateUser(@RequestBody UserDTO userDto,@PathVariable String objectId) {
-        servicioUserCompany.updateUser(userDto.getUser(),objectId);
+        servicioUserCompany.updateUser(userDto.crearUsuario(),objectId);
     }
 
   

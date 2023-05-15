@@ -52,7 +52,7 @@ public class UserDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public User getUser() {
+    public User crearUsuario() {
 
         return new User (this.getObjectId(),this.getName(),this.getLastName(),this.getEmail());
     }
