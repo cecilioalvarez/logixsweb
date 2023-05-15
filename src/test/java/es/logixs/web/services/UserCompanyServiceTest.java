@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +21,7 @@ import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 
 
 @SpringBootTest
+@Tag("usercompany")
 public class UserCompanyServiceTest {
     @MockBean
     public UserRepositoryMySQL userRepositoryMock;

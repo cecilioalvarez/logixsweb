@@ -1,10 +1,12 @@
 package es.logixs.web.controllers;
 
 import es.logixs.web.domain.User;
+import es.logixs.web.dto.UserDTO;
 import es.logixs.web.services.UserCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,13 +17,23 @@ public class UserController {
     private UserCompanyService servicioUserCompany;
 
     @GetMapping
-    public List<User> findAllUsers() {
-        return servicioUserCompany.findAllUsers();
+    public List<UserDTO> findAllUsers() {
+
+        List<UserDTO> listUserDto= new ArrayList<UserDTO>();
+        
+        for (User user: servicioUserCompany.findAllUsers() ) {
+
+                listUserDto.add(new UserDTO(user));
+        }
+
+        return listUserDto;
     }
 
     @GetMapping("/{objectId}")
-    public User findOneUser(@PathVariable String objectId) {
-        return servicioUserCompany.findOneUser(objectId);
+    public UserDTO findOneUser(@PathVariable String objectId) {
+
+
+        return new UserDTO(servicioUserCompany.findOneUser(objectId));
     }
 
     @DeleteMapping("/{objectId}")
@@ -30,12 +42,12 @@ public class UserController {
         servicioUserCompany.deleteUser(new User(objectId));
     }
     @PostMapping
-    public User insertUser(@RequestBody User user) {
-        return servicioUserCompany.insertUser(user);
+    public User insertUser(@RequestBody UserDTO userDto) {
+        return servicioUserCompany.insertUser(userDto.getUser());
     }
     @PutMapping("/{objectId}")
-    public void updateUser(@RequestBody User user,@PathVariable String objectId) {
-        servicioUserCompany.updateUser(user,objectId);
+    public void updateUser(@RequestBody UserDTO userDto,@PathVariable String objectId) {
+        servicioUserCompany.updateUser(userDto.getUser(),objectId);
     }
 
   
