@@ -90,12 +90,12 @@ public class SaleDTO {
         this.counterOfferId = counterOfferId;
     }
 
-    public boolean getIsCounterOffer() {
+    public boolean isCounterOffer() {
         return isCounterOffer;
     }
 
-    public void setIsCounterOffer(boolean isCounterOffer) {
-        this.isCounterOffer = isCounterOffer;
+    public void setCounterOffer(boolean CounterOffer) {
+        isCounterOffer = CounterOffer;
     }
 
     public Sale createSale() {
@@ -106,7 +106,7 @@ public class SaleDTO {
                 getCode(),
                 getOfferId(),
                 getCounterOfferId(),
-                getIsCounterOffer()
+                isCounterOffer()
         );
     }
 }
