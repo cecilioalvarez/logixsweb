@@ -31,19 +31,6 @@ public class Sale {
         this.isCounterOffer = isCounterOffer;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Sale sale = (Sale) o;
-        return Objects.equals(objectId, sale.objectId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(objectId);
-    }
-
     public String getObjectId() {
         return objectId;
     }
@@ -87,4 +74,16 @@ public class Sale {
         this.isCounterOffer = isCounterOffer;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sale sale = (Sale) o;
+        return isCounterOffer == sale.isCounterOffer && Objects.equals(objectId, sale.objectId) && Objects.equals(ownerId, sale.ownerId) && Objects.equals(clientId, sale.clientId) && Objects.equals(code, sale.code) && Objects.equals(offerId, sale.offerId) && Objects.equals(counterOfferId, sale.counterOfferId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectId, ownerId, clientId, code, offerId, counterOfferId, isCounterOffer);
+    }
 }
