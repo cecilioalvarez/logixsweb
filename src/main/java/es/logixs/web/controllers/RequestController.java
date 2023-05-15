@@ -1,10 +1,13 @@
 package es.logixs.web.controllers;
 
 import es.logixs.web.domain.Request;
+import es.logixs.web.dto.RequestDTO;
+import es.logixs.web.dto.UserDTO;
 import es.logixs.web.services.SaleProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,13 +18,18 @@ public class RequestController {
     private SaleProductRequestService saleProductRequestService;
 
     @GetMapping
-    public List<Request> findAllRequests() {
-        return saleProductRequestService.findAllRequests();
+    public List<RequestDTO> findAllRequests() {
+        List<RequestDTO> listRequestDto = new ArrayList<>();
+
+        for (Request request : saleProductRequestService.findAllRequests()) {
+            listRequestDto.add(new RequestDTO(request));
+        }
+        return listRequestDto;
     }
 
     @GetMapping("/{objectId}")
-    public Request findOneRequest(@PathVariable String objectId) {
-        return saleProductRequestService.findOneRequest(objectId);
+    public RequestDTO findOneRequest(@PathVariable String objectId) {
+        return new RequestDTO(saleProductRequestService.findOneRequest(objectId));
     }
 
     @DeleteMapping("/{objectId}")
@@ -29,12 +37,12 @@ public class RequestController {
         saleProductRequestService.deleteRequest(objectId);
     }
     @PostMapping
-    public Request insertRequest(@RequestBody Request request) {
-        return saleProductRequestService.insertRequest(request);
+    public Request insertRequest(@RequestBody RequestDTO requestDTO) {
+        return saleProductRequestService.insertRequest(requestDTO.createRequest());
     }
     @PutMapping("/{objectId}")
-    public void updateRequest(@RequestBody Request request, @PathVariable String objectId) {
-        saleProductRequestService.updateRequest(request,objectId);
+    public void updateRequest(@RequestBody RequestDTO requestDTO, @PathVariable String objectId) {
+        saleProductRequestService.updateRequest(requestDTO.createRequest(),objectId);
     }
 
   
