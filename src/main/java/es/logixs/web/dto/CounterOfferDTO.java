@@ -41,30 +41,6 @@ public class CounterOfferDTO {
         this.quantity = counterOffer.getQuantity();
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CounterOfferDTO other = (CounterOfferDTO) obj;
-        if (objectId == null) {
-            return other.objectId == null;
-        } else {
-            return objectId.equals(other.objectId);
-        }
-    }
-
     public String getObjectId() {
         return objectId;
     }
@@ -111,5 +87,16 @@ public class CounterOfferDTO {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public CounterOffer createCounterOffer() {
+        return new CounterOffer(
+                getObjectId(),
+                getName(),
+                getVom(),
+                getOriginalPrice(),
+                getCounterOfferPrice(),
+                getQuantity()
+        );
     }
 }
