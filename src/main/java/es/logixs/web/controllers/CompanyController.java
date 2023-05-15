@@ -1,7 +1,11 @@
 package es.logixs.web.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import es.logixs.web.domain.User;
+import es.logixs.web.dto.CompanyDTO;
+import es.logixs.web.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +27,20 @@ public class CompanyController {
     private UserCompanyService servicioUserCompany;
 
     @GetMapping
-    public List<Company> findAllCompanies() {
-        return servicioUserCompany.findAllCompanies();
+    public List<CompanyDTO> findAllCompanies() {
+        List<CompanyDTO> listCompanyDto= new ArrayList<CompanyDTO>();
+
+        for (Company company: servicioUserCompany.findAllCompanies() ) {
+
+            listCompanyDto.add(new CompanyDTO(company));
+        }
+
+        return listCompanyDto;
     }
 
     @GetMapping("/{objectId}")
-    public Company findOneCompany(@PathVariable String objectId) {
-        return servicioUserCompany.findOneCompany(objectId);
+    public CompanyDTO findOneCompany(@PathVariable String objectId) {
+        return new CompanyDTO(servicioUserCompany.findOneCompany(objectId));
     }
 
     @DeleteMapping("/{objectId}")
@@ -38,12 +49,12 @@ public class CompanyController {
         servicioUserCompany.deleteCompany(new Company(objectId));
     }
     @PostMapping
-    public Company insertCompany(@RequestBody Company company) {
-        return servicioUserCompany.insertCompany(company);
+    public Company insertCompany(@RequestBody CompanyDTO companyDto) {
+        return servicioUserCompany.insertCompany(companyDto.createCompany());
     }
     @PutMapping("/{objectId}")
-    public void updateCompany(@RequestBody Company company, @PathVariable String objectId) {
-        servicioUserCompany.updateCompany(company,objectId);
+    public void updateCompany(@RequestBody CompanyDTO companyDto, @PathVariable String objectId) {
+        servicioUserCompany.updateCompany(companyDto.createCompany(),objectId);
     }
 
   
