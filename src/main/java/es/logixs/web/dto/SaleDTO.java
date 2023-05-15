@@ -1,9 +1,8 @@
-package es.logixs.web.domain;
+package es.logixs.web.dto;
 
-import java.util.Objects;
+import es.logixs.web.domain.Sale;
 
-public class Sale {
-
+public class SaleDTO {
     private String objectId;
     private String ownerId;
     private String clientId;
@@ -12,16 +11,18 @@ public class Sale {
     private String counterOfferId;
     private boolean isCounterOffer;
 
-
-    public Sale() {
+    public SaleDTO() {
     }
 
-    public Sale(String objectId) {
-        this.objectId = objectId;
-    }
-
-    public Sale(String objectId, String ownerId, String clientId, String code, String offerId, String counterOfferId,
-                boolean isCounterOffer) {
+    public SaleDTO(
+            String objectId,
+            String ownerId,
+            String clientId,
+            String code,
+            String offerId,
+            String counterOfferId,
+            boolean isCounterOffer
+    ) {
         this.objectId = objectId;
         this.ownerId = ownerId;
         this.clientId = clientId;
@@ -29,61 +30,83 @@ public class Sale {
         this.offerId = offerId;
         this.counterOfferId = counterOfferId;
         this.isCounterOffer = isCounterOffer;
+    }
+
+    public SaleDTO(Sale sale) {
+        this.objectId = sale.getObjectId();
+        this.ownerId = sale.getOwnerId();
+        this.clientId = sale.getClientId();
+        this.code = sale.getCode();
+        this.offerId = sale.getOfferId();
+        this.counterOfferId = sale.getCounterOfferId();
+        this.isCounterOffer = sale.isCounterOffer();
     }
 
     public String getObjectId() {
         return objectId;
     }
+
     public void setObjectId(String objectId) {
         this.objectId = objectId;
     }
+
     public String getOwnerId() {
         return ownerId;
     }
+
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
+
     public String getClientId() {
         return clientId;
     }
+
     public void setClientId(String clientId) {
         this.clientId = clientId;
     }
+
     public String getCode() {
         return code;
     }
+
     public void setCode(String code) {
         this.code = code;
     }
+
     public String getOfferId() {
         return offerId;
     }
+
     public void setOfferId(String offerId) {
         this.offerId = offerId;
     }
+
     public String getCounterOfferId() {
         return counterOfferId;
     }
+
     public void setCounterOfferId(String counterOfferId) {
         this.counterOfferId = counterOfferId;
     }
+
     public boolean isCounterOffer() {
         return isCounterOffer;
     }
-    public void setCounterOffer(boolean isCounterOffer) {
-        this.isCounterOffer = isCounterOffer;
+
+    public void setCounterOffer(boolean CounterOffer) {
+        isCounterOffer = CounterOffer;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Sale sale = (Sale) o;
-        return isCounterOffer == sale.isCounterOffer && Objects.equals(objectId, sale.objectId) && Objects.equals(ownerId, sale.ownerId) && Objects.equals(clientId, sale.clientId) && Objects.equals(code, sale.code) && Objects.equals(offerId, sale.offerId) && Objects.equals(counterOfferId, sale.counterOfferId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(objectId, ownerId, clientId, code, offerId, counterOfferId, isCounterOffer);
+    public Sale createSale() {
+        return new Sale(
+                getObjectId(),
+                getOwnerId(),
+                getClientId(),
+                getCode(),
+                getOfferId(),
+                getCounterOfferId(),
+                isCounterOffer()
+        );
     }
 }
