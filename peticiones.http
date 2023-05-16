@@ -1,4 +1,5 @@
 http://localhost:8080/webapi/user
+
 #####
 http://localhost:8080/webapi/companies/1A
 
@@ -10,21 +11,32 @@ POST http://localhost:8080/webapi/companies HTTP/1.1
 content-type: application/json
 
 {
-    "objectId": "3F",
-    "code":"123B",
-    "licenseId": "AABBB",
-    "name":"mycompany3",
-    "taxId":"2C"
+  "objectId": "3F",
+  "code": "123B",
+  "licenseId": "AABBB",
+  "name": "mycompany3",
+  "taxId": "2C"
 }
+
 ######
 PUT http://localhost:8080/webapi/companies/2A HTTP/1.1
 content-type: application/json
 
 {
-    "objectId": "10A",
-    "code":"1",
-    "licenseId": "2",
-    "name":"my",
-    "taxId":"A"
+  "objectId": "10A",
+  "code": "1",
+  "licenseId": "2",
+  "name": "my",
+  "taxId": "A"
 }
 
+#####
+POST http://localhost:8080/webapi/auth/admin/register HTTP/1.1
+content-type: application/json
+
+{
+  "objectId": "3F",
+  "name": "juan",
+  "lastName": "doniz",
+  "email": "jcarlins@gmail.com"
+}
