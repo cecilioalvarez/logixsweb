@@ -14,6 +14,10 @@ public class UserCompanyService {
  
    private final UserRepository userRepository;
    private final CompanyRepository companyRepository;
+    public UserCompanyService(CompanyRepository companyRepository, UserRepository userRepository) {
+        this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
+    }
 
     public void updateCompany(Company company, String objectId) {
        Company companyOld= companyRepository.findOne(objectId);
@@ -21,10 +25,6 @@ public class UserCompanyService {
     }
 
 
-    public UserCompanyService(CompanyRepository companyRepository, UserRepository userRepository) {
-        this.userRepository = userRepository;
-        this.companyRepository = companyRepository;
-    }
     public void updateUser(User user,String objectId) {
         User userOld= userRepository.findOne(objectId);
         userRepository.update(user,userOld);
