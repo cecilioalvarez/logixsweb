@@ -14,14 +14,14 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserCompanyService servicioUserCompany;
+    private UserCompanyService userCompanyService;
 
     @GetMapping
     public List<UserDTO> findAllUsers() {
 
         List<UserDTO> listUserDto= new ArrayList<UserDTO>();
         
-        for (User user: servicioUserCompany.findAllUsers() ) {
+        for (User user: userCompanyService.findAllUsers() ) {
 
                 listUserDto.add(new UserDTO(user));
         }
@@ -33,21 +33,21 @@ public class UserController {
     public UserDTO findOneUser(@PathVariable String objectId) {
 
 
-        return new UserDTO(servicioUserCompany.findOneUser(objectId));
+        return new UserDTO(userCompanyService.findOneUser(objectId));
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteUser(@PathVariable String objectId) {
 
-        servicioUserCompany.deleteUser(new User(objectId));
+        userCompanyService.deleteUser(new User(objectId));
     }
     @PostMapping
     public User insertUser(@RequestBody UserDTO userDto) {
-        return servicioUserCompany.insertUser(userDto.crearUsuario());
+        return userCompanyService.insertUser(userDto.crearUsuario());
     }
     @PutMapping("/{objectId}")
     public void updateUser(@RequestBody UserDTO userDto,@PathVariable String objectId) {
-        servicioUserCompany.updateUser(userDto.crearUsuario(),objectId);
+        userCompanyService.updateUser(userDto.crearUsuario(),objectId);
     }
 
   
