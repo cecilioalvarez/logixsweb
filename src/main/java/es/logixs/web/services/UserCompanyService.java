@@ -8,27 +8,27 @@ import org.springframework.stereotype.Component;
 
 import es.logixs.web.domain.Company;
 import es.logixs.web.repositories.CompanyRepository;
+
 @Component
 public class UserCompanyService {
-
- 
-   private final UserRepository userRepository;
-   private final CompanyRepository companyRepository;
+    private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
 
     public void updateCompany(Company company, String objectId) {
-       Company companyOld= companyRepository.findOne(objectId);
-       companyRepository.update(company,companyOld);
+        Company companyOld = companyRepository.findOne(objectId);
+        companyRepository.update(company, companyOld);
     }
-
 
     public UserCompanyService(CompanyRepository companyRepository, UserRepository userRepository) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
     }
-    public void updateUser(User user,String objectId) {
-        User userOld= userRepository.findOne(objectId);
-        userRepository.update(user,userOld);
+
+    public void updateUser(User user, String objectId) {
+        User userOld = userRepository.findOne(objectId);
+        userRepository.update(user, userOld);
     }
+
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
@@ -36,7 +36,6 @@ public class UserCompanyService {
     public void deleteCompany(Company company) {
         companyRepository.delete(company);
     }
-
 
     public Company insertCompany(Company company) {
         return companyRepository.insert(company);
@@ -61,8 +60,4 @@ public class UserCompanyService {
     public User findOneUser(String objectId) {
         return userRepository.findOne(objectId);
     }
-
-
-
-
 }
