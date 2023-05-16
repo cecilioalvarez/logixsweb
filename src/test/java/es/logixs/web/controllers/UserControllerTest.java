@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.text.DateFormat;
 import java.util.List;
 
 import org.junit.jupiter.api.Tag;
@@ -28,10 +29,7 @@ import org.springframework.test.web.servlet.MvcResult;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Tag("usercompany")
 class UserControllerTest {
-
-    // que hace peticiones http a traves de los objectos mock
     @Autowired
     private MockMvc mvc;
     @Autowired
@@ -41,16 +39,26 @@ class UserControllerTest {
 
     @Test
     void findAllUsersTest() throws Exception {
-
-        User user1 = new User("1A", "pedro", "perez", "pedro@gmail.com");
-        User user2 = new User("2B", "ana", "gomez", "ana@gmail.com");
-        User user3 = new User("3C", "gema", "sanchez", "gema@gmail.com");
+        User user1 = new User("1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
+        User user2 = new User("2B", "ana", "gomez", "ana@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
+        User user3 = new User("3C", "gema", "sanchez", "gema@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         List<User> userList = List.of(user1, user2, user3);
         when(service.findAllUsers()).thenReturn(userList);
 
         String listExpected = objectMapper.writeValueAsString(userList);
-        // test de risa
         String userListResultJSON = mvc.perform(get("/webapi/user")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
         assertEquals(listExpected, userListResultJSON);
@@ -59,10 +67,14 @@ class UserControllerTest {
     @Test
     void findOneUserTest() throws Exception {
 
-        User user1 = new User("1A", "pedro", "perez", "pedro@gmail.com");
+        User user1 = new User("1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         when(service.findOneUser("1A")).thenReturn(user1);
-        // test de risa
+
         String userJsonResult = mvc.perform(get("/webapi/user/1A")).andExpect(status().isOk()).andReturn().getResponse()
                 .getContentAsString();
 
@@ -74,7 +86,12 @@ class UserControllerTest {
     @Test
     void deleteUserTest() throws Exception {
 
-        User userToDelete = new User("1A", "Pedro", "Perez", "pedro@gmail.com");
+        User userToDelete = new User(
+                "1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         when(service.findOneUser("1A")).thenReturn(userToDelete);
 
@@ -87,24 +104,24 @@ class UserControllerTest {
 
     @Test
     void insertUserTest() throws Exception {
-
-        User user1 = new User("10A","juan","gomez","juan@gmail.com");
-
-        // verify(servicio,times(1)).deleteUser(user1);
-        // test de risa
+        User user1 = new User(
+                "6A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         when(service.insertUser(user1)).thenReturn(user1);
         MvcResult result = mvc.perform(post("/webapi/user")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content( objectMapper.writeValueAsString(user1))
-        .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk()).andReturn();
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(user1))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()).andReturn();
 
         String responseJson = result.getResponse().getContentAsString();
         User createdUser = objectMapper.readValue(responseJson, User.class);
         assertEquals(user1, createdUser);
 
-        // Verifica que el servicio haya sido llamado con el usuario correcto
         verify(service, times(1)).insertUser(user1);
 
     }

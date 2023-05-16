@@ -9,12 +9,15 @@ import org.springframework.test.context.jdbc.Sql;
 import es.logixs.web.domain.User;
 import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 
+
+import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Sql({ "classpath:schemausers.sql", "classpath:datausers.sql" })
+@Sql({"classpath:schemausers.sql", "classpath:datausers.sql"})
 @Tag("usercompany")
 class UserRepositoryTest {
 
@@ -22,15 +25,35 @@ class UserRepositoryTest {
     private UserRepositoryMySQL repository;
 
     @Test
-    void insertTest() {
-        User user = new User("5A", "Ana", "Sanchez", "ana@mail.com");
+    void insertTest() throws ParseException {
+        User user = new User(
+                "5A",
+                "Ana",
+                "Sanchez",
+                "ana@mail.com",
+                "state",
+                "avatar",
+                "password",
+                "prevPassword",
+                "companyId",
+                "invitedBy",
+                "role",
+                10.0,
+                "address",
+                "phone",
+                "city",
+                "zipCode",
+                "countryIso",
+                null,
+                null
+        );
         User userFinal = repository.insert(user);
         assertEquals(user, userFinal);
     }
 
     @Test
     void deleteTest() {
-        User user = new User("5A", "Ana", "Sanchez", "ana@mail.com");
+        User user = new User("5A");
         repository.delete(user);
         List<User> allUsers = repository.findAll();
         assertFalse(allUsers.contains(user));
@@ -54,7 +77,6 @@ class UserRepositoryTest {
 
     @Test
     void updateFieldsTest() {
-
         User userToUpdate = repository.findOne("2A");
 
         userToUpdate.setEmail("pepe100@gmail.com");
@@ -71,7 +93,6 @@ class UserRepositoryTest {
 
     @Test
     void updateFieldsTesWithObjectId() {
-
         User actualUser = repository.findOne("2A");
         User newDataForUser = new User();
         newDataForUser.setObjectId("5J");

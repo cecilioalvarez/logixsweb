@@ -5,6 +5,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,22 +36,33 @@ public class UserCompanyServiceTest {
     
 
     @Test
-    public void findOneUserTest() {
-
-        User user1 = new User("1A","Juan","Hernandez","juan@juan.com");
+    public void findOneUserTest() throws ParseException {
+        User user1 = new User(
+                "1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         when(userRepositoryMock.findOne("1A")).thenReturn(user1);
-
         User foundUser = userRepositoryMock.findOne("1A");
 
         assertEquals(user1, foundUser);
     }
 
     @Test
-    public void findAllUsersTest() {
-
-        User user1 = new User("1A","Juan","Hernandez","juan@juan.com");
-        User user2 = new User("2A","Alexis","Fernandez","alexis@alexis.com");
+    public void findAllUsersTest() throws ParseException {
+        User user1 = new User(
+                "1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
+        User user2 = new User("2A","Alexis","Fernandez","alexis@alexis.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         List<User> usersListMock = Arrays.asList(user1, user2);
         when(userRepositoryMock.findAll()).thenReturn(usersListMock);
@@ -61,7 +74,6 @@ public class UserCompanyServiceTest {
 
     @Test
     public void deleteUserTest() {
-
         User user = new User("1A");
 
         userCompanyService.deleteUser(user);
@@ -70,12 +82,14 @@ public class UserCompanyServiceTest {
     }
 
     @Test
-    public void insertUserTest() {
-
-        User user1 = new User("1A","Juan","Hernandez","juan@juan.com");
+    public void insertUserTest() throws ParseException {
+        User user1 = new User("1A","Juan","Hernandez","juan@juan.com", "state", "avatar",
+                "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
+                "address", "phone", "city", "zipCode", "countryIso",
+                null, null
+        );
 
         when(userRepositoryMock.insert(user1)).thenReturn(user1);
-
         User insertedUser = userRepositoryMock.insert(user1);
 
         assertEquals(user1, insertedUser);
