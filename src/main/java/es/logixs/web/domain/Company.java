@@ -55,6 +55,70 @@ public class Company {
         this.taxId = taxId;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public int getLimitUsers() {
+        return limitUsers;
+    }
+
+    public void setLimitUsers(int limitUsers) {
+        this.limitUsers = limitUsers;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCountryIso() {
+        return countryIso;
+    }
+
+    public void setCountryIso(String countryIso) {
+        this.countryIso = countryIso;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public Date getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        this.updateAt = updateAt;
+    }
+
     public String getObjectId() {
         return objectId;
     }
