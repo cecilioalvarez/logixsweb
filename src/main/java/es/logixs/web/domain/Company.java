@@ -1,11 +1,37 @@
 package es.logixs.web.domain;
 
+import java.util.Date;
+
 public class Company {
     private String objectId;
     private String code;
+    private String state;
     private String licenseId;
+    private int limitUsers;
     private String name;
+    private String address;
+    private String phone;
+    private String countryIso;
     private String taxId;
+    private String url;
+    private Date createAt;
+    private Date updateAt;
+
+    public Company(String objectId, String code, String state, String licenseId, int limitUsers, String name, String address, String phone, String countryIso, String taxId, String url, Date createAt, Date updateAt) {
+        this.objectId = objectId;
+        this.code = code;
+        this.state = state;
+        this.licenseId = licenseId;
+        this.limitUsers = limitUsers;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.countryIso = countryIso;
+        this.taxId = taxId;
+        this.url = url;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
+    }
 
     public Company(String objectId, String code, String licenseId, String name, String taxId) {
         this.objectId = objectId;
