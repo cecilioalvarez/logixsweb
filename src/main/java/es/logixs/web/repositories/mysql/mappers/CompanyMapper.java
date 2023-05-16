@@ -14,9 +14,18 @@ public class CompanyMapper implements RowMapper<Company> {
         return new Company(
                 rs.getString("objectId"),
                 rs.getString("code"),
+                rs.getString("state"),
                 rs.getString("licenseId"),
+                rs.getInt("limitUsers"),
                 rs.getString("name"),
-                rs.getString("taxId")
+                rs.getString("address"),
+                rs.getString("phone"),
+                rs.getString("countryIso"),
+                rs.getString("taxId"),
+                rs.getString("url"),
+                rs.getDate("createdAt"),
+                rs.getDate("updateAt")
+
         );
     }
 }
