@@ -1,10 +1,28 @@
 package es.logixs.web.domain;
 
+
+import java.util.Date;
+
 public class User {
     private String objectId;
     private String name;
     private String lastName;
     private String email;
+    private String state;
+    private String avatar;
+    private String password;
+    private String prevPasswords; // TODO Solucionar si es array o string
+    private String companyId;
+    private String invitedBy;
+    private String role;
+    private Double limitAmount;
+    private String address;
+    private String phone;
+    private String city;
+    private String zipCode;
+    private String countryIso;
+    private Date createdAt; // TODO Solucionar para insertar fecha
+    private Date updatedAt; // TODO Solucionar para insertar fecha
 
 
     public User(String objectId) {
@@ -14,11 +32,46 @@ public class User {
     public User() {
     }
 
-    public User(String objectId, String name, String lastName, String email) {
+    public User(
+            String objectId,
+            String name,
+            String lastName,
+            String email,
+            String state,
+            String avatar,
+            String password,
+            String prevPasswords,
+            String companyId,
+            String invitedBy,
+            String role,
+            Double limitAmount,
+            String address,
+            String phone,
+            String city,
+            String zipCode,
+            String countryIso,
+            Date createdAt,
+            Date updatedAt
+    ) {
         this.objectId = objectId;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
+        this.state = state;
+        this.avatar = avatar;
+        this.password = password;
+        this.prevPasswords = prevPasswords;
+        this.companyId = companyId;
+        this.invitedBy = invitedBy;
+        this.role = role;
+        this.limitAmount = limitAmount;
+        this.address = address;
+        this.phone = phone;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.countryIso = countryIso;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getObjectId() {
@@ -53,6 +106,126 @@ public class User {
         this.email = email;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPrevPasswords() {
+        return prevPasswords;
+    }
+
+    public void setPrevPasswords(String prevPasswords) {
+        this.prevPasswords = prevPasswords;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getInvitedBy() {
+        return invitedBy;
+    }
+
+    public void setInvitedBy(String invitedBy) {
+        this.invitedBy = invitedBy;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Double getLimitAmount() {
+        return limitAmount;
+    }
+
+    public void setLimitAmount(Double limitAmount) {
+        this.limitAmount = limitAmount;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCountryIso() {
+        return countryIso;
+    }
+
+    public void setCountryIso(String countryIso) {
+        this.countryIso = countryIso;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -71,12 +244,9 @@ public class User {
             return false;
         User other = (User) obj;
         if (objectId == null) {
-            if (other.objectId != null)
-                return false;
-        } else if (!objectId.equals(other.objectId))
-            return false;
-        return true;
+            return other.objectId == null;
+        } else {
+            return objectId.equals(other.objectId);
+        }
     }
-
-    
 }
