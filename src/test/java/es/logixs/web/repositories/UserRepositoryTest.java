@@ -10,7 +10,6 @@ import es.logixs.web.domain.User;
 import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     @Autowired
-    private UserRepositoryMySQL repository;
+    private UserRepositoryMySQL userRepositoryMySQL;
 
     @Test
     void insertTest() throws ParseException {
@@ -47,22 +46,27 @@ class UserRepositoryTest {
                 null,
                 null
         );
-        User userFinal = repository.insert(user);
+
+        User userFinal = userRepositoryMySQL.insert(user);
+
         assertEquals(user, userFinal);
     }
 
     @Test
     void deleteTest() {
         User user = new User("5A");
-        repository.delete(user);
-        List<User> allUsers = repository.findAll();
+
+        userRepositoryMySQL.delete(user);
+        List<User> allUsers = userRepositoryMySQL.findAll();
+
         assertFalse(allUsers.contains(user));
 
     }
 
     @Test
     void findOneTest() {
-        User user = repository.findOne("2A");
+        User user = userRepositoryMySQL.findOne("2A");
+
         assertEquals("2A", user.getObjectId());
         assertEquals("Pedro", user.getName());
         assertEquals("Sanchez", user.getLastName());
@@ -71,20 +75,20 @@ class UserRepositoryTest {
 
     @Test
     void findAllTest() {
-        List<User> lista = repository.findAll();
+        List<User> lista = userRepositoryMySQL.findAll();
+
         assertTrue(lista.size() >= 4);
     }
 
     @Test
     void updateFieldsTest() {
-        User userToUpdate = repository.findOne("2A");
+        User userToUpdate = userRepositoryMySQL.findOne("2A");
 
         userToUpdate.setEmail("pepe100@gmail.com");
         userToUpdate.setName("marta");
         userToUpdate.setLastName("gomez");
-
-        repository.update(userToUpdate);
-        User userUpdated = repository.findOne("2A");
+        userRepositoryMySQL.update(userToUpdate);
+        User userUpdated = userRepositoryMySQL.findOne("2A");
 
         assertEquals(userToUpdate.getEmail(), userUpdated.getEmail());
         assertEquals(userToUpdate.getName(), userUpdated.getName());
@@ -93,15 +97,15 @@ class UserRepositoryTest {
 
     @Test
     void updateFieldsTesWithObjectId() {
-        User actualUser = repository.findOne("2A");
+        User actualUser = userRepositoryMySQL.findOne("2A");
         User newDataForUser = new User();
         newDataForUser.setObjectId("5J");
         newDataForUser.setEmail("pepe100@gmail.com");
         newDataForUser.setName("marta");
         newDataForUser.setLastName("gomez");
 
-        repository.update(newDataForUser, actualUser);
-        User userFullUpdated = repository.findOne("5J");
+        userRepositoryMySQL.update(newDataForUser, actualUser);
+        User userFullUpdated = userRepositoryMySQL.findOne("5J");
 
         assertEquals(userFullUpdated.getEmail(), newDataForUser.getEmail());
         assertEquals(userFullUpdated.getEmail(), newDataForUser.getEmail());

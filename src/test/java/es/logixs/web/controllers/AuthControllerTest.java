@@ -16,10 +16,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AuthControllerTest {
-
     @Mock
     private UserCompanyService userCompanyService;
-
     @InjectMocks
     private AuthController authController;
 
@@ -39,10 +37,18 @@ class AuthControllerTest {
     @Test
     @DisplayName("Should register a new admin successfully")
     void registerAdminSuccessfully() {
-        UserDTO userDTO = new UserDTO("1", "John", "Doe", "john.doe@example.com");
-        User user = new User("1", "John", "Doe", "john.doe@example.com");
-        when(userCompanyService.insertUser(any(User.class))).thenReturn(user);
+        UserDTO userDTO = new UserDTO("1", "John", "Doe", "john.doe@example.com",
+                "state", "avatar", "password", "prevPassword", "companyId",
+                "invitedBy", "role", 10.0, "address", "phone", "city",
+                "zipCode", "countryIso", null, null
+        );
+        User user = new User("1", "John", "Doe", "john.doe@example.com",
+                "state", "avatar", "password", "prevPassword", "companyId",
+                "invitedBy", "role", 10.0, "address", "phone", "city",
+                "zipCode", "countryIso", null, null
+        );
 
+        when(userCompanyService.insertUser(any(User.class))).thenReturn(user);
         UserDTO result = authController.registerAdmin(userDTO);
 
         assertNotNull(result);

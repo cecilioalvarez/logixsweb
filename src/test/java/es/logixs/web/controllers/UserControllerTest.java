@@ -9,10 +9,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.text.DateFormat;
 import java.util.List;
 
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -35,7 +33,7 @@ class UserControllerTest {
     @Autowired
     ObjectMapper objectMapper;
     @MockBean
-    private UserCompanyService service;
+    private UserCompanyService userCompanyService;
 
     @Test
     void findAllUsersTest() throws Exception {
@@ -56,28 +54,32 @@ class UserControllerTest {
         );
 
         List<User> userList = List.of(user1, user2, user3);
-        when(service.findAllUsers()).thenReturn(userList);
+        when(userCompanyService.findAllUsers()).thenReturn(userList);
 
         String listExpected = objectMapper.writeValueAsString(userList);
-        String userListResultJSON = mvc.perform(get("/webapi/user")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        String userListResultJSON = mvc.perform(get("/webapi/user"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
 
         assertEquals(listExpected, userListResultJSON);
     }
 
     @Test
     void findOneUserTest() throws Exception {
-
         User user1 = new User("1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
                 "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
                 "address", "phone", "city", "zipCode", "countryIso",
                 null, null
         );
 
-        when(service.findOneUser("1A")).thenReturn(user1);
-
-        String userJsonResult = mvc.perform(get("/webapi/user/1A")).andExpect(status().isOk()).andReturn().getResponse()
+        when(userCompanyService.findOneUser("1A")).thenReturn(user1);
+        String userJsonResult = mvc.perform(get("/webapi/user/1A"))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
                 .getContentAsString();
-
         String userExpected = objectMapper.writeValueAsString(user1);
 
         assertEquals(userExpected, userJsonResult);
@@ -85,7 +87,6 @@ class UserControllerTest {
 
     @Test
     void deleteUserTest() throws Exception {
-
         User userToDelete = new User(
                 "1A", "pedro", "perez", "pedro@gmail.com", "state", "avatar",
                 "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
@@ -93,13 +94,11 @@ class UserControllerTest {
                 null, null
         );
 
-        when(service.findOneUser("1A")).thenReturn(userToDelete);
-
+        when(userCompanyService.findOneUser("1A")).thenReturn(userToDelete);
         mvc.perform(delete("/webapi/user/1A"))
                 .andExpect(status().isOk());
 
-        verify(service, times(1)).deleteUser(userToDelete);
-
+        verify(userCompanyService, times(1)).deleteUser(userToDelete);
     }
 
     @Test
@@ -111,18 +110,16 @@ class UserControllerTest {
                 null, null
         );
 
-        when(service.insertUser(user1)).thenReturn(user1);
+        when(userCompanyService.insertUser(user1)).thenReturn(user1);
         MvcResult result = mvc.perform(post("/webapi/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user1))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
-
         String responseJson = result.getResponse().getContentAsString();
         User createdUser = objectMapper.readValue(responseJson, User.class);
+
         assertEquals(user1, createdUser);
-
-        verify(service, times(1)).insertUser(user1);
-
+        verify(userCompanyService, times(1)).insertUser(user1);
     }
 }

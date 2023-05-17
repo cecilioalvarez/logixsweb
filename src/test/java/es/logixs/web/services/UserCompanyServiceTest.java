@@ -21,7 +21,6 @@ import es.logixs.web.domain.User;
 import es.logixs.web.repositories.mysql.CompanyRepositoryMySQL;
 import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 
-
 @SpringBootTest
 @Tag("usercompany")
 public class UserCompanyServiceTest {
@@ -31,9 +30,6 @@ public class UserCompanyServiceTest {
     public CompanyRepositoryMySQL companyRepositoryMock;
     @Autowired
     public UserCompanyService userCompanyService;
-
-
-    
 
     @Test
     public void findOneUserTest() throws ParseException {
@@ -58,7 +54,7 @@ public class UserCompanyServiceTest {
                 "address", "phone", "city", "zipCode", "countryIso",
                 null, null
         );
-        User user2 = new User("2A","Alexis","Fernandez","alexis@alexis.com", "state", "avatar",
+        User user2 = new User("2A", "Alexis", "Fernandez", "alexis@alexis.com", "state", "avatar",
                 "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
                 "address", "phone", "city", "zipCode", "countryIso",
                 null, null
@@ -83,7 +79,7 @@ public class UserCompanyServiceTest {
 
     @Test
     public void insertUserTest() throws ParseException {
-        User user1 = new User("1A","Juan","Hernandez","juan@juan.com", "state", "avatar",
+        User user1 = new User("1A", "Juan", "Hernandez", "juan@juan.com", "state", "avatar",
                 "password", "prevPassword", "companyId", "invitedBy", "role", 10.0,
                 "address", "phone", "city", "zipCode", "countryIso",
                 null, null
@@ -97,11 +93,9 @@ public class UserCompanyServiceTest {
 
     @Test
     public void insertCompanyTest() {
-
-        Company company1 = new Company("1A","ds12fsdf","asdafs23","PWC","324234d");
+        Company company1 = new Company("1A", "ds12fsdf", "asdafs23", "PWC", "324234d");
 
         when(companyRepositoryMock.insert(company1)).thenReturn(company1);
-
         Company insertedCompany = companyRepositoryMock.insert(company1);
 
         assertEquals(company1, insertedCompany);
@@ -109,12 +103,9 @@ public class UserCompanyServiceTest {
 
     @Test
     public void findOneCompanyTest() {
-
-        Company company1 = new Company("1A","ds12fsdf","asdafs23","PWC","324234d");
-
+        Company company1 = new Company("1A", "ds12fsdf", "asdafs23", "PWC", "324234d");
 
         when(companyRepositoryMock.findOne("1A")).thenReturn(company1);
-
         Company foundCompany = companyRepositoryMock.findOne("1A");
 
         assertEquals(company1, foundCompany);
@@ -122,9 +113,8 @@ public class UserCompanyServiceTest {
 
     @Test
     public void findAllCompaniesTest() {
-
-        Company company1 = new Company("1A","HFGAD2","ASDFAF2","PWC","asdfasdf2");
-        Company company2 = new Company("2A","HFGDAD2","ASDFAAF2","PWC 2","asd2fasdf2");
+        Company company1 = new Company("1A", "HFGAD2", "ASDFAF2", "PWC", "asdfasdf2");
+        Company company2 = new Company("2A", "HFGDAD2", "ASDFAAF2", "PWC 2", "asd2fasdf2");
 
         List<Company> companyListMock = Arrays.asList(company1, company2);
         when(companyRepositoryMock.findAll()).thenReturn(companyListMock);
@@ -136,14 +126,10 @@ public class UserCompanyServiceTest {
 
     @Test
     public void deleteCompanyTest() {
-
         Company company = new Company("1A");
 
         userCompanyService.deleteCompany(company);
 
         verify(companyRepositoryMock, times(1)).delete(company);
     }
-
-
-
 }
