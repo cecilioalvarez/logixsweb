@@ -18,7 +18,7 @@ public class UserController {
     @GetMapping
     public List<UserDTO> findAllUsers() {
         List<UserDTO> listUserDto = new ArrayList<UserDTO>();
-        for (User user : servicioUserCompany.findAllUsers()) {
+        for (User user : userCompanyService.findAllUsers()) {
             listUserDto.add(new UserDTO(user));
         }
         return listUserDto;
@@ -26,12 +26,12 @@ public class UserController {
 
     @GetMapping("/{objectId}")
     public UserDTO findOneUser(@PathVariable String objectId) {
-        return new UserDTO(servicioUserCompany.findOneUser(objectId));
+        return new UserDTO(userCompanyService.findOneUser(objectId));
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteUser(@PathVariable String objectId) {
-        servicioUserCompany.deleteUser(new User(objectId));
+        userCompanyService.deleteUser(new User(objectId));
     }
 
     @PostMapping
@@ -41,7 +41,7 @@ public class UserController {
 
     @PutMapping("/{objectId}")
     public void updateUser(@RequestBody UserDTO userDto, @PathVariable String objectId) {
-        servicioUserCompany.updateUser(userDto.crearUsuario(), objectId);
+        userCompanyService.updateUser(userDto.crearUsuario(), objectId);
     }
 
 }
