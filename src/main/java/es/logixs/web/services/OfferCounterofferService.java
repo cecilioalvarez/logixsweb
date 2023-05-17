@@ -51,8 +51,8 @@ public class OfferCounterofferService {
         counterOfferRepository.update(counterOffer, oldCounterOffer);
     }
 
-    public void deleteCounterOffer(CounterOffer counterOffer) {
-        counterOfferRepository.delete(counterOffer);
+    public void deleteCounterOffer(UUID objectId) {
+        counterOfferRepository.delete(objectId);
     }
 
     public CounterOffer findOneCounterOffer(UUID objectId) {

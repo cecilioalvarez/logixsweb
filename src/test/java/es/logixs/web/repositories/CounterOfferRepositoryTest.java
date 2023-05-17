@@ -45,7 +45,7 @@ public class CounterOfferRepositoryTest {
     void delete() {
         CounterOffer counterOffer = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
-        counterOfferRepository.delete(counterOffer);
+        counterOfferRepository.delete(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
         List<CounterOffer> counterOffers = counterOfferRepository.findAll();
 
         assertFalse(counterOffers.contains(counterOffer));

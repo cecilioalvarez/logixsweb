@@ -81,9 +81,8 @@ public class OfferCounterofferServiceTest {
 
     @Test
     public void deleteCounterOffer() {
-        CounterOffer counterOffers = mock(CounterOffer.class);
-        offersService.deleteCounterOffer(counterOffers);
-        verify(counterOfferRepositoryMock, times(1)).delete(counterOffers);
+        offersService.deleteCounterOffer(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        verify(counterOfferRepositoryMock, times(1)).delete(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
     }
 
     @Test
