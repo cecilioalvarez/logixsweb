@@ -2,9 +2,6 @@ package es.logixs.web.repositories.mysql;
 
 import es.logixs.web.domain.Request;
 import es.logixs.web.repositories.RequestRepository;
-import es.logixs.web.repositories.mysql.mappers.RequestMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

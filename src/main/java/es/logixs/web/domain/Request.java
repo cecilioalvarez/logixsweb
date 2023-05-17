@@ -16,16 +16,20 @@ public class Request {
     @Column(name = "objectId")
     private UUID objectId;
     private String code;
+    @Type(type="uuid-char")
     @Column(name = "offerId")
     private UUID offerId;
+    @Type(type="uuid-char")
     @Column(name = "ownerId")
     private UUID ownerId;
+    @Type(type="uuid-char")
     @Column(name = "companyId")
     private UUID companyId;
     @Column(name = "isAccepted")
     private boolean isAccepted;
+    @Type(type="uuid-char")
     @Column(name = "privateCompanyIds")
-    private UUID[] privateCompanyIds;
+    private UUID privateCompanyIds;
     private String category;
     @Column(name = "scientificName")
     private String scientificName;
@@ -44,7 +48,7 @@ public class Request {
 
 
 
-    public Request(UUID objectId, String code, UUID offerId, UUID ownerId, UUID companyId, boolean isAccepted, UUID[] privateCompanyIds, String category, String scientificName, String name, String originalCountryIso, String description, String productionMethod, int glazing, String currency, Date createdAt, Date updatedAt) {
+    public Request(UUID objectId, String code, UUID offerId, UUID ownerId, UUID companyId, boolean isAccepted, UUID privateCompanyIds, String category, String scientificName, String name, String originalCountryIso, String description, String productionMethod, int glazing, String currency, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
         this.code = code;
         this.offerId = offerId;
@@ -76,15 +80,13 @@ public class Request {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return Objects.equals(objectId, request.objectId) && Objects.equals(code, request.code) && Objects.equals(offerId, request.offerId) && Objects.equals(ownerId, request.ownerId) && Objects.equals(companyId, request.companyId);
+        return Objects.equals(objectId, request.objectId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(objectId, code, offerId, ownerId, companyId);
+        return Objects.hash(objectId);
     }
-
-
 
     public UUID getObjectId() {
         return objectId;
@@ -134,11 +136,11 @@ public class Request {
         isAccepted = accepted;
     }
 
-    public UUID[] getPrivateCompanyIds() {
+    public UUID getPrivateCompanyIds() {
         return privateCompanyIds;
     }
 
-    public void setPrivateCompanyIds(UUID[] privateCompanyIds) {
+    public void setPrivateCompanyIds(UUID privateCompanyIds) {
         this.privateCompanyIds = privateCompanyIds;
     }
 

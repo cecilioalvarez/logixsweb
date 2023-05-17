@@ -1,12 +1,8 @@
 package es.logixs.web.dto;
 
 import es.logixs.web.domain.Request;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
 public class RequestDTO {
@@ -16,7 +12,7 @@ public class RequestDTO {
     private UUID ownerId;
     private UUID companyId;
     private boolean isAccepted;
-    private UUID[] privateCompanyIds;
+    private UUID privateCompanyIds;
     private String category;
     private String scientificName;
     private String name;
@@ -48,7 +44,7 @@ public class RequestDTO {
         this.updatedAt = request.getUpdatedAt();
     }
 
-    public RequestDTO(UUID objectId, String code, UUID offerId, UUID ownerId, UUID companyId, boolean isAccepted, UUID[] privateCompanyIds, String category, String scientificName, String name, String originalCountryIso, String description, String productionMethod, int glazing, String currency, Date createdAt, Date updatedAt) {
+    public RequestDTO(UUID objectId, String code, UUID offerId, UUID ownerId, UUID companyId, boolean isAccepted, UUID privateCompanyIds, String category, String scientificName, String name, String originalCountryIso, String description, String productionMethod, int glazing, String currency, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
         this.code = code;
         this.offerId = offerId;
@@ -125,11 +121,11 @@ public class RequestDTO {
         isAccepted = accepted;
     }
 
-    public UUID[] getPrivateCompanyIds() {
+    public UUID getPrivateCompanyIds() {
         return privateCompanyIds;
     }
 
-    public void setPrivateCompanyIds(UUID[] privateCompanyIds) {
+    public void setPrivateCompanyIds(UUID privateCompanyIds) {
         this.privateCompanyIds = privateCompanyIds;
     }
 
