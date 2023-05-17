@@ -11,14 +11,10 @@ import es.logixs.web.repositories.CompanyRepository;
 
 @Component
 public class UserCompanyService {
-    private final UserRepository userRepository;
-    private final CompanyRepository companyRepository;
 
-    public void updateCompany(Company company, String objectId) {
-        Company companyOld = companyRepository.findOne(objectId);
-        companyRepository.update(company, companyOld);
-    }
-
+ 
+   private final UserRepository userRepository;
+   private final CompanyRepository companyRepository;
     public UserCompanyService(CompanyRepository companyRepository, UserRepository userRepository) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
@@ -27,6 +23,16 @@ public class UserCompanyService {
     public void updateUser(User user, String objectId) {
         User userOld = userRepository.findOne(objectId);
         userRepository.update(user, userOld);
+
+    public void updateCompany(Company company, String objectId) {
+       Company companyOld= companyRepository.findOne(objectId);
+       companyRepository.update(company,companyOld);
+    }
+
+
+    public void updateUser(User user,String objectId) {
+        User userOld= userRepository.findOne(objectId);
+        userRepository.update(user,userOld);
     }
 
     public void deleteUser(User user) {

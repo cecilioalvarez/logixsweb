@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("webapi/user")
 public class UserController {
     @Autowired
-    private UserCompanyService servicioUserCompany;
+    private UserCompanyService userCompanyService;
 
     @GetMapping
     public List<UserDTO> findAllUsers() {
@@ -36,7 +36,7 @@ public class UserController {
 
     @PostMapping
     public User insertUser(@RequestBody UserDTO userDto) {
-        return servicioUserCompany.insertUser(userDto.crearUsuario());
+        return userCompanyService.insertUser(userDto.crearUsuario());
     }
 
     @PutMapping("/{objectId}")
