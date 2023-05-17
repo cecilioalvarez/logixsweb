@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +91,7 @@ public class OfferCounterofferServiceTest {
 
     @Test
     public void findOneCounterOffer() {
-        String objectId = "A2";
+        UUID objectId = UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014");
 
         CounterOffer counterOffer = mock(CounterOffer.class);
 
