@@ -2,55 +2,50 @@ package es.logixs.web.repositories.mysql;
 
 import es.logixs.web.domain.Offer;
 import es.logixs.web.repositories.OfferRepository;
-import es.logixs.web.repositories.mysql.mappers.OfferMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class OfferRepositoryMySQL implements OfferRepository {
 
-    private final static String sqlInsert = "insert into offer (objectId,code,name,description,category) values (?,?,?,?,?)";
-    private final static String sqlDelete = "delete from offer where objectId=?";
-    private final static String sqlFindAll = "select * from offer";
-    private final static String sqlFindOne = "select * from offer where objectId=?";
-    private final static String sqlUpdate = "update offer set code=?,name=?,description=?,category=? where objectId=?";
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    @PersistenceContext
+    EntityManager em;
 
     @Override
+    @Transactional
     public Offer insert(Offer offer) {
-        jdbcTemplate.update(sqlInsert, offer.getObjectId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory());
+        em.persist(offer);
         return offer;
     }
 
     @Override
+    @Transactional
     public Offer update(Offer offer) {
-        jdbcTemplate.update(sqlUpdate, offer.getObjectId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory());
+        em.merge(offer);
         return offer;
     }
 
     @Override
-    public Offer update(Offer offer, Offer offerOld) {
-        jdbcTemplate.update(sqlUpdate, offer.getObjectId(), offer.getCode(), offer.getName(), offer.getDescription(), offer.getCategory(), offerOld.getObjectId());
-        return offer;
+    @Transactional
+    public void delete(UUID objectId) {
+        Offer offer = em.find(Offer.class, objectId);
+        em.remove(offer);
     }
 
     @Override
-    public void delete(String objectId) {
-        jdbcTemplate.update(sqlDelete, objectId);
+    @Transactional
+    public Offer findOne(UUID objectId) {
+        return em.find(Offer.class, objectId);
     }
 
     @Override
-    public Offer findOne(String objectId) {
-        return jdbcTemplate.queryForObject(sqlFindOne, new OfferMapper(), objectId);
-    }
-
-    @Override
+    @Transactional
     public List<Offer> findAll() {
-        return jdbcTemplate.query(sqlFindAll, new OfferMapper());
+        return em.createQuery("SELECT o FROM Offer o", Offer.class).getResultList();
     }
 }
