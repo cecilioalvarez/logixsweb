@@ -1,10 +1,17 @@
 package es.logixs.web.domain;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
+import java.util.UUID;
 
+@Entity
 public class Sale {
-
-    private String objectId;
+    @Id
+    @Type(type="uuid-char")
+    private UUID objectId;
     private String ownerId;
     private String clientId;
     private String code;
@@ -16,11 +23,11 @@ public class Sale {
     public Sale() {
     }
 
-    public Sale(String objectId) {
+    public Sale(UUID objectId) {
         this.objectId = objectId;
     }
 
-    public Sale(String objectId, String ownerId, String clientId, String code, String offerId, String counterOfferId,
+    public Sale(UUID objectId, String ownerId, String clientId, String code, String offerId, String counterOfferId,
                 boolean isCounterOffer) {
         this.objectId = objectId;
         this.ownerId = ownerId;
@@ -31,10 +38,10 @@ public class Sale {
         this.isCounterOffer = isCounterOffer;
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
     public String getOwnerId() {
