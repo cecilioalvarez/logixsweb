@@ -2,10 +2,10 @@ package es.logixs.web.dto;
 
 import es.logixs.web.domain.CounterOffer;
 
-import java.util.Objects;
+import java.util.UUID;
 
 public class CounterOfferDTO {
-    private String objectId;
+    private UUID objectId;
     private String name;
     private String vom;
     private double originalPrice;
@@ -17,7 +17,7 @@ public class CounterOfferDTO {
     }
 
     public CounterOfferDTO(
-            String objectId,
+            UUID objectId,
             String name,
             String vom,
             double originalPrice,
@@ -41,11 +41,11 @@ public class CounterOfferDTO {
         this.quantity = counterOffer.getQuantity();
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 
@@ -91,12 +91,12 @@ public class CounterOfferDTO {
 
     public CounterOffer createCounterOffer() {
         return new CounterOffer(
-                getObjectId(),
-                getName(),
-                getVom(),
-                getOriginalPrice(),
-                getCounterOfferPrice(),
-                getQuantity()
+                this.getObjectId(),
+                this.getName(),
+                this.getVom(),
+                this.getOriginalPrice(),
+                this.getCounterOfferPrice(),
+                this.getQuantity()
         );
     }
 }

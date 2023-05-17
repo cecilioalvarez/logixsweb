@@ -7,6 +7,7 @@ import es.logixs.web.repositories.OfferRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class OfferCounterofferService {
@@ -45,7 +46,7 @@ public class OfferCounterofferService {
         return counterOfferRepository.insert(counterOffer);
     }
 
-    public void updateCounterOffer(CounterOffer counterOffer, String objectId){
+    public void updateCounterOffer(CounterOffer counterOffer, UUID objectId){
         CounterOffer oldCounterOffer = counterOfferRepository.findOne(objectId);
         counterOfferRepository.update(counterOffer, oldCounterOffer);
     }
@@ -54,7 +55,7 @@ public class OfferCounterofferService {
         counterOfferRepository.delete(counterOffer);
     }
 
-    public CounterOffer findOneCounterOffer(String objectId){
+    public CounterOffer findOneCounterOffer(UUID objectId){
         return counterOfferRepository.findOne(objectId);
     }
 

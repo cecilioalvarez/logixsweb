@@ -1,10 +1,24 @@
 package es.logixs.web.domain;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
 public class CounterOffer {
-    private String objectId;
+    @Id
+    @Type(type="uuid-char")
+    @Column(name = "objectId")
+    private UUID objectId;
     private String name;
     private String vom;
+    @Column(name = "originalPrice")
     private double originalPrice;
+    @Column(name = "counterOfferPrice")
     private double counterOfferPrice;
     private double quantity;
 
@@ -12,11 +26,11 @@ public class CounterOffer {
 
     }
 
-    public CounterOffer(String objectId) {
+    public CounterOffer(UUID objectId) {
         this.objectId = objectId;
     }
 
-    public CounterOffer(String objectId, String name, String vom, double originalPrice, double counterOfferPrice, double quantity) {
+    public CounterOffer(UUID objectId, String name, String vom, double originalPrice, double counterOfferPrice, double quantity) {
         this.objectId = objectId;
         this.name = name;
         this.vom = vom;
@@ -25,11 +39,11 @@ public class CounterOffer {
         this.quantity = quantity;
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 
@@ -74,27 +88,15 @@ public class CounterOffer {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CounterOffer that = (CounterOffer) o;
+        return Double.compare(that.originalPrice, originalPrice) == 0 && Double.compare(that.counterOfferPrice, counterOfferPrice) == 0 && Double.compare(that.quantity, quantity) == 0 && Objects.equals(objectId, that.objectId) && Objects.equals(name, that.name) && Objects.equals(vom, that.vom);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        CounterOffer other = (CounterOffer) obj;
-        if (objectId == null) {
-            if (other.objectId != null)
-                return false;
-        } else if (!objectId.equals(other.objectId))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(objectId, name, vom, originalPrice, counterOfferPrice, quantity);
     }
 }
