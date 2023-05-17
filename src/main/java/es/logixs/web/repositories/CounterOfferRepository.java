@@ -13,7 +13,7 @@ public interface CounterOfferRepository {
 
     CounterOffer insert(CounterOffer counterOffer);
 
-    void delete(CounterOffer counterOffer);
+    void delete(UUID objectId);
 
     void update(CounterOffer counterOffer);
 
