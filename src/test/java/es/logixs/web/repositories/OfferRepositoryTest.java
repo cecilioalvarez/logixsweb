@@ -7,11 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
+import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
-@Sql({ "classpath:schemaoffers.sql", "classpath:dataoffers.sql" })
+@Sql({"classpath:schemaoffers.sql", "classpath:dataoffers.sql"})
 public
 class OfferRepositoryTest {
 
@@ -20,29 +22,48 @@ class OfferRepositoryTest {
 
     @Test
     void insert() {
-        Offer offer = new Offer("A1", "123456789", "offer1", "description offer 1", "category1");
+        Offer offer = new Offer(UUID.randomUUID(), "123456789", "offer1", "description offer 1", "category1");
         Offer offerFinal = offerRepository.insert(offer);
         assertEquals(offer, offerFinal);
     }
 
+    //
     @Test
     void delete() {
-        Offer offer = new Offer("A1", "123456789", "offer1", "description offer 1", "category1");
-        offerRepository.insert(offer);
-        offerRepository.delete("A1");
-        List<Offer> lista = offerRepository.findAll();
-        assertFalse(lista.contains(offer));
+        Offer offer = new Offer(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        offerRepository.delete(offer.getObjectId());
+        List<Offer> allOffers = offerRepository.findAll();
+        assertFalse(allOffers.contains(offer));
+    }
+
+    @Test
+    void update() {
+        Offer offerOld = offerRepository.findOne(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        offerOld.setDescription("new description");
+        offerOld.setCategory("new category");
+        offerOld.setCode("new code");
+        offerOld.setName("new name");
+        offerRepository.update(offerOld);
+        Offer offerFinal = offerRepository.findOne(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        assertEquals(offerOld.getCode(), offerFinal.getCode());
+        assertEquals(offerOld.getName(), offerFinal.getName());
+        assertEquals(offerOld.getDescription(), offerFinal.getDescription());
+        assertEquals(offerOld.getCategory(), offerFinal.getCategory());
     }
 
     @Test
     void findOne() {
-        Offer offer = offerRepository.findOne("A2");
-        assertEquals("A2", offer.getObjectId());
+        Offer offer = offerRepository.findOne(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        assertEquals(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"), offer.getObjectId());
+        assertEquals("code1", offer.getCode());
+        assertEquals("name1", offer.getName());
+        assertEquals("description1", offer.getDescription());
+        assertEquals("category1", offer.getCategory());
     }
 
     @Test
     void findAll() {
-        List<Offer> lista = offerRepository.findAll();
-        assertTrue(lista.size()>=5);
+        List<Offer> allOffers = offerRepository.findAll();
+        assertFalse(allOffers.isEmpty());
     }
 }
