@@ -9,6 +9,7 @@ import es.logixs.web.repositories.SaleRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class SaleProductRequestService {
@@ -87,7 +88,7 @@ public class SaleProductRequestService {
         return requestList;
     }
 
-    public Request findOneRequest(String objectId) {
+    public Request findOneRequest(UUID objectId) {
         return requestRepository.findOne(objectId);
     }
 
@@ -95,8 +96,8 @@ public class SaleProductRequestService {
         return requestRepository.findAll();
     }
 
-    public void deleteRequest(String objectId) {
-        requestRepository.delete(objectId);
+    public void deleteRequest(Request request) {
+        requestRepository.delete(request);
     }
 
     public void updateRequest(Request request, String objectId) {

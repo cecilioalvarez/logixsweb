@@ -28,7 +28,25 @@ public class RequestDTO {
     private Date createdAt;
     private Date updatedAt;
 
-
+    public RequestDTO(Request request) {
+        this.objectId = request.getObjectId();
+        this.code = request.getCode();
+        this.offerId = request.getOfferId();
+        this.ownerId = request.getOwnerId();
+        this.companyId = request.getCompanyId();
+        this.isAccepted = request.isAccepted();
+        this.privateCompanyIds = request.getPrivateCompanyIds();
+        this.category = request.getCategory();
+        this.scientificName = request.getScientificName();
+        this.name = request.getName();
+        this.originalCountryIso = request.getOriginalCountryIso();
+        this.description = request.getDescription();
+        this.productionMethod = request.getProductionMethod();
+        this.glazing = request.getGlazing();
+        this.currency = request.getCurrency();
+        this.createdAt = request.getCreatedAt();
+        this.updatedAt = request.getUpdatedAt();
+    }
 
     public RequestDTO(UUID objectId, String code, UUID offerId, UUID ownerId, UUID companyId, boolean isAccepted, UUID[] privateCompanyIds, String category, String scientificName, String name, String originalCountryIso, String description, String productionMethod, int glazing, String currency, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
