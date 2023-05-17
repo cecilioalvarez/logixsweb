@@ -24,7 +24,7 @@ public class CompanyMapper implements RowMapper<Company> {
                 rs.getString("taxId"),
                 rs.getString("url"),
                 rs.getDate("createdAt"),
-                rs.getDate("updateAt")
+                rs.getDate("updatedAt")
 
         );
     }

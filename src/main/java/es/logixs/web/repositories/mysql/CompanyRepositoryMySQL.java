@@ -39,8 +39,8 @@ public class CompanyRepositoryMySQL implements CompanyRepository {
                 company.getCountryIso(),
                 company.getTaxId(),
                 company.getUrl(),
-                company.getCreateAt(),
-                company.getUpdateAt());
+                company.getCreatedAt(),
+                company.getUpdatedAt());
         return company;
     }
     @Override
@@ -74,8 +74,8 @@ public class CompanyRepositoryMySQL implements CompanyRepository {
                 company.getCountryIso(),
                 company.getTaxId(),
                 company.getUrl(),
-                company.getCreateAt(),
-                company.getUpdateAt(),
+                company.getCreatedAt(),
+                company.getUpdatedAt(),
                 company.getObjectId());
     }
     @Override
@@ -94,8 +94,8 @@ public class CompanyRepositoryMySQL implements CompanyRepository {
                 company.getCountryIso(),
                 company.getTaxId(),
                 company.getUrl(),
-                company.getCreateAt(),
-                company.getUpdateAt(),
+                company.getCreatedAt(),
+                company.getUpdatedAt(),
                 oldCompany.getObjectId());
     }
 

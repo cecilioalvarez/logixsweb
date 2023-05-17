@@ -28,7 +28,7 @@ class CompanyRepositoryTest {
     void findOne() {
         Company companyFinal;
         companyFinal = companiesRepository.findOne("1A");
-        assertEquals("PWC", companyFinal.getName());
+        assertEquals("name1", companyFinal.getName());
     }
 
     @Test
@@ -38,14 +38,14 @@ class CompanyRepositoryTest {
     }
     @Test
     void insert() {
-        Company company = new Company("6A", "32234", "ADF2323SD", "PWC DTS", "adsf23");
+        Company company = new Company("yyy", "code13", "state13", "licenseId13", 21, "name31", "address13", "phone13", "CISO13", "taxId13", "url13", null, null);
         Company companyFinal = companiesRepository.insert(company);
         assertEquals(company, companyFinal);
     }
 
     @Test
     void delete() {
-        Company company = new Company("6A", "32234", "ADF2323SD", "PWC DTS", "adsf23");
+        Company company = new Company("yyy", "code13", "state13", "licenseId13", 21, "name31", "address13", "phone13", "CISO13", "taxId13", "url13", null, null);
         companiesRepository.insert(company);
         companiesRepository.delete(company);
        List<Company> companies = companiesRepository.findAll();

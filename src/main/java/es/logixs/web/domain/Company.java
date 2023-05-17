@@ -14,10 +14,10 @@ public class Company {
     private String countryIso;
     private String taxId;
     private String url;
-    private Date createAt;
-    private Date updateAt;
+    private Date createdAt;
+    private Date updatedAt;
 
-    public Company(String objectId, String code, String state, String licenseId, int limitUsers, String name, String address, String phone, String countryIso, String taxId, String url, Date createAt, Date updateAt) {
+    public Company(String objectId, String code, String state, String licenseId, int limitUsers, String name, String address, String phone, String countryIso, String taxId, String url, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
         this.code = code;
         this.state = state;
@@ -29,8 +29,8 @@ public class Company {
         this.countryIso = countryIso;
         this.taxId = taxId;
         this.url = url;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Company(String objectId, String code, String licenseId, String name, String taxId) {
@@ -103,20 +103,20 @@ public class Company {
         this.url = url;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getUpdateAt() {
-        return updateAt;
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(Date updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getObjectId() {
