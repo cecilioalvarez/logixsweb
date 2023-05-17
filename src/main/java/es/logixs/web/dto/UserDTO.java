@@ -3,10 +3,11 @@ package es.logixs.web.dto;
 import es.logixs.web.domain.User;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class UserDTO {
 
-    private String objectId;
+    private UUID objectId;
     private String name;
     private String lastName;
     private String email;
@@ -30,7 +31,7 @@ public class UserDTO {
     }
 
     public UserDTO(
-            String objectId,
+            UUID objectId,
             String name,
             String lastName,
             String email,
@@ -93,11 +94,11 @@ public class UserDTO {
         this.updatedAt = user.getUpdatedAt();
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 

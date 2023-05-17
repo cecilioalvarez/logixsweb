@@ -1,31 +1,52 @@
 package es.logixs.web.domain;
 
 
-import java.util.Date;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Date;
+import java.util.UUID;
+
+@Entity
 public class User {
-    private String objectId;
+    @Id
+    @Type(type="uuid-char")
+    @Column(name = "objectId")
+    private UUID objectId;
     private String name;
+    @Column(name = "lastName")
     private String lastName;
     private String email;
     private String state;
     private String avatar;
     private String password;
+    @Column(name = "prevPasswords")
     private String prevPasswords; // TODO Solucionar si es array o string
+    @Column(name = "companyId")
     private String companyId;
+    @Column(name = "invitedBy")
     private String invitedBy;
     private String role;
+
+    @Column(name = "limitAmount")
     private Double limitAmount;
     private String address;
     private String phone;
     private String city;
+
+    @Column(name = "zipCode")
     private String zipCode;
+    @Column(name = "countryIso")
     private String countryIso;
+    @Column(name = "createdAt")
     private Date createdAt; // TODO Solucionar para insertar fecha
+    @Column(name = "updatedAt")
     private Date updatedAt; // TODO Solucionar para insertar fecha
 
 
-    public User(String objectId) {
+    public User(UUID objectId) {
         this.objectId = objectId;
     }
 
@@ -33,7 +54,7 @@ public class User {
     }
 
     public User(
-            String objectId,
+            UUID objectId,
             String name,
             String lastName,
             String email,
@@ -74,11 +95,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 

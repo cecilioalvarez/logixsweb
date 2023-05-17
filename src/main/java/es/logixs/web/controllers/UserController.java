@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("webapi/user")
@@ -26,12 +27,12 @@ public class UserController {
 
     @GetMapping("/{objectId}")
     public UserDTO findOneUser(@PathVariable String objectId) {
-        return new UserDTO(userCompanyService.findOneUser(objectId));
+        return new UserDTO(userCompanyService.findOneUser(UUID.fromString(objectId)));
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteUser(@PathVariable String objectId) {
-        userCompanyService.deleteUser(new User(objectId));
+        userCompanyService.deleteUser(new User(UUID.fromString(objectId)));
     }
 
     @PostMapping
@@ -41,7 +42,7 @@ public class UserController {
 
     @PutMapping("/{objectId}")
     public void updateUser(@RequestBody UserDTO userDto, @PathVariable String objectId) {
-        userCompanyService.updateUser(userDto.crearUsuario(), objectId);
+        userCompanyService.updateUser(userDto.crearUsuario(), UUID.fromString(objectId));
     }
 
 }

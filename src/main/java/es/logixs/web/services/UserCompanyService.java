@@ -1,6 +1,7 @@
 package es.logixs.web.services;
 
 import java.util.List;
+import java.util.UUID;
 
 import es.logixs.web.domain.User;
 import es.logixs.web.repositories.UserRepository;
@@ -27,7 +28,7 @@ public class UserCompanyService {
     }
 
 
-    public void updateUser(User user, String objectId) {
+    public void updateUser(User user, UUID objectId) {
         User userOld = userRepository.findOne(objectId);
         userRepository.update(user, userOld);
     }
@@ -60,7 +61,7 @@ public class UserCompanyService {
         return companyRepository.findOne(objectId);
     }
 
-    public User findOneUser(String objectId) {
+    public User findOneUser(UUID objectId) {
         return userRepository.findOne(objectId);
     }
 }

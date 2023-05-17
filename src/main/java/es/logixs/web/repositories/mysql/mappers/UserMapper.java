@@ -1,3 +1,4 @@
+/*
 package es.logixs.web.repositories.mysql.mappers;
 
 import es.logixs.web.domain.User;
@@ -35,3 +36,4 @@ public class UserMapper implements RowMapper<User> {
         );
     }
 }
+*/

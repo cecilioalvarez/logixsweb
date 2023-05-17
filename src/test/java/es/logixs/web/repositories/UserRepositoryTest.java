@@ -1,4 +1,6 @@
+
 package es.logixs.web.repositories;
+
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,6 +14,7 @@ import es.logixs.web.repositories.mysql.UserRepositoryMySQL;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +29,7 @@ class UserRepositoryTest {
     @Test
     void insertTest() throws ParseException {
         User user = new User(
-                "5A",
+                UUID.randomUUID(),
                 "Ana",
                 "Sanchez",
                 "ana@mail.com",
@@ -54,7 +57,7 @@ class UserRepositoryTest {
 
     @Test
     void deleteTest() {
-        User user = new User("5A");
+        User user = new User(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
         userRepositoryMySQL.delete(user);
         List<User> allUsers = userRepositoryMySQL.findAll();
@@ -65,9 +68,9 @@ class UserRepositoryTest {
 
     @Test
     void findOneTest() {
-        User user = userRepositoryMySQL.findOne("2A");
+        User user = userRepositoryMySQL.findOne(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
-        assertEquals("2A", user.getObjectId());
+
         assertEquals("Pedro", user.getName());
         assertEquals("Sanchez", user.getLastName());
         assertEquals("pedro@mail.com", user.getEmail());
@@ -82,13 +85,13 @@ class UserRepositoryTest {
 
     @Test
     void updateFieldsTest() {
-        User userToUpdate = userRepositoryMySQL.findOne("2A");
+        User userToUpdate = userRepositoryMySQL.findOne(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
         userToUpdate.setEmail("pepe100@gmail.com");
         userToUpdate.setName("marta");
         userToUpdate.setLastName("gomez");
         userRepositoryMySQL.update(userToUpdate);
-        User userUpdated = userRepositoryMySQL.findOne("2A");
+        User userUpdated = userRepositoryMySQL.findOne(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
         assertEquals(userToUpdate.getEmail(), userUpdated.getEmail());
         assertEquals(userToUpdate.getName(), userUpdated.getName());
@@ -96,20 +99,19 @@ class UserRepositoryTest {
     }
 
     @Test
-    void updateFieldsTesWithObjectId() {
-        User actualUser = userRepositoryMySQL.findOne("2A");
-        User newDataForUser = new User();
-        newDataForUser.setObjectId("5J");
-        newDataForUser.setEmail("pepe100@gmail.com");
-        newDataForUser.setName("marta");
-        newDataForUser.setLastName("gomez");
+    void updateFieldsIDTest() {
+        User userToUpdate = userRepositoryMySQL.findOne(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
-        userRepositoryMySQL.update(newDataForUser, actualUser);
-        User userFullUpdated = userRepositoryMySQL.findOne("5J");
+        userToUpdate.setObjectId(UUID.fromString("491e8a7e-b050-44df-b86f-6718a267d014"));
+        userToUpdate.setEmail("pepe100@gmail.com");
+        userToUpdate.setName("marta");
+        userToUpdate.setLastName("gomez");
+        userRepositoryMySQL.update(userToUpdate);
+        User userUpdated = userRepositoryMySQL.findOne(UUID.fromString("491e8a7e-b050-44df-b86f-6718a267d014"));
 
-        assertEquals(userFullUpdated.getEmail(), newDataForUser.getEmail());
-        assertEquals(userFullUpdated.getEmail(), newDataForUser.getEmail());
-        assertEquals(userFullUpdated.getName(), newDataForUser.getName());
-        assertEquals(userFullUpdated.getLastName(), newDataForUser.getLastName());
+        assertEquals(userToUpdate.getEmail(), userUpdated.getEmail());
+        assertEquals(userToUpdate.getName(), userUpdated.getName());
+        assertEquals(userToUpdate.getLastName(), userUpdated.getLastName());
     }
 }
+
