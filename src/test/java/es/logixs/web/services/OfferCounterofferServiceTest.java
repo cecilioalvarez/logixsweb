@@ -88,7 +88,7 @@ public class OfferCounterofferServiceTest {
 
     @Test
     public void findOneCounterOffer() {
-        String objectId = "A2";
+        UUID objectId = UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014");
 
         CounterOffer counterOffer = mock(CounterOffer.class);
 
