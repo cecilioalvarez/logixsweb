@@ -7,47 +7,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class RequestRepositoryMySQL implements RequestRepository {
 
-    private final static String sqlInsert = "insert into request (objectId, code, offerId, ownerId, companyId) values (?,?,?,?,?);";
-    private final static String sqlDelete = "delete from request where objectId=?";
-    private final static String sqlFindAll = "select * from request;";
-    private final static String sqlFindOne = "select * from request where objectId=?;";
-    private final static String sqlUpdate = "update request set objectId=?, code=?, offerId=?, ownerId=?, companyId=? where objectId=?";
+    @PersistenceContext
+    EntityManager em;
 
-    @Autowired
-    private JdbcTemplate plantilla;
 
     @Override
+    @Transactional
     public Request insert(Request request) {
-        plantilla.update(sqlInsert, request.getObjectId(),request.getCode(), request.getOfferId(),request.getOwnerId(), request.getCompanyId());
+        em.persist(request);
         return request;
     }
     @Override
-    public void delete(String objectId) {
-        plantilla.update(sqlDelete, objectId);
+    @Transactional
+    public void delete(Request request) {
+        Request requestToDelete = em.find(Request.class, request.getObjectId());
+        em.remove(requestToDelete);
     }
 
     @Override
     public List<Request> findAll() {
-        return plantilla.query(sqlFindAll, new RequestMapper());
+        return em.createQuery("select r from Request r", Request.class).getResultList();
     }
     
     @Override
-    public Request findOne(String objectId) {
-       return  plantilla.queryForObject(sqlFindOne, new RequestMapper(),objectId);
+    public Request findOne(UUID objectId) {
+        return em.find(Request.class, objectId);
     }
 
     @Override
     public void update(Request request) {
-        plantilla.update(sqlUpdate,request.getObjectId(), request.getCode(), request.getOfferId(),request.getOwnerId(), request.getCompanyId(),request.getObjectId());
+        em.merge(request);
     }
     @Override
     public void update(Request request, Request oldRequest) {
-        plantilla.update(sqlUpdate,request.getObjectId(), request.getCode(), request.getOfferId(),request.getOwnerId(), request.getCompanyId(), oldRequest.getObjectId());
+
     }
 
 }

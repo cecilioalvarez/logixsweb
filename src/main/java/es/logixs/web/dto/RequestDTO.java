@@ -213,4 +213,26 @@ public class RequestDTO {
         this.updatedAt = updatedAt;
     }
 
+
+    public Request createRequest() {
+        return new Request(
+                this.getObjectId(),
+                this.getCode(),
+                this.getOfferId(),
+                this.getOwnerId(),
+                this.getCompanyId(),
+                this.isAccepted(),
+                this.getPrivateCompanyIds(),
+                this.getCategory(),
+                this.getScientificName(),
+                this.getName(),
+                this.getOriginalCountryIso(),
+                this.getDescription(),
+                this.getProductionMethod(),
+                this.getGlazing(),
+                this.getCurrency(),
+                this.getCreatedAt(),
+                this.getUpdatedAt()
+        );
+    }
 }

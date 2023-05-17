@@ -28,7 +28,6 @@ public class UserRepositoryMySQL implements UserRepository {
     }
 
     @Override
-
     @Transactional
     public void delete(User user) {
       User userToDelete= em.find(User.class,user.getObjectId());
@@ -48,8 +47,7 @@ public class UserRepositoryMySQL implements UserRepository {
     @Override
     @Transactional
     public void update(User user) {
-
-    em.merge(user);
+        em.merge(user);
     }
 
     @Override

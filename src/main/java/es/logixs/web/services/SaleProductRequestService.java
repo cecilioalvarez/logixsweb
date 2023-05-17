@@ -100,7 +100,7 @@ public class SaleProductRequestService {
         requestRepository.delete(request);
     }
 
-    public void updateRequest(Request request, String objectId) {
+    public void updateRequest(Request request, UUID objectId) {
         Request requestOld= requestRepository.findOne(objectId);
         requestRepository.update(request,requestOld);
     }

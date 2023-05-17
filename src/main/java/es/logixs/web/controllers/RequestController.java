@@ -35,7 +35,7 @@ public class RequestController {
 
     @DeleteMapping("/{objectId}")
     public void deleteRequest(@PathVariable String objectId) {
-        saleProductRequestService.deleteRequest(UUID.fromString(objectId));
+        saleProductRequestService.deleteRequest(new Request(UUID.fromString(objectId)));
     }
     @PostMapping
     public RequestDTO insertRequest(@RequestBody RequestDTO requestDTO) {
@@ -43,7 +43,7 @@ public class RequestController {
     }
     @PutMapping("/{objectId}")
     public void updateRequest(@RequestBody RequestDTO requestDTO, @PathVariable String objectId) {
-        saleProductRequestService.updateRequest(requestDTO.createRequest(),UUID.fromString(objectId));
+        saleProductRequestService.updateRequest(requestDTO.createRequest(), UUID.fromString(objectId));
     }
 
   
