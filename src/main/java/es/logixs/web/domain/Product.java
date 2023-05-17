@@ -1,39 +1,52 @@
 package es.logixs.web.domain;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
+@Entity
+@Table(name = "product")
 public class Product {
-    private String objectId;
+    @Id
+    @Type(type="uuid-char")
+    @Column(name = "objectId")
+    private UUID objectId;
+    @Column(name = "userId")
     private String userId;
     private String code;
+    @Column(name = "companyId")
     private String companyId;
+    @Column(name = "scientificName")
     private String scientificName;
     private String name;
     private String category;
+    @Column(name = "originCountryIso")
     private String originCountryIso;
     private String quality;
+    @Column(name = "descAndSpecs")
     private String descAndSpecs;
-
+    private double glazing;
+    @Column(name = "productionMethod")
+    private String productionMethod;
+    private String packing;
+    private String description;
+    @Column(name = "createdAt")
+    private Date createdAt;
+    @Column(name = "updatedAt")
+    private Date updatedAt;
     public Product() {
 
     }
 
-    public Product(String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
-        //this.objectId=objectId;
-        this.userId = userId;
-        this.code = code;
-        this.companyId = companyId;
-        this.scientificName = scientificName;
-        this.name = name;
-        this.category = category;
-        this.originCountryIso = originCountryIso;
-        this.quality = quality;
-        this.descAndSpecs = descAndSpecs;
-    }
-
-    public Product(String objectId) {
+    public Product(UUID objectId) {
         this.objectId = objectId;
     }
 
-    public Product(String objectId, String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs) {
+    public Product(UUID objectId, String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs, double glazing, String productionMethod, String packing, String description, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
         this.userId = userId;
         this.code = code;
@@ -44,13 +57,37 @@ public class Product {
         this.originCountryIso = originCountryIso;
         this.quality = quality;
         this.descAndSpecs = descAndSpecs;
+        this.glazing = glazing;
+        this.productionMethod = productionMethod;
+        this.packing = packing;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public String getObjectId() {
+    public Product(String userId, String code, String companyId, String scientificName, String name, String category, String originCountryIso, String quality, String descAndSpecs, double glazing, String productionMethod, String packing, String description, Date createdAt, Date updatedAt) {
+        this.userId = userId;
+        this.code = code;
+        this.companyId = companyId;
+        this.scientificName = scientificName;
+        this.name = name;
+        this.category = category;
+        this.originCountryIso = originCountryIso;
+        this.quality = quality;
+        this.descAndSpecs = descAndSpecs;
+        this.glazing = glazing;
+        this.productionMethod = productionMethod;
+        this.packing = packing;
+        this.description = description;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 
@@ -126,46 +163,51 @@ public class Product {
         this.descAndSpecs = descAndSpecs;
     }
 
-    @Override
-    public String toString() {
-        return "Products{" +
-            "objectId='" + objectId + '\'' +
-            ", userId='" + userId + '\'' +
-            ", code='" + code + '\'' +
-            ", companyId='" + companyId + '\'' +
-            ", scientificName='" + scientificName + '\'' +
-            ", name='" + name + '\'' +
-            ", category='" + category + '\'' +
-            ", originCountryIso='" + originCountryIso + '\'' +
-            ", quality='" + quality + '\'' +
-            ", descAndSpecs='" + descAndSpecs + '\'' +
-            '}';
+    public double getGlazing() {
+        return glazing;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
-        return result;
+    public void setGlazing(double glazing) {
+        this.glazing = glazing;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Product other = (Product) obj;
-        if (objectId == null) {
-            if (other.objectId != null)
-                return false;
-        } else if (!objectId.equals(other.objectId))
-            return false;
-        return true;
+    public String getProductionMethod() {
+        return productionMethod;
     }
 
-    
+    public void setProductionMethod(String productionMethod) {
+        this.productionMethod = productionMethod;
+    }
+
+    public String getPacking() {
+        return packing;
+    }
+
+    public void setPacking(String packing) {
+        this.packing = packing;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
