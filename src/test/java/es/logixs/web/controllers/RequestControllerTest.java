@@ -1,4 +1,3 @@
-/*
 package es.logixs.web.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
+import java.util.UUID;
 
 
 import es.logixs.web.domain.Request;
@@ -39,9 +39,60 @@ public class RequestControllerTest {
 
     @Test
     void findAllRequestsTest() throws Exception {
-        Request request1 = new Request("4B","5B","6B","7B", "8B");
-        Request request2 = new Request("4B","5B","6B","7B", "8B");
-        Request request3 = new Request("4B","5B","6B","7B", "8B");
+        Request request1 = new Request(
+                UUID.randomUUID(),
+                "code1",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                false,
+                UUID.randomUUID(),
+                "category10",
+                "scientificName10",
+                "name10",
+                "originalCountryIso10",
+                "description10",
+                "productionMethod10",
+                69,
+                "currency10",
+                null,
+                null);
+        Request request2 = new Request(
+                UUID.randomUUID(),
+                "code1",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                false,
+                UUID.randomUUID(),
+                "category10",
+                "scientificName10",
+                "name10",
+                "originalCountryIso10",
+                "description10",
+                "productionMethod10",
+                69,
+                "currency10",
+                null,
+                null);
+        Request request3 = new Request(
+                UUID.randomUUID(),
+                "code1",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                false,
+                UUID.randomUUID(),
+                "category10",
+                "scientificName10",
+                "name10",
+                "originalCountryIso10",
+                "description10",
+                "productionMethod10",
+                69,
+                "currency10",
+                null,
+                null);
 
         List<Request> requestList = List.of(request1,request2,request3);
         when(service.findAllRequests()).thenReturn(requestList);
@@ -55,9 +106,26 @@ public class RequestControllerTest {
 
     @Test
     void findOneRequestTest() throws Exception {
-        Request request = new Request("9A", "10A", "11A", "12A", "13A");
-        when(service.findOneRequest("9A")).thenReturn(request);
-        String requestJsonResult = mvc.perform(get("/webapi/request/9A")).andExpect(status().isOk()).andReturn().getResponse()
+        Request request = new Request(
+                UUID.fromString("691e8a7e-b050-44df-b86f-6718a267d014"),
+                "code1",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                false,
+                UUID.randomUUID(),
+                "category10",
+                "scientificName10",
+                "name10",
+                "originalCountryIso10",
+                "description10",
+                "productionMethod10",
+                69,
+                "currency10",
+                null,
+                null);
+        when(service.findOneRequest(UUID.fromString("691e8a7e-b050-44df-b86f-6718a267d014"))).thenReturn(request);
+        String requestJsonResult = mvc.perform(get("/webapi/request/691e8a7e-b050-44df-b86f-6718a267d014")).andExpect(status().isOk()).andReturn().getResponse()
                 .getContentAsString();
         String requestExpected = objectMapper.writeValueAsString(request);
 
@@ -67,18 +135,52 @@ public class RequestControllerTest {
     @Test
     void deleteRequestTest() throws Exception {
 
-        Request request = new Request("1A", "1AC", "4321A", "PWC","1234A");
+        Request request = new Request(
+                UUID.fromString("691e8a7e-b050-44df-b86f-6718a267d014"),
+                "code1",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                false,
+                UUID.randomUUID(),
+                "category10",
+                "scientificName10",
+                "name10",
+                "originalCountryIso10",
+                "description10",
+                "productionMethod10",
+                69,
+                "currency10",
+                null,
+                null);
 
         when(service.insertRequest(request)).thenReturn(request);
 
-        mvc.perform(delete("/webapi/request/1A")).andExpect(status().isOk());
+        mvc.perform(delete("/webapi/request/691e8a7e-b050-44df-b86f-6718a267d014")).andExpect(status().isOk());
 
-        verify(service, times(1)).deleteRequest("1A");
+        verify(service, times(1)).deleteRequest(request);
     }
 
     @Test
     void insertRequestTest() throws  Exception {
-        Request request = new Request("1A", "1AC", "4321A", "PWC","1234A");
+        Request request = new Request(
+                UUID.fromString("691e8a7e-b050-44df-b86f-6718a267d014"),
+                "code1",
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                UUID.randomUUID(),
+                false,
+                UUID.randomUUID(),
+                "category10",
+                "scientificName10",
+                "name10",
+                "originalCountryIso10",
+                "description10",
+                "productionMethod10",
+                69,
+                "currency10",
+                null,
+                null);
 
         when(service.insertRequest(request)).thenReturn(request);
         MvcResult result = mvc.perform(post("/webapi/request")
@@ -98,4 +200,4 @@ public class RequestControllerTest {
     }
 }
 
- */
+

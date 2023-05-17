@@ -1,4 +1,4 @@
-/*
+
 package es.logixs.web.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,11 +113,11 @@ public class SaleProductRequestServiceTest {
 
   @Test
   public void deleteRequestTest() {
-    Request request = new Request("123456789", "offer6", "owner6", "company6");
+    //Request request = new Request("123456789", "offer6", "owner6", "company6");Request request = mock(Request.class);
+      Request request = mock(Request.class);
+      when(request.getObjectId()).thenReturn(UUID.fromString("311e8a7e-b050-44df-b86f-6718a267d014"));
+    saleProductRequestService.deleteRequest(request);
 
-    saleProductRequestService.deleteRequest(request.getObjectId());
-
-    verify(requestRepositoryMock, times(1)).delete(request.getObjectId());
+    verify(requestRepositoryMock, times(1)).delete(request);
   }
 }
-*/
