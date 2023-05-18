@@ -35,8 +35,8 @@ public class CounterOfferRepositoryMySQL implements CounterOfferRepository {
 
     @Override
     @Transactional
-    public void delete(CounterOffer counterOffer) {
-        CounterOffer counterOfferToDelete= entityManager.find(CounterOffer.class,counterOffer.getObjectId());
+    public void delete(UUID objectId) {
+        CounterOffer counterOfferToDelete= entityManager.find(CounterOffer.class, objectId);
         entityManager.remove(counterOfferToDelete);
     }
 

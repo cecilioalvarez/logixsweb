@@ -66,11 +66,13 @@ public class CounterOfferControllerTest {
 
     @Test
     void deleteCounterOffer() throws Exception {
-//        CounterOffer counterOffer = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"), "name1", "vom1", 2.0, 4.0, 10.0);
-//
-//        mvc.perform(delete("/webapi/counteroffer/391e8a7e-b050-44df-b86f-6718a267d014")).andExpect(status().isOk());
-//
-//        verify(offerCounterofferService, times(1)).deleteCounterOffer(counterOffer);
+        UUID objectId = UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014");
+        CounterOffer counterOffer = new CounterOffer(objectId, "name1", "vom1", 2.0, 4.0, 10.0);
+
+        when(offerCounterofferService.findOneCounterOffer(objectId)).thenReturn(counterOffer);
+        mvc.perform(delete("/webapi/counteroffer/391e8a7e-b050-44df-b86f-6718a267d014")).andExpect(status().isOk());
+
+        verify(offerCounterofferService, times(1)).deleteCounterOffer(objectId);
     }
 
     @Test
