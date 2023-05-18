@@ -1,4 +1,3 @@
-/*
 package es.logixs.web.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +37,11 @@ public class SaleProductRequestServiceTest {
   private SaleProductRequestService saleProductRequestService;
   @Test
   public void deleteSaleTest() {
-    Sale sale = new Sale("0001","0001","0001","1A","1","1",true);
+    Sale sale = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
 
-    saleProductRequestService.deleteSale("1A");
+    saleProductRequestService.deleteSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
 
-    verify(saleRepositoryMock, times(1)).delete("1A");
+    verify(saleRepositoryMock, times(1)).delete(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
 
   }
 
@@ -62,8 +62,8 @@ public class SaleProductRequestServiceTest {
 
   @Test
   public void findAllSalesTest() {
-    Sale sale1 = new Sale("0001","0001","0001","1A","1","1",true);
-    Sale sale2 = new Sale("0002","0002","0002","2A","2","2",false);
+    Sale sale1 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
+    Sale sale2 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d021"), "0002", "0002", "2A", "2", "2", true);
 
     List<Sale> salesListMock = Arrays.asList(sale1,sale2);
     when(saleRepositoryMock.findAll()).thenReturn(salesListMock);
@@ -76,6 +76,7 @@ public class SaleProductRequestServiceTest {
   }
 
   // Products
+  /*
   @Test
   public void insertProductsTest() {
     Product products = mock(Product.class);
@@ -87,7 +88,7 @@ public class SaleProductRequestServiceTest {
 
     assertIterableEquals(productsList, insertedproductsList);
   }
-
+*//*
   @Test
   public void deleteProductTest() {
     Product product = new Product("7", "23", "123456789", "company1", "scientificName1", "product1", "category1", "ES", "quality1", "description1");
@@ -96,7 +97,7 @@ public class SaleProductRequestServiceTest {
 
     verify(productRepositoryMock, times(1)).delete(product.getObjectId());
   }
-
+*/
   // Request
   @Test
   public void insertRequestTest() {
@@ -112,11 +113,13 @@ public class SaleProductRequestServiceTest {
 
   @Test
   public void deleteRequestTest() {
-    Request request = new Request("123456789", "offer6", "owner6", "company6");
+    //Request request = new Request("123456789", "offer6", "owner6", "company6");Request request = mock(Request.class);
+      Request request = mock(Request.class);
+      when(request.getObjectId()).thenReturn(UUID.fromString("311e8a7e-b050-44df-b86f-6718a267d014"));
+    saleProductRequestService.deleteRequest(request);
 
-    saleProductRequestService.deleteRequest(request.getObjectId());
-
-    verify(requestRepositoryMock, times(1)).delete(request.getObjectId());
+    verify(requestRepositoryMock, times(1)).delete(request);
   }
 }
-*/
+
+

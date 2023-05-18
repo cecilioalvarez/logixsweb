@@ -2,56 +2,49 @@ package es.logixs.web.repositories.mysql;
 
 import es.logixs.web.domain.Sale;
 import es.logixs.web.repositories.SaleRepository;
-import es.logixs.web.repositories.mysql.mappers.SaleMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class SaleRepositoryMySQL implements SaleRepository {
-
-    private final static String sqlUpdate = "update sale set objectId=?, ownerId=?, clientId=?, code=?, offerId=?, counterOfferId=?, isCounterOffer=? where objectId=?";
-
-    private final static String sqlInsert = "insert into sale (objectId,ownerId,clientId,code,offerId,counterOfferId,isCounterOffer) values (?,?,?,?,?,?,?)";
-
-    private final static String sqlDelete = "delete from sale where objectId=?";
-
-    private final static String sqlFindAll = "select * from sale";
-
-    private final static String sqlFindOne = "select * from sale where objectId=?";
-
-    @Autowired
-    private JdbcTemplate plantilla;
+    @PersistenceContext
+    EntityManager em;
 
     @Override
+    @Transactional
     public Sale insert(Sale sale) {
-        plantilla.update(sqlInsert, sale.getObjectId(),sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(), sale.getCounterOfferId(), sale.isCounterOffer());
+        em.persist(sale);
         return sale;
     }
+
     @Override
-    public void delete(String objectId) {
-        plantilla.update(sqlDelete, objectId);
+    @Transactional
+    public void delete(UUID objectId) {
+        Sale saleToDelete = em.find(Sale.class, objectId);
+        em.remove(saleToDelete);
     }
 
     @Override
     public List<Sale> findAll() {
-        return plantilla.query(sqlFindAll, new SaleMapper());
+        return em.createQuery("select s from Sale s", Sale.class).getResultList();
     }
 
     @Override
-    public Sale findOne(String objectId) {
-       return  plantilla.queryForObject(sqlFindOne, new SaleMapper(),objectId);
+    public Sale findOne(UUID objectId) {
+       return em.find(Sale.class, objectId);
     }
 
     @Override
+    @Transactional
     public void update(Sale sale) {
-        plantilla.update(sqlUpdate,sale.getObjectId(), sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(),sale.getCounterOfferId(), sale.isCounterOffer(), sale.getObjectId());
+        em.merge(sale);
     }
     @Override
-    public void update(Sale sale, Sale oldSale) {
-        plantilla.update(sqlUpdate,sale.getObjectId(), sale.getOwnerId(), sale.getClientId(),sale.getCode(), sale.getOfferId(),sale.getCounterOfferId(), sale.isCounterOffer(), oldSale.getObjectId());
-    }
+    public void update(Sale sale, Sale oldSale) { }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("webapi/sale")
@@ -26,12 +27,12 @@ public class SaleController {
     }
 
     @GetMapping("/{objectId}")
-    public SaleDTO findOneSale(@PathVariable String objectId) {
+    public SaleDTO findOneSale(@PathVariable UUID objectId) {
         return new SaleDTO(saleProductRequestService.findOneSale(objectId));
     }
 
     @DeleteMapping("/{objectId}")
-    public void deleteSale(@PathVariable String objectId) {
+    public void deleteSale(@PathVariable UUID objectId) {
         saleProductRequestService.deleteSale(objectId);
     }
 
@@ -41,7 +42,7 @@ public class SaleController {
     }
 
     @PutMapping("/{objectId}")
-    public void updateSale(@RequestBody SaleDTO saleDto, @PathVariable String objectId) {
+    public void updateSale(@RequestBody SaleDTO saleDto, @PathVariable UUID objectId) {
         saleProductRequestService.updateSale(saleDto.createSale(), objectId);
     }
 }

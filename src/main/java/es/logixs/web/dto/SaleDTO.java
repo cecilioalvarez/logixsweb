@@ -2,8 +2,10 @@ package es.logixs.web.dto;
 
 import es.logixs.web.domain.Sale;
 
+import java.util.UUID;
+
 public class SaleDTO {
-    private String objectId;
+    private UUID objectId;
     private String ownerId;
     private String clientId;
     private String code;
@@ -15,7 +17,7 @@ public class SaleDTO {
     }
 
     public SaleDTO(
-            String objectId,
+            UUID objectId,
             String ownerId,
             String clientId,
             String code,
@@ -42,11 +44,11 @@ public class SaleDTO {
         this.isCounterOffer = sale.isCounterOffer();
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 

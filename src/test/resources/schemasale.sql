@@ -1,6 +1,6 @@
 DROP TABLE   IF EXISTS sale;
 create table sale (
-    objectId varchar(25),
+    objectId varchar(255),
     ownerId varchar(50),
     clientId varchar(50),
     code varchar(50),
