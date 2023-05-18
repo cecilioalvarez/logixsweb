@@ -2,9 +2,11 @@ package es.logixs.web.dto;
 
 import es.logixs.web.domain.Offer;
 
+import java.util.UUID;
+
 public class OfferDTO {
 
-    private String objectId;
+    private UUID objectId;
     private String code;
     private String name;
     private String description;
@@ -14,7 +16,7 @@ public class OfferDTO {
     public OfferDTO() {
     }
 
-    public OfferDTO(String objectId, String code, String name, String description, String category) {
+    public OfferDTO(UUID objectId, String code, String name, String description, String category) {
         this.objectId = objectId;
         this.code = code;
         this.name = name;
@@ -30,11 +32,11 @@ public class OfferDTO {
         this.category = offer.getCategory();
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 

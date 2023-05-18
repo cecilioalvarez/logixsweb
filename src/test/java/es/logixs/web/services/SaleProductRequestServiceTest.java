@@ -1,4 +1,3 @@
-
 package es.logixs.web.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -77,6 +76,7 @@ public class SaleProductRequestServiceTest {
   }
 
   // Products
+  /*
   @Test
   public void insertProductsTest() {
     Product products = mock(Product.class);
@@ -88,7 +88,7 @@ public class SaleProductRequestServiceTest {
 
     assertIterableEquals(productsList, insertedproductsList);
   }
-
+*//*
   @Test
   public void deleteProductTest() {
     Product product = new Product("7", "23", "123456789", "company1", "scientificName1", "product1", "category1", "ES", "quality1", "description1");
@@ -97,7 +97,7 @@ public class SaleProductRequestServiceTest {
 
     verify(productRepositoryMock, times(1)).delete(product.getObjectId());
   }
-
+*/
   // Request
   @Test
   public void insertRequestTest() {

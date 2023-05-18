@@ -1,15 +1,14 @@
 package es.logixs.web.controllers;
 
 import es.logixs.web.domain.CounterOffer;
-import es.logixs.web.domain.User;
 import es.logixs.web.dto.CounterOfferDTO;
-import es.logixs.web.dto.UserDTO;
 import es.logixs.web.services.OfferCounterofferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("webapi/counteroffer")
@@ -28,12 +27,12 @@ public class CounterOfferController {
 
     @GetMapping("/{objectId}")
     public CounterOfferDTO findOneCounterOffer(@PathVariable String objectId) {
-        return new CounterOfferDTO(offerCounterofferService.findOneCounterOffer(objectId));
+        return new CounterOfferDTO(offerCounterofferService.findOneCounterOffer(UUID.fromString(objectId)));
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteCounterOffer(@PathVariable String objectId) {
-        offerCounterofferService.deleteCounterOffer(new CounterOffer(objectId));
+        offerCounterofferService.deleteCounterOffer(new CounterOffer(UUID.fromString(objectId)));
     }
 
     @PostMapping
@@ -43,7 +42,7 @@ public class CounterOfferController {
 
     @PutMapping("/{objectId}")
     public void updateCounterOffer(@RequestBody CounterOfferDTO counterOfferDto, @PathVariable String objectId) {
-        offerCounterofferService.updateCounterOffer(counterOfferDto.createCounterOffer(), objectId);
+        offerCounterofferService.updateCounterOffer(counterOfferDto.createCounterOffer(), UUID.fromString(objectId));
     }
 
 }

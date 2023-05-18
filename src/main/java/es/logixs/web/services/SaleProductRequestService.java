@@ -64,7 +64,7 @@ public class SaleProductRequestService {
         return productList;
     }
 
-    public Product findOneProduct(String objectId) {
+    public Product findOneProduct(UUID objectId) {
         return productRepository.findOne(objectId);
     }
 
@@ -72,7 +72,7 @@ public class SaleProductRequestService {
         return productRepository.findAll();
     }
 
-    public void deleteProduct(String objectId) {
+    public void deleteProduct(UUID objectId) {
         productRepository.delete(objectId);
     }
 
@@ -105,7 +105,7 @@ public class SaleProductRequestService {
         requestRepository.update(request,requestOld);
     }
 
-    public void updateProduct(Product product, String objectId) {
+    public void updateProduct(Product product, UUID objectId) {
         Product productOld= productRepository.findOne(objectId);
         productRepository.update(product,productOld);
     }

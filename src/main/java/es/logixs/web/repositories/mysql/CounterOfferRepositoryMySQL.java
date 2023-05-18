@@ -2,76 +2,52 @@ package es.logixs.web.repositories.mysql;
 
 import es.logixs.web.domain.CounterOffer;
 import es.logixs.web.repositories.CounterOfferRepository;
-import es.logixs.web.repositories.mysql.mappers.CounterOfferMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.UUID;
 
 
 @Component
 public class CounterOfferRepositoryMySQL implements CounterOfferRepository {
-    private final static String sqlInsert = "insert into counteroffer (objectId,name,vom,originalPrice,counterOfferPrice,quantity) values(?,?,?,?,?,?)";
-    private final static String sqlUpdate = "update counteroffer set name=? ,vom=? ,originalPrice=? ,counterOfferPrice=? ,quantity=? where objectId=?";
-    private final static String sqlDelete = "delete from counteroffer where objectId=?";
-    private final static String sqlFindAll = "select * from counteroffer";
-    private final static String sqlFindOne = "select * from counteroffer  where objectId=?";
-    @Autowired
-    private JdbcTemplate plantilla;
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
-    public CounterOffer insert(CounterOffer counterOffer) {
-        plantilla.update(
-                sqlInsert,
-                counterOffer.getObjectId(),
-                counterOffer.getName(),
-                counterOffer.getVom(),
-                counterOffer.getOriginalPrice(),
-                counterOffer.getCounterOfferPrice(),
-                counterOffer.getQuantity()
-        );
-        return counterOffer;
-    }
-
-    @Override
-    public void update(CounterOffer counterOffer) {
-        plantilla.update(
-                sqlUpdate,
-                counterOffer.getName(),
-                counterOffer.getVom(),
-                counterOffer.getOriginalPrice(),
-                counterOffer.getCounterOfferPrice(),
-                counterOffer.getQuantity(),
-                counterOffer.getObjectId()
-        );
-    }
-
-    @Override
-    public void update(CounterOffer counterOffer, CounterOffer oldCounterOffer) {
-        plantilla.update(
-                sqlUpdate,
-                counterOffer.getName(),
-                counterOffer.getVom(),
-                counterOffer.getOriginalPrice(),
-                counterOffer.getCounterOfferPrice(),
-                counterOffer.getQuantity(),
-                oldCounterOffer.getObjectId()
-        );
-    }
-
-    @Override
-    public void delete(CounterOffer counterOffer) {
-        plantilla.update(sqlDelete, counterOffer.getObjectId());
-    }
-
-    @Override
-    public CounterOffer findOne(String objectId) {
-        return plantilla.queryForObject(sqlFindOne, new CounterOfferMapper(), objectId);
+    public CounterOffer findOne(UUID objectId) {
+        return entityManager.find(CounterOffer.class, objectId);
     }
 
     @Override
     public List<CounterOffer> findAll() {
-        return plantilla.query(sqlFindAll, new CounterOfferMapper());
+        return entityManager.createQuery("select counterOffer from CounterOffer counterOffer ", CounterOffer.class).getResultList();
+    }
+
+    @Override
+    @Transactional
+    public CounterOffer insert(CounterOffer counterOffer) {
+        entityManager.persist(counterOffer);
+        return counterOffer;
+    }
+
+    @Override
+    @Transactional
+    public void delete(CounterOffer counterOffer) {
+        CounterOffer counterOfferToDelete= entityManager.find(CounterOffer.class,counterOffer.getObjectId());
+        entityManager.remove(counterOfferToDelete);
+    }
+
+    @Override
+    @Transactional
+    public void update(CounterOffer counterOffer) {
+        entityManager.merge(counterOffer);
+    }
+
+    @Override
+    public void update(CounterOffer counterOffer, CounterOffer oldCounterOffer) {
+        // TODO
     }
 }
