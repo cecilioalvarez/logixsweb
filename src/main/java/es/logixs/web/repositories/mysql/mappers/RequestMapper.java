@@ -1,3 +1,4 @@
+/*
 package es.logixs.web.repositories.mysql.mappers;
 
 import es.logixs.web.domain.Request;
@@ -18,4 +19,6 @@ public class RequestMapper implements RowMapper<Request> {
                 rs.getString("companyId")
         );
     }
+
 }
+ */

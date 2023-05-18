@@ -1,16 +1,30 @@
 package es.logixs.web.domain;
 
-import java.util.Objects;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
 public class Offer {
 
-    private String objectId;
+    @Id
+    @Type(type = "uuid-char")
+    @Column(name = "objectId")
+    private UUID objectId;
+    @Column(name = "code")
     private String code;
+    @Column(name = "name")
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "category")
     private String category;
 
-    public Offer(String objectId, String code, String name, String description, String category) {
+    public Offer(UUID objectId, String code, String name, String description, String category) {
         this.objectId = objectId;
         this.code = code;
         this.name = name;
@@ -18,11 +32,16 @@ public class Offer {
         this.category = category;
     }
 
-    public Offer(String objectId) {
+    public Offer(UUID objectId) {
         this.objectId = objectId;
     }
 
     public Offer() {
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(objectId, code);
     }
 
     @Override
@@ -32,16 +51,11 @@ public class Offer {
         return Objects.equals(objectId, offers.objectId) && Objects.equals(code, offers.code);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(objectId, code);
-    }
-
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 
