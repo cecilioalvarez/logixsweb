@@ -54,6 +54,34 @@ class UserRepositoryTest {
 
         assertEquals(user, userFinal);
     }
+    @Test
+    void insertTestDuplicatePK() throws ParseException {
+        User user = new User(
+                UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"),
+                "Ana",
+                "Sanchez",
+                "ana@mail.com",
+                "state",
+                "avatar",
+                "password",
+                "prevPassword",
+                "companyId",
+                "invitedBy",
+                "role",
+                10.0,
+                "address",
+                "phone",
+                "city",
+                "zipCode",
+                "countryIso",
+                null,
+                null
+        );
+
+        User userFinal = userRepositoryMySQL.insert(user);
+
+        assertEquals(user, userFinal);
+    }
 
     @Test
     void deleteTest() {
