@@ -9,8 +9,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.Date;
 import java.util.List;
-
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,12 @@ class CompanyControllerTest {
     @Test
     void findAllCompaniesTest() throws Exception {
 
-        Company company1 = new Company("1A", "1AC", "4321A", "PWC","1234A");
-        Company company2 = new Company("2A", "2AC", "4321B", "IBERDROLA","1234B");
-        Company company3 = new Company("3A", "3AC", "4321C", "MOVISTAR","1234C");
-
+        Company company1 = new Company(UUID.randomUUID(), "code1", "state1", "licenseId1", 30, "name1", "address1",
+                "phone1", "CISO1", "taxId1", "url1", new Date(), new Date());
+        Company company2 = new Company(UUID.randomUUID(), "code2", "state2", "licenseId2", 40, "name2", "address2",
+                "phone2", "CISO2", "taxId2", "url2", new Date(), new Date());
+        Company company3 = new Company(UUID.randomUUID(), "code3", "state3", "licenseId3", 28, "name3", "address3",
+                "phone3", "CISO3", "taxId3", "url3", new Date(), new Date());
 
         List<Company> companyList = List.of(company1, company2, company3);
         when(service.findAllCompanies()).thenReturn(companyList);
@@ -59,11 +62,13 @@ class CompanyControllerTest {
     @Test
     void findOneCompanyTest() throws Exception {
 
-        Company company1 = new Company("1A", "1AC", "4321A", "PWC","1234A");
+        Company company1 = new Company(UUID.randomUUID(), "code3", "state3", "licenseId3", 28, "name3", "address3",
+                "phone3", "CISO3", "taxId3", "url3", new Date(), new Date());
 
-        when(service.findOneCompany("1A")).thenReturn(company1);
+        when(service.findOneCompany(company1.getObjectId())).thenReturn(company1);
 
-        String companyJsonResult = mvc.perform(get("/webapi/company/1A")).andExpect(status().isOk()).andReturn().getResponse()
+        String companyJsonResult = mvc.perform(get("/webapi/company/" + company1.getObjectId()))
+                .andExpect(status().isOk()).andReturn().getResponse()
                 .getContentAsString();
 
         String companyExpected = objectMapper.writeValueAsString(company1);
@@ -74,11 +79,11 @@ class CompanyControllerTest {
     @Test
     void deleteCompanyTest() throws Exception {
 
-        Company companyToDelete = new Company("1A");
+        Company companyToDelete = new Company(UUID.randomUUID());
 
-        when(service.findOneCompany("1A")).thenReturn(companyToDelete);
+        when(service.findOneCompany(companyToDelete.getObjectId())).thenReturn(companyToDelete);
 
-        mvc.perform(delete("/webapi/company/1A"))
+        mvc.perform(delete("/webapi/company/" + companyToDelete.getObjectId()))
                 .andExpect(status().isOk());
 
         verify(service, times(1)).deleteCompany(companyToDelete);
@@ -88,12 +93,13 @@ class CompanyControllerTest {
     @Test
     void insertCompanyTest() throws Exception {
 
-        Company company1 = new Company("1A", "1AC", "4321A", "PWC","1234A");
+        Company company1 = new Company(UUID.randomUUID(), "code3", "state3", "licenseId3", 28, "name3", "address3",
+                "phone3", "CISO3", "taxId3", "url3", new Date(), new Date());
 
         when(service.insertCompany(company1)).thenReturn(company1);
         MvcResult result = mvc.perform(post("/webapi/company")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content( objectMapper.writeValueAsString(company1))
+                        .content(objectMapper.writeValueAsString(company1))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andReturn();
 

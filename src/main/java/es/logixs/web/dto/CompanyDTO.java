@@ -1,11 +1,13 @@
 package es.logixs.web.dto;
+
 import es.logixs.web.domain.Company;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class CompanyDTO {
 
-    private String objectId;
+    private UUID objectId;
     private String code;
     private String state;
     private String licenseId;
@@ -19,11 +21,11 @@ public class CompanyDTO {
     private Date createdAt;
     private Date updatedAt;
 
-    public CompanyDTO(){
+    public CompanyDTO() {
 
     }
 
-    public CompanyDTO(String objectId, String code, String licenseId, String name, String taxId) {
+    public CompanyDTO(UUID objectId, String code, String licenseId, String name, String taxId) {
         this.objectId = objectId;
         this.code = code;
         this.licenseId = licenseId;
@@ -31,8 +33,8 @@ public class CompanyDTO {
         this.taxId = taxId;
     }
 
-
-    public CompanyDTO(String objectId, String code, String state, String licenseId, int limitUsers, String name, String address, String phone, String countryIso, String taxId, String url, Date createdAt, Date updatedAt) {
+    public CompanyDTO(UUID objectId, String code, String state, String licenseId, int limitUsers, String name,
+                      String address, String phone, String countryIso, String taxId, String url, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
         this.code = code;
         this.state = state;
@@ -48,7 +50,7 @@ public class CompanyDTO {
         this.updatedAt = updatedAt;
     }
 
-    public CompanyDTO (Company company) {
+    public CompanyDTO(Company company) {
         this.objectId = company.getObjectId();
         this.code = company.getCode();
         this.state = company.getState();
@@ -64,8 +66,10 @@ public class CompanyDTO {
         this.updatedAt = company.getUpdatedAt();
     }
 
-    public Company createCompany(){
-        return new Company(this.getObjectId(),this.getCode(),this.getLicenseId(),this.getName(),this.getTaxId());
+    public Company createCompany() {
+        return new Company(this.getObjectId(), this.getCode(), this.getState(), this.getLicenseId(),
+                this.getLimitUsers(), this.getName(), this.getAddress(), this.getPhone(), this.getCountryIso(),
+                this.getTaxId(), this.getUrl(), this.getCreatedAt(), this.getUpdatedAt());
     }
 
     public String getState() {
@@ -132,11 +136,11 @@ public class CompanyDTO {
         this.updatedAt = updatedAt;
     }
 
-    public String getObjectId() {
+    public UUID getObjectId() {
         return objectId;
     }
 
-    public void setObjectId(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 

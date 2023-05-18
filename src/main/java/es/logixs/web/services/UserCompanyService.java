@@ -22,7 +22,7 @@ public class UserCompanyService {
         this.companyRepository = companyRepository;
     }
 
-    public void updateCompany(Company company, String objectId) {
+    public void updateCompany(Company company, UUID objectId) {
         Company companyOld = companyRepository.findOne(objectId);
         companyRepository.update(company, companyOld);
     }
@@ -57,7 +57,7 @@ public class UserCompanyService {
         return userRepository.findAll();
     }
 
-    public Company findOneCompany(String objectId) {
+    public Company findOneCompany(UUID objectId) {
         return companyRepository.findOne(objectId);
     }
 
