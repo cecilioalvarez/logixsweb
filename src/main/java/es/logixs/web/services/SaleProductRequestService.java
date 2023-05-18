@@ -9,6 +9,7 @@ import es.logixs.web.repositories.SaleRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class SaleProductRequestService {
@@ -39,7 +40,7 @@ public class SaleProductRequestService {
         saleRepository.update(sale);
     }
 
-    public Sale findOneSale(String objectId) {
+    public Sale findOneSale(UUID objectId) {
         return saleRepository.findOne(objectId);
     }
 
@@ -47,7 +48,7 @@ public class SaleProductRequestService {
         return saleRepository.findAll();
     }
 
-    public void deleteSale(String objectId) {
+    public void deleteSale(UUID objectId) {
         saleRepository.delete(objectId);
     }
 
@@ -109,7 +110,7 @@ public class SaleProductRequestService {
         productRepository.update(product,productOld);
     }
 
-    public void updateSale(Sale sale, String objectId) {
+    public void updateSale(Sale sale, UUID objectId) {
         Sale saleOld= saleRepository.findOne(objectId);
         saleRepository.update(sale,saleOld);
     }

@@ -1,4 +1,4 @@
-package es.logixs.web.repositories.mysql.mappers;
+/*package es.logixs.web.repositories.mysql.mappers;
 
 import es.logixs.web.domain.Sale;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,4 +20,4 @@ public class SaleMapper implements RowMapper<Sale> {
                 rs.getBoolean("isCounterOffer")
         );
     }
-}
+}*/

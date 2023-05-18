@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,11 @@ public class SaleProductRequestServiceTest {
   private SaleProductRequestService saleProductRequestService;
   @Test
   public void deleteSaleTest() {
-    Sale sale = new Sale("0001","0001","0001","1A","1","1",true);
+    Sale sale = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
 
-    saleProductRequestService.deleteSale("1A");
+    saleProductRequestService.deleteSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
 
-    verify(saleRepositoryMock, times(1)).delete("1A");
+    verify(saleRepositoryMock, times(1)).delete(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
 
   }
 
@@ -61,8 +62,8 @@ public class SaleProductRequestServiceTest {
 
   @Test
   public void findAllSalesTest() {
-    Sale sale1 = new Sale("0001","0001","0001","1A","1","1",true);
-    Sale sale2 = new Sale("0002","0002","0002","2A","2","2",false);
+    Sale sale1 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
+    Sale sale2 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d021"), "0002", "0002", "2A", "2", "2", true);
 
     List<Sale> salesListMock = Arrays.asList(sale1,sale2);
     when(saleRepositoryMock.findAll()).thenReturn(salesListMock);
@@ -118,3 +119,5 @@ public class SaleProductRequestServiceTest {
     verify(requestRepositoryMock, times(1)).delete(request.getObjectId());
   }
 }
+
+
