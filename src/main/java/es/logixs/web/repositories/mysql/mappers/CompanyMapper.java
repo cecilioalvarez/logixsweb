@@ -1,4 +1,4 @@
-package es.logixs.web.repositories.mysql.mappers;
+/*package es.logixs.web.repositories.mysql.mappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,4 +28,4 @@ public class CompanyMapper implements RowMapper<Company> {
 
         );
     }
-}
+}*/

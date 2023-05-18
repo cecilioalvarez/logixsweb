@@ -93,7 +93,7 @@ public class UserCompanyServiceTest {
 
     @Test
     public void insertCompanyTest() {
-        Company company1 = new Company("1A", "ds12fsdf", "asdafs23", "PWC", "324234d");
+        Company company1 = new Company(UUID.randomUUID(), "code1", "state1", "licenseId1", 30, "name1", "address1", "phone1", "CISO1", "taxId1", "url1", new Date(), new Date());
 
         when(companyRepositoryMock.insert(company1)).thenReturn(company1);
         Company insertedCompany = companyRepositoryMock.insert(company1);
@@ -103,18 +103,19 @@ public class UserCompanyServiceTest {
 
     @Test
     public void findOneCompanyTest() {
-        Company company1 = new Company("1A", "ds12fsdf", "asdafs23", "PWC", "324234d");
+        Company company1 = new Company(UUID.randomUUID(), "code1", "state1", "licenseId1", 30, "name1", "address1", "phone1", "CISO1", "taxId1", "url1", new Date(), new Date());
 
-        when(companyRepositoryMock.findOne("1A")).thenReturn(company1);
-        Company foundCompany = companyRepositoryMock.findOne("1A");
+
+        when(companyRepositoryMock.findOne(company1.getObjectId())).thenReturn(company1);
+        Company foundCompany = companyRepositoryMock.findOne(company1.getObjectId());
 
         assertEquals(company1, foundCompany);
     }
 
     @Test
     public void findAllCompaniesTest() {
-        Company company1 = new Company("1A", "HFGAD2", "ASDFAF2", "PWC", "asdfasdf2");
-        Company company2 = new Company("2A", "HFGDAD2", "ASDFAAF2", "PWC 2", "asd2fasdf2");
+        Company company1 = new Company(UUID.randomUUID(), "code1", "state1", "licenseId1", 30, "name1", "address1", "phone1", "CISO1", "taxId1", "url1", new Date(), new Date());
+        Company company2 = new Company(UUID.randomUUID(), "code1", "state1", "licenseId1", 30, "name1", "address1", "phone1", "CISO1", "taxId1", "url1", new Date(), new Date());
 
         List<Company> companyListMock = Arrays.asList(company1, company2);
         when(companyRepositoryMock.findAll()).thenReturn(companyListMock);
@@ -126,7 +127,7 @@ public class UserCompanyServiceTest {
 
     @Test
     public void deleteCompanyTest() {
-        Company company = new Company("1A");
+        Company company = new Company(UUID.fromString("1A"));
 
         userCompanyService.deleteCompany(company);
 

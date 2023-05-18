@@ -8,31 +8,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("webapi/offer")
 public class OfferController {
-    
+
     @Autowired
     private OfferCounterofferService offerCounterofferService;
-    
+
     @GetMapping()
     private List<OfferDTO> findAllOffers() {
         List<OfferDTO> listOfferDTO = new ArrayList<>();
-        for (Offer offer: offerCounterofferService.findAllOffers()) {
+        for (Offer offer : offerCounterofferService.findAllOffers()) {
             listOfferDTO.add(new OfferDTO(offer));
         }
         return listOfferDTO;
     }
-    
+
     @GetMapping("/{objectId}")
     private OfferDTO findOneOffer(@PathVariable String objectId) {
-        return new OfferDTO(offerCounterofferService.findOneOffer(objectId));
+        return new OfferDTO(offerCounterofferService.findOneOffer(UUID.fromString(objectId)));
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteOffer(@PathVariable String objectId) {
-        offerCounterofferService.deleteOffer(objectId);
+        offerCounterofferService.deleteOffer(UUID.fromString(objectId));
     }
 
     @PostMapping
@@ -41,7 +42,8 @@ public class OfferController {
     }
 
     @PutMapping("/{objectId}")
-    public void updateOffer(@RequestBody OfferDTO offerDTO,@PathVariable String objectId){
-        offerCounterofferService.updateOffer(offerDTO.createOffer(),objectId);
+    public void updateOffer(@RequestBody OfferDTO offerDTO,
+                            @PathVariable String objectId) {
+        offerCounterofferService.updateOffer(offerDTO.createOffer(), UUID.fromString(objectId));
     }
 }

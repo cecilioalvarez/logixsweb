@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -33,9 +34,9 @@ public class SaleControllerTest {
 
     @Test
     void findAllSalesTest() throws Exception {
-        Sale sale1 = new Sale("1A", "1B", "1B", "aaa", "aaa", "aaa", false);
-        Sale sale2 = new Sale("2A", "2B", "2B", "bbb", "bbb", "bbb", false);
-        Sale sale3 = new Sale("3A", "3B", "3B", "ccc", "ccc", "ccc", false);
+        Sale sale1 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
+        Sale sale2 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d021"), "0002", "0002", "2A", "2", "2", true);
+        Sale sale3 = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d022"), "0003", "0003", "3A", "2", "2", false);
 
         List<Sale> saleList = List.of(sale1, sale2, sale3);
         when(service.findAllSales()).thenReturn(saleList);
@@ -50,13 +51,13 @@ public class SaleControllerTest {
 
     @Test
     void findOneSaleTest() throws Exception {
-        Sale sale1 = new Sale("1A", "1B", "1B", "aaa", "aaa", "aaa", false);
+        Sale sale = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
 
-        when(service.findOneSale("1A")).thenReturn(sale1);
+        when(service.findOneSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"))).thenReturn(sale);
 
-        String saleExpected = objectMapper.writeValueAsString(sale1);
-        // test de risa
-        String saleResultJSON = mvc.perform(get("/webapi/sale/1A")).andExpect(status().isOk())
+        String saleExpected = objectMapper.writeValueAsString(sale);
+
+        String saleResultJSON = mvc.perform(get("/webapi/sale/391e8a7e-b050-44df-b86f-6718a267d020")).andExpect(status().isOk())
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
         assertEquals(saleExpected, saleResultJSON);
@@ -64,19 +65,19 @@ public class SaleControllerTest {
 
     @Test
     void deleteSaleTest() throws Exception {
-        Sale saleToDelete = new Sale("1A", "1B", "1B", "aaa", "aaa", "aaa", false);
+        Sale saleToDelete = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
 
-        when(service.findOneSale("1A")).thenReturn(saleToDelete);
+        when(service.findOneSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"))).thenReturn(saleToDelete);
 
-        mvc.perform(delete("/webapi/sale/1A"))
+        mvc.perform(delete("/webapi/sale/391e8a7e-b050-44df-b86f-6718a267d020"))
                 .andExpect(status().isOk());
 
-        verify(service, times(1)).deleteSale("1A");
+        verify(service, times(1)).deleteSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
     }
 
     @Test
     void insertSaleTest() throws Exception {
-        Sale sale = new Sale("1A", "1B", "1B", "aaa", "aaa", "aaa", false);
+        Sale sale = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
 
         when(service.insertSale(sale)).thenReturn(sale);
         MvcResult result = mvc.perform(post("/webapi/sale")
@@ -94,21 +95,24 @@ public class SaleControllerTest {
 
     @Test
     void updateSale() throws Exception {
-        Sale saleToUpdate = new Sale("1A", "1B", "1B", "aaa", "aaa", "aaa", false);
+        Sale saleToUpdate = new Sale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"),"0001","0001","1A","1","1",true);
         saleToUpdate.setCode("bbb");
         saleToUpdate.setClientId("1A");
 
-        when(service.findOneSale("1A")).thenReturn(saleToUpdate);
-        service.updateSale(saleToUpdate, "1A");
-        mvc.perform(put("/webapi/sale/1A")
+        when(service.findOneSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"))).thenReturn(saleToUpdate);
+        service.updateSale(saleToUpdate, UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
+        mvc.perform(put("/webapi/sale/391e8a7e-b050-44df-b86f-6718a267d020")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(saleToUpdate))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        Sale saleUpdated = service.findOneSale("1A");
+        Sale saleUpdated = service.findOneSale(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d020"));
 
         assertEquals(saleToUpdate.getCode(), saleUpdated.getCode());
         assertEquals(saleToUpdate.getClientId(), saleUpdated.getClientId());
     }
+
 }
+
+

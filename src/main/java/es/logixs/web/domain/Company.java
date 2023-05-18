@@ -1,23 +1,48 @@
 package es.logixs.web.domain;
 
-import java.util.Date;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.util.Date;
+import java.util.Objects;
+import java.util.UUID;
+
+@Entity
 public class Company {
-    private String objectId;
+    @Id
+    @Type(type = "uuid-char")
+    @Column(name = "objectId")
+    private UUID objectId;
     private String code;
     private String state;
+    @Column(name = "licenseId")
     private String licenseId;
+    @Column(name = "limitUsers")
     private int limitUsers;
     private String name;
     private String address;
     private String phone;
+    @Column(name = "countryIso")
     private String countryIso;
+    @Column(name = "taxId")
     private String taxId;
     private String url;
+    @Column(name = "createdAt")
     private Date createdAt;
+    @Column(name = "updatedAt")
     private Date updatedAt;
 
-    public Company(String objectId, String code, String state, String licenseId, int limitUsers, String name, String address, String phone, String countryIso, String taxId, String url, Date createdAt, Date updatedAt) {
+    public Company(UUID objectId) {
+        this.objectId = objectId;
+    }
+
+    public Company() {
+    }
+
+    public Company(UUID objectId, String code, String state, String licenseId, int limitUsers, String name,
+                   String address, String phone, String countryIso, String taxId, String url, Date createdAt, Date updatedAt) {
         this.objectId = objectId;
         this.code = code;
         this.state = state;
@@ -33,26 +58,20 @@ public class Company {
         this.updatedAt = updatedAt;
     }
 
-    public Company(String objectId, String code, String licenseId, String name, String taxId) {
-        this.objectId = objectId;
-        this.code = code;
-        this.licenseId = licenseId;
-        this.name = name;
-        this.taxId = taxId;
+    public UUID getObjectId() {
+        return objectId;
     }
 
-    public Company(String objectId) {
+    public void setObjectId(UUID objectId) {
         this.objectId = objectId;
     }
 
-    public Company() {
+    public String getCode() {
+        return code;
     }
 
-    public Company(String code, String licenseId, String name, String taxId) {
+    public void setCode(String code) {
         this.code = code;
-        this.licenseId = licenseId;
-        this.name = name;
-        this.taxId = taxId;
     }
 
     public String getState() {
@@ -63,12 +82,28 @@ public class Company {
         this.state = state;
     }
 
+    public String getLicenseId() {
+        return licenseId;
+    }
+
+    public void setLicenseId(String licenseId) {
+        this.licenseId = licenseId;
+    }
+
     public int getLimitUsers() {
         return limitUsers;
     }
 
     public void setLimitUsers(int limitUsers) {
         this.limitUsers = limitUsers;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {
@@ -95,6 +130,14 @@ public class Company {
         this.countryIso = countryIso;
     }
 
+    public String getTaxId() {
+        return taxId;
+    }
+
+    public void setTaxId(String taxId) {
+        this.taxId = taxId;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -119,70 +162,25 @@ public class Company {
         this.updatedAt = updatedAt;
     }
 
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getLicenseId() {
-        return licenseId;
-    }
-
-    public void setLicenseId(String licenseId) {
-        this.licenseId = licenseId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTaxId() {
-        return taxId;
-    }
-
-    public void setTaxId(String taxId) {
-        this.taxId = taxId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Company company = (Company) o;
+        return limitUsers == company.limitUsers && Objects.equals(objectId, company.objectId)
+                && Objects.equals(code, company.code) && Objects.equals(state, company.state)
+                && Objects.equals(licenseId, company.licenseId) && Objects.equals(name, company.name)
+                && Objects.equals(address, company.address) && Objects.equals(phone, company.phone)
+                && Objects.equals(countryIso, company.countryIso) && Objects.equals(taxId, company.taxId)
+                && Objects.equals(url, company.url) && Objects.equals(createdAt, company.createdAt)
+                && Objects.equals(updatedAt, company.updatedAt);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((objectId == null) ? 0 : objectId.hashCode());
-        return result;
+        return Objects.hash(objectId, code, state, licenseId, limitUsers, name, address, phone, countryIso, taxId, url,
+                createdAt, updatedAt);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Company other = (Company) obj;
-        if (objectId == null) {
-            if (other.objectId != null)
-                return false;
-        } else if (!objectId.equals(other.objectId))
-            return false;
-        return true;
-    }
-
-    
 }

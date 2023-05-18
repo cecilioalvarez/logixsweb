@@ -1,23 +1,20 @@
 package es.logixs.web.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-
+import es.logixs.web.domain.CounterOffer;
+import es.logixs.web.domain.Offer;
+import es.logixs.web.repositories.mysql.CounterOfferRepositoryMySQL;
+import es.logixs.web.repositories.mysql.OfferRepositoryMySQL;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import es.logixs.web.domain.CounterOffer;
-import es.logixs.web.domain.Offer;
-import es.logixs.web.repositories.mysql.CounterOfferRepositoryMySQL;
-import es.logixs.web.repositories.mysql.OfferRepositoryMySQL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class OfferCounterofferServiceTest {
@@ -40,6 +37,7 @@ public class OfferCounterofferServiceTest {
         verify(counterOfferRepositoryMock, times(1)).findAll();
         assertEquals(listCounterOffer, listCounterOfferResult);
     }
+
     @Test
     public void findAllOffersTest() {
         Offer offer1 = mock(Offer.class);
@@ -77,20 +75,19 @@ public class OfferCounterofferServiceTest {
 
     @Test
     public void deleteOfferTest() {
-        offersService.deleteOffer("A2");
-        verify(offerRepositoryMock, times(1)).delete("A2");
+        offersService.deleteOffer(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        verify(offerRepositoryMock, times(1)).delete(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
     }
 
     @Test
     public void deleteCounterOffer() {
-        CounterOffer counterOffers = mock(CounterOffer.class);
-        offersService.deleteCounterOffer(counterOffers);
-        verify(counterOfferRepositoryMock, times(1)).delete(counterOffers);
+        offersService.deleteCounterOffer(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
+        verify(counterOfferRepositoryMock, times(1)).delete(UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091"));
     }
 
     @Test
     public void findOneCounterOffer() {
-        String objectId = "A2";
+        UUID objectId = UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014");
 
         CounterOffer counterOffer = mock(CounterOffer.class);
 
@@ -103,10 +100,8 @@ public class OfferCounterofferServiceTest {
 
     @Test
     public void findOneOffer() {
-        String objectId = "A2";
-
         Offer offer = mock(Offer.class);
-
+        UUID objectId = UUID.fromString("df5dd66d-43fd-477f-ac5d-02b0347d2091");
         when(offerRepositoryMock.findOne(objectId)).thenReturn(offer);
         Offer offerResult = offersService.findOneOffer(objectId);
 

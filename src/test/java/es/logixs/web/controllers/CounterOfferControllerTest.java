@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -31,9 +32,9 @@ public class CounterOfferControllerTest {
 
     @Test
     void findAllCounterOffers() throws Exception {
-        CounterOffer counterOffer1 = new CounterOffer("1A", "name1", "vom1", 2.0, 4.0, 10.0);
-        CounterOffer counterOffer2 = new CounterOffer("2A", "name2", "vom2", 2.0, 4.0, 10.0);
-        CounterOffer counterOffer3 = new CounterOffer("3A", "name3", "vom3", 2.0, 4.0, 10.0);
+        CounterOffer counterOffer1 = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"), "name1", "vom1", 2.0, 4.0, 10.0);
+        CounterOffer counterOffer2 = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d015"), "name2", "vom2", 2.0, 4.0, 10.0);
+        CounterOffer counterOffer3 = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d016"), "name3", "vom3", 2.0, 4.0, 10.0);
         List<CounterOffer> counterOfferList = List.of(counterOffer1, counterOffer2, counterOffer3);
 
         when(offerCounterofferService.findAllCounterOffers()).thenReturn(counterOfferList);
@@ -50,10 +51,10 @@ public class CounterOfferControllerTest {
 
     @Test
     void findOneCounterOffer() throws Exception {
-        CounterOffer counterOffer = new CounterOffer("1A", "name1", "vom1", 2.0, 4.0, 10.0);
+        CounterOffer counterOffer = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"), "name1", "vom1", 2.0, 4.0, 10.0);
 
-        when(offerCounterofferService.findOneCounterOffer("1A")).thenReturn(counterOffer);
-        String counterOfferJsonResult = mvc.perform(get("/webapi/counteroffer/1A"))
+        when(offerCounterofferService.findOneCounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"))).thenReturn(counterOffer);
+        String counterOfferJsonResult = mvc.perform(get("/webapi/counteroffer/391e8a7e-b050-44df-b86f-6718a267d014"))
                 .andExpect(status().isOk())
                 .andReturn()
                 .getResponse()
@@ -65,17 +66,18 @@ public class CounterOfferControllerTest {
 
     @Test
     void deleteCounterOffer() throws Exception {
-        CounterOffer counterOffer = new CounterOffer("1A", "name1", "vom1", 2.0, 4.0, 10.0);
+        UUID objectId = UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014");
+        CounterOffer counterOffer = new CounterOffer(objectId, "name1", "vom1", 2.0, 4.0, 10.0);
 
-        when(offerCounterofferService.findOneCounterOffer("1A")).thenReturn(counterOffer);
-        mvc.perform(delete("/webapi/counteroffer/1A")).andExpect(status().isOk());
+        when(offerCounterofferService.findOneCounterOffer(objectId)).thenReturn(counterOffer);
+        mvc.perform(delete("/webapi/counteroffer/391e8a7e-b050-44df-b86f-6718a267d014")).andExpect(status().isOk());
 
-        verify(offerCounterofferService, times(1)).deleteCounterOffer(counterOffer);
+        verify(offerCounterofferService, times(1)).deleteCounterOffer(objectId);
     }
 
     @Test
     void insertCounterOffer() throws Exception {
-        CounterOffer counterOffer = new CounterOffer("1A", "name1", "vom1", 2.0, 4.0, 10.0);
+        CounterOffer counterOffer = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"), "name1", "vom1", 2.0, 4.0, 10.0);
 
         when(offerCounterofferService.insertCounterOffer(counterOffer)).thenReturn(counterOffer);
         MvcResult result = mvc.perform(post("/webapi/counteroffer")
@@ -92,19 +94,19 @@ public class CounterOfferControllerTest {
 
     @Test
     void updateCounterOffer() throws Exception {
-        CounterOffer counterOfferToUpdate = new CounterOffer("1A", "name1", "vom1", 2, 3, 10);
+        CounterOffer counterOfferToUpdate = new CounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"), "name1", "vom1", 2, 3, 10);
         counterOfferToUpdate.setCounterOfferPrice(10);
         counterOfferToUpdate.setName("nombre 1 actualizado");
 
-        when(offerCounterofferService.findOneCounterOffer("1A")).thenReturn(counterOfferToUpdate);
-        offerCounterofferService.updateCounterOffer(counterOfferToUpdate, "1A");
-        mvc.perform(put("/webapi/counteroffer/1A")
+        when(offerCounterofferService.findOneCounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"))).thenReturn(counterOfferToUpdate);
+        offerCounterofferService.updateCounterOffer(counterOfferToUpdate, UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
+        mvc.perform(put("/webapi/counteroffer/391e8a7e-b050-44df-b86f-6718a267d014")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(counterOfferToUpdate))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        CounterOffer counterOfferUpdated = offerCounterofferService.findOneCounterOffer("1A");
+        CounterOffer counterOfferUpdated = offerCounterofferService.findOneCounterOffer(UUID.fromString("391e8a7e-b050-44df-b86f-6718a267d014"));
 
         assertEquals(counterOfferToUpdate.getName(), counterOfferUpdated.getName());
         assertEquals(counterOfferToUpdate.getCounterOfferPrice(), counterOfferUpdated.getCounterOfferPrice());

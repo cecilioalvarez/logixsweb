@@ -5,12 +5,13 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class CounterOfferMapper implements RowMapper<CounterOffer> {
     @Override
     public CounterOffer mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new CounterOffer(
-                rs.getString("objectId"),
+                UUID.fromString(rs.getString("objectId")),
                 rs.getString("name"),
                 rs.getString("vom"),
                 rs.getDouble("originalPrice"),
