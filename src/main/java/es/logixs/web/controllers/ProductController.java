@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("webapi/product")
@@ -28,12 +29,12 @@ public class ProductController {
 
     @GetMapping("/{objectId}")
     public ProductDTO findOneProduct(@PathVariable String objectId) {
-        return new ProductDTO(saleProductRequestService.findOneProduct(objectId));
+        return new ProductDTO(saleProductRequestService.findOneProduct(UUID.fromString(objectId)));
     }
 
     @DeleteMapping("/{objectId}")
     public void deleteProduct(@PathVariable String objectId) {
-        saleProductRequestService.deleteProduct(objectId);
+        saleProductRequestService.deleteProduct(UUID.fromString(objectId));
     }
     @PostMapping
     public Product insertProduct(@RequestBody ProductDTO product) {
@@ -41,7 +42,7 @@ public class ProductController {
     }
     @PutMapping("/{objectId}")
     public void updateProduct(@RequestBody ProductDTO product, @PathVariable String objectId) {
-        saleProductRequestService.updateProduct(product.createProduct(), objectId);
+        saleProductRequestService.updateProduct(product.createProduct(), UUID.fromString(objectId));
     }
 
   

@@ -32,7 +32,7 @@ public class CounterOfferController {
 
     @DeleteMapping("/{objectId}")
     public void deleteCounterOffer(@PathVariable String objectId) {
-        offerCounterofferService.deleteCounterOffer(new CounterOffer(UUID.fromString(objectId)));
+        offerCounterofferService.deleteCounterOffer(UUID.fromString(objectId));
     }
 
     @PostMapping
