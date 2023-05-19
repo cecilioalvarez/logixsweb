@@ -12,11 +12,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("webapi/user")
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
 public class UserController {
     @Autowired
     private UserCompanyService userCompanyService;
 
     @GetMapping
+
     public List<UserDTO> findAllUsers() {
         List<UserDTO> listUserDto = new ArrayList<UserDTO>();
         for (User user : userCompanyService.findAllUsers()) {

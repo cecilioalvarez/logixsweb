@@ -38,11 +38,12 @@ public class HttpParserService {
         String token = request.getHeader(cabeceraHttp);
         //simplemente el hash completo del token
         System.out.println(token);
-        String tokenReal=token.substring(token.indexOf(" ")+1);
-        System.out.println("<"+tokenReal+">");
+
+
 
         if (token!=null) {
-
+            String tokenReal=token.substring(token.indexOf(" ")+1);
+            System.out.println("<"+tokenReal+">");
             String usuario = new TokenService().leeToken(tokenReal,claveEncriptar);
             if(usuario!=null) {
 
